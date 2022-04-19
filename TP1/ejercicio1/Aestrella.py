@@ -3,16 +3,15 @@ import numpy as np
 
 #================================== Algoritmo A* =========================================#
 def Astar(matriz,inicio,destino):
-    dim=10
+    dim=len(matriz)
     flag=True
     actual=inicio
-    Mfn=[]                                                                                #Matriz que guardará las funciones f(n)
-    costo=[]                                                                              #Matriz que guardará el costo c(n)
+    Mfn=[]                                                                                #Matriz que guardará las funciones f(n)                                                                             #Matriz que guardará el costo c(n)
     caminos=[]                                                                            #Matriz que guardara los caminos hasta cada nodo
 
-    for i in range(0,10):
+    for i in range(0,dim):
         Mfn.append([10000]*dim)
-        caminos.append([0]*10)
+        caminos.append([0]*dim)
 
     caminos[actual[0]][actual[1]]=inicio
 
@@ -20,15 +19,15 @@ def Astar(matriz,inicio,destino):
     matriz[destino[0]][destino[1]]='F'
 
     while(flag):
-        costo.append(1) 
-           
-        for i in range(-1,2):
+              
+        for m in range(-1,2):
             for j in range(-1,2):
-                if ((i==0 and j==-1)or(i==0 and j==1)or(j==0 and i==-1)or(j==0 and i==1)): #_Expando el nodo solo hacia arriba, abajo, der e iz
-                    pSig=[actual[0]+i,actual[1]+j]                                         #_Posible posición siguiente. Dependendiendo de su f(n)
+                if ((m==0 and j==-1)or(m==0 and j==1)or(j==0 and m==-1)or(j==0 and m==1)): #_Expando el nodo solo hacia arriba, abajo, der e iz
+                    pSig=[actual[0]+m,actual[1]+j]                                         #_Posible posición siguiente. Dependendiendo de su f(n)
+
                     if pSig[0]>=0 and pSig[1]>=0 and pSig[0]<dim and pSig[1]<dim:          #_Que no se salga de los límites del almacén
-                        if matriz[pSig[0]][pSig[1]]==0:                                    #_Para que avance solo por los pasillos                        
-                            [f,hn]=fn(pSig,destino,costo)                                  #_Calculo f(n) de esa posición
+                        if matriz[pSig[0]][pSig[1]]==0:                                    #_Para que avance solo por los pasillos                    
+                            [f,hn]=fn(pSig,destino,len(caminos[actual[0]][actual[1]])-2)   #_Calculo f(n) de esa posición
                             Mfn[pSig[0]][pSig[1]]=f                                        #_Lo almaceno en la matriz
                             
                             path=[]
@@ -44,7 +43,6 @@ def Astar(matriz,inicio,destino):
                             if hn==1:                                                      #_Si estoy a un paso del destino se detiene
                                 flag=False
                                 
-     
         Mfn[actual[0]][actual[1]]=10000                                                    #_Reemplazo el valor de f(n) anterior para no volver a pasar por ese nodo        
         for i in range(0,dim):
             for j in range(0,dim):
@@ -54,7 +52,7 @@ def Astar(matriz,inicio,destino):
        
         matriz[actual[0]][actual[1]]='#'                                                   #_Marco el camino en el almacén
         cont=0
-
+       
     camino=[]
     for i in path:
         if cont>=2:
@@ -62,6 +60,7 @@ def Astar(matriz,inicio,destino):
             camino[cont-2]=i
             matriz[i[0]][i[1]]='.'
         cont=cont+1
+
     return [matriz,camino]
 
 
@@ -69,6 +68,6 @@ def Astar(matriz,inicio,destino):
 def fn(pSig,destino,costo): 
 
     hn=abs(destino[0]-pSig[0])+abs(destino[1]-pSig[1])
-    gn=sum(costo)
+    gn=costo
     fn=hn+gn
     return [fn,hn]
