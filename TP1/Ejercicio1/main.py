@@ -52,10 +52,12 @@ if __name__=="__main__":
 
     inicio=[0,0]                                                                          #_Punto de partida
     pos1=ubicacion(matriz,int(input('Posición de destino: ')))                                     #_Saber el lugar de la matriz de la posicion de destino
-    [matriz,path]=Astar(matriz,inicio,pos1)                                               #_Encontramos el camino óptimo
+    [matriz,camino]=Astar(matriz,inicio,pos1)                                               #_Encontramos el camino óptimo
+
 
     os.system('cls')
-    print('Camino:\n',path)
+    print('Camino:\n',camino)
+    print('Distancia recorrida: ',len(camino),' celdas')
 
     print('\n')
     for i in range(0,10):                                                                 #_Graficar el almacén y el recorrido

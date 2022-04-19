@@ -14,7 +14,7 @@ def Astar(matriz,inicio,destino):
         Mfn.append([10000]*dim)
         caminos.append([0]*10)
 
-    caminos[actual[0]][actual[1]]=[0,0]
+    caminos[actual[0]][actual[1]]=inicio
 
     matriz[actual[0]][actual[1]]='I'                                                      #Marcar inicio y fin del recorrido en el almacén
     matriz[destino[0]][destino[1]]='F'
@@ -32,8 +32,14 @@ def Astar(matriz,inicio,destino):
                             Mfn[pSig[0]][pSig[1]]=f                                        #_Lo almaceno en la matriz
                             
                             path=[]
-                            path.append(caminos[actual[0]][actual[1]])
-                            path.append(pSig)
+                            cont=0
+                            for i in caminos[actual[0]][actual[1]]:
+                                path.append(0)
+                                path[cont]=i
+                                cont=cont+1
+                            path.append(0)
+
+                            path[cont]=pSig
                             caminos[pSig[0]][pSig[1]]= path                                #Almaceno el camino hasta el nodo en cuestion
                             if hn==1:                                                      #_Si estoy a un paso del destino se detiene
                                 flag=False
@@ -47,8 +53,16 @@ def Astar(matriz,inicio,destino):
 
        
         matriz[actual[0]][actual[1]]='#'                                                   #_Marco el camino en el almacén
+        cont=0
 
-    return [matriz,path]
+    camino=[]
+    for i in path:
+        if cont>=2:
+            camino.append(0)
+            camino[cont-2]=i
+            matriz[i[0]][i[1]]='.'
+        cont=cont+1
+    return [matriz,camino]
 
 
 #==================================== Calcular F(n)=h(n)+c(n)=============================#
