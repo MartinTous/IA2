@@ -60,7 +60,7 @@ def ubicacion(plano, producto):
     # La coordenada inicial y final son la bahia de carga, lo cual
     # devuelve buscar_ubicacion al pasarle un cero 0
     if (producto == 0):
-        return (BAHIA_DE_CARGA())
+        return list(BAHIA_DE_CARGA())
     for i, fila in enumerate(plano):
         # El índice i es el numero de la fila donde esta el valor buscado
         # La variable fila es la fila entera respectiva
@@ -75,9 +75,9 @@ def ubicacion(plano, producto):
                 j = j - 1
             elif (plano[i][j + 1] == 0):
                 j = j + 1
-            return (i, j)
+            return list((i, j))
     # Retorno para evitar errores en caso de no encuentrar el item buscado
-    return (BAHIA_DE_CARGA())
+    return list(BAHIA_DE_CARGA())
 
 #def ubicacion(matriz,pos):
     
