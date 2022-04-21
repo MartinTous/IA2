@@ -47,7 +47,8 @@ def BAHIA_DE_CARGA():
     return (1, 0)
 
 
-def buscar_ubicacion(plano, producto):
+#def buscar_ubicacion(plano, producto):
+def ubicacion(plano, producto):
     """ Función buscar_ubicacion
     Entrega las coordenadas (i,j) donde esta el producto buscado en el plano
     Parametros de Entrada:
@@ -66,7 +67,7 @@ def buscar_ubicacion(plano, producto):
         if (producto in fila):
             # Como fila es un array de numpy no tiene atributo index
             # Por ello se la convierto en lista
-            fila = fila.tolist()
+            # fila = fila.tolist()
             # Columna j en la que esta el producto buscado
             j = fila.index(producto)
             # Indico la coordenada del pasillo al lado del producto (con valor 0)
@@ -78,14 +79,14 @@ def buscar_ubicacion(plano, producto):
     # Retorno para evitar errores en caso de no encuentrar el item buscado
     return (BAHIA_DE_CARGA())
 
-def ubicacion(matriz,pos):
+#def ubicacion(matriz,pos):
     
-    dim=len(matriz)
-    for i in range(0,dim):
-        for j in range(0,dim):
-            if matriz[i][j]==pos:
-                pos=[i,j]
-    return pos
+    #dim=len(matriz)
+    #for i in range(0,dim):
+        #for j in range(0,dim):
+            #if matriz[i][j]==pos:
+                #pos=[i,j]
+    #return pos
 
 def estado_vecino_aleatorio(lista_de_productos):
     """ Función estado_vecino_aleatorio
@@ -97,7 +98,7 @@ def estado_vecino_aleatorio(lista_de_productos):
         estado_vecino: lista en que intercambio de lugar dos items aleatoriamente
     """
     # Creo una copia de la lista de productos que luego será el estado vecino
-    estado_vecino = lista_de_productos[:]
+    estado_vecino = lista_de_productos
     # Elijo aleatoriamente dos índices de la lista, e intercambio los elementos
     # para esos índices
     idx = range(len(estado_vecino))
@@ -158,7 +159,7 @@ def recocido_simulado(To, alfa, Tf, plano, lista_de_productos,dim):
         T = alfa * T
 
         # Intercambio de lugar dos ítems diferentes de la lista
-        estado_vecino =estado_vecino_aleatorio(lista_de_productos)
+        estado_vecino = estado_vecino_aleatorio(lista_de_productos)
 
         d_actual = distancia_recorrida(plano, lista_de_productos,dim)
         print(estado_vecino)
