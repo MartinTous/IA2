@@ -9,7 +9,32 @@ from random import sample, random
 from math import e
 
 from a_estrella import a_estrella
+from Aestrella import *
 
+def almacen(matriz,dim):
+    PF=0             #Pasillo filas
+    PC=0             #Pasillos columnas
+    estante=0
+    for i in range(0,dim):
+        matriz.append([0]*dim)
+
+    for i in range(0,dim):
+        for j in range(0,dim):
+            if PF==0:
+                matriz[i][j]=0
+            elif PC==0:
+                matriz[i][j]=0
+            else:
+                estante=estante+1
+                matriz[i][j]=estante
+            PC=PC+1
+            if PC==3:
+                PC=0
+        PF=PF+1
+        PC=0
+        if PF==5:
+            PF=0
+    return matriz
 
 def BAHIA_DE_CARGA():
     """ Función BAHIA_DE_CARGA
@@ -53,6 +78,14 @@ def buscar_ubicacion(plano, producto):
     # Retorno para evitar errores en caso de no encuentrar el item buscado
     return (BAHIA_DE_CARGA())
 
+def ubicacion(matriz,pos):
+    
+    dim=len(matriz)
+    for i in range(0,dim):
+        for j in range(0,dim):
+            if matriz[i][j]==pos:
+                pos=[i,j]
+    return pos
 
 def estado_vecino_aleatorio(lista_de_productos):
     """ Función estado_vecino_aleatorio
@@ -73,7 +106,7 @@ def estado_vecino_aleatorio(lista_de_productos):
     return (estado_vecino)
 
 
-def distancia_recorrida(plano, lista_de_productos):
+def distancia_recorrida(plano, lista_de_productos,dim):
     """ Función distancia_recorrida
     Calcula la distancia recorrida para un cierto orden de la lista de productos
     Es la función a minimizar. Dice que tan buena es una solución propuesta
@@ -86,19 +119,25 @@ def distancia_recorrida(plano, lista_de_productos):
     posiciones = lista_de_productos[:]
     # La posicion inicial y final son la bahia de carga, lo cual
     # devuelve buscar_ubicacion al pasarle un cero 0
-    posiciones.insert(0, 0)
-    posiciones.insert(len(posiciones), 0)
+    #posiciones.insert(0, 0)
+    #posiciones.insert(len(posiciones), 0)
     f_total = 0
-    for i in range(0, len(posiciones) - 1, 1):
+    #pdb.set_trace()
+    for i in range (len(posiciones) - 1):
+        print('i: ',i)
         # Busco las coordenadas del elemento para poder buscarlo con A estrella
-        indices_a = buscar_ubicacion(plano, posiciones[i])
-        indices_b = buscar_ubicacion(plano, posiciones[i + 1])
+        indices_a = ubicacion(plano, posiciones[i])
+        indices_b = ubicacion(plano, posiciones[i + 1])
+        print('a: ',indices_a)
+        print('b: ',indices_b)
         # Sumo de todos los desplazamientos de ir de cada posicion a la proximo
-        f_total = f_total + len(a_estrella(indices_a, indices_b, plano))
+        f_total = f_total + len(Astar(plano, list(indices_a),list(indices_b )))
+        plano=[]
+        plano=almacen(plano,dim)
     return (f_total)
 
 
-def recocido_simulado(To, alfa, Tf, plano, lista_de_productos):
+def recocido_simulado(To, alfa, Tf, plano, lista_de_productos,dim):
     """ Función recocido_simulado
     Determina un orden optimizado para la lista de picking a traves
     del algoritmo de Temple Simulado o Recocido Simulado
@@ -119,10 +158,12 @@ def recocido_simulado(To, alfa, Tf, plano, lista_de_productos):
         T = alfa * T
 
         # Intercambio de lugar dos ítems diferentes de la lista
-        estado_vecino = estado_vecino_aleatorio(lista_de_productos)
+        estado_vecino =estado_vecino_aleatorio(lista_de_productos)
 
-        d_actual = distancia_recorrida(plano, lista_de_productos)
-        d_estado_vecino = distancia_recorrida(plano, estado_vecino)
+        d_actual = distancia_recorrida(plano, lista_de_productos,dim)
+        print(estado_vecino)
+        
+        d_estado_vecino = distancia_recorrida(plano, estado_vecino,dim)
         # La variación de energía dE es la función objetivo a minimizar
         dE = d_estado_vecino - d_actual
 
@@ -136,5 +177,5 @@ def recocido_simulado(To, alfa, Tf, plano, lista_de_productos):
 
     # El algoritmo devuelve la mejor solución que se haya podido explorar y la
     # distancia minimiaza correspondiente
-    dist_min = distancia_recorrida(plano, lista_de_productos)
+    dist_min = distancia_recorrida(plano, lista_de_productos,dim)
     return (lista_de_productos, dist_min)

@@ -1,4 +1,6 @@
 from Aestrella import *
+from numpy import matrix
+from subprocess import call
 import os
 
 #====================== Armar la matriz que representa todo el almacen==================#
@@ -47,17 +49,18 @@ if __name__=="__main__":
     dim=int(input('Tamaño del almacen (LxL) -> L= '))
     matriz=almacen(matriz,dim)                                                              #_Armo la matriz que representa al almacen
     print('\n')
-    for i in range(0,dim):                                                                  #_Graficar el almacén
-        for j in range(0,dim):
-            print(matriz[i][j],end=' ')
-        print('\n')
-
+    
+    print(matrix(matriz))
+    
     inicio=ubicacion(matriz,int(input('Posición de inicio: ')),dim)                                                                                                                                                 
     pos1=ubicacion(matriz,int(input('Posición de destino: ')),dim)                          #_Saber el lugar de la matriz de la posicion de destino
     [matriz,camino]=Astar(matriz,inicio,pos1)                                               #_Encontramos el camino óptimo
 
-
+    
     os.system('cls')
+    # Limpia la pantalla del programa, funciona en varios sistemas
+    #call('clear' if os.name =='posix' else 'cls')
+
     print('Camino:\n',camino)
     print('Distancia recorrida: ',len(camino),' celdas')
 
