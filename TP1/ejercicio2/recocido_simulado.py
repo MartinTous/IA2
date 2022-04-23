@@ -62,6 +62,7 @@ def estado_vecino_aleatorio(estado_vecino):
     #estado_vecino = lista_de_productos
     # Elijo aleatoriamente dos índices de la lista, e intercambio los elementos
     # para esos índices
+    estado_vecino=copy.deepcopy(estado_vecino)
     idx = range(len(estado_vecino))
     i1, i2 = sample(idx, 2)
     estado_vecino[i1], estado_vecino[i2] = estado_vecino[i2], estado_vecino[i1]
