@@ -1,5 +1,5 @@
 from Aestrella import *
-from numpy import matrix
+from numpy import *
 from subprocess import call
 import os
 
@@ -58,8 +58,6 @@ if __name__=="__main__":
 
     
     os.system('cls')
-    # Limpia la pantalla del programa, funciona en varios sistemas
-    #call('clear' if os.name =='posix' else 'cls')
 
     print('Camino:\n',camino)
     print('Distancia recorrida: ',len(camino),' celdas')

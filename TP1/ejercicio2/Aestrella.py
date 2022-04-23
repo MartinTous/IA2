@@ -5,13 +5,10 @@ def Astar(matriz,inicio,destino):
 
     dim=len(matriz)
     flag=True
-    actual=inicio
-    Mfn=[]                                                                                #Matriz que guardará las funciones f(n)                                                                             #Matriz que guardará el costo c(n)
-    caminos=[]                                                                            #Matriz que guardara los caminos hasta cada nodo
+    actual=inicio                                                         
 
-    for i in range(0,dim):
-        Mfn.append([1000]*dim)
-        caminos.append([0]*dim)
+    Mfn=np.full((dim,dim),1000)                                          #Matriz que guardará las funciones f(n)
+    caminos=np.full((dim,dim),None)                                      #Matriz que guardara los caminos hasta cada nodo
 
     caminos[actual[0]][actual[1]]=inicio
 
@@ -42,7 +39,8 @@ def Astar(matriz,inicio,destino):
                             caminos[pSig[0]][pSig[1]]= path                                #Almaceno el camino hasta el nodo en cuestion
                             if hn==1:                                                      #_Si estoy a un paso del destino se detiene
                                 flag=False
-                                
+
+        caminos[actual[0]][actual[1]]=None                        
         Mfn[actual[0]][actual[1]]=1000                                                    #_Reemplazo el valor de f(n) anterior para no volver a pasar por ese nodo        
         for i in range(0,dim):
             for j in range(0,dim):
