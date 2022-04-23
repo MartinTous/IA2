@@ -108,8 +108,7 @@ def recocido_simulado(To, alfa, Tf, plano, lista_de_productos,dim):
         lista_de_productos: Lista ordenada para reducir la distancia recorrida
         dist_min: Distancia minimizada por la lista ordenada
     """
-    plano=[]
-    plano=almacen(plano,dim)
+
     e_actual = distancia_recorrida(plano, lista_de_productos,dim)
 
     # Temperatura inicial
