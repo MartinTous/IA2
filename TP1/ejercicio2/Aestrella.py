@@ -1,19 +1,16 @@
 import numpy as np
-import pdb
-
 
 #================================== Algoritmo A* =========================================#
 def Astar(matriz,inicio,destino):
-    #pdb.set_trace()
+
     dim=len(matriz)
     flag=True
     actual=inicio
     Mfn=[]                                                                                #Matriz que guardará las funciones f(n)                                                                             #Matriz que guardará el costo c(n)
     caminos=[]                                                                            #Matriz que guardara los caminos hasta cada nodo
-    #print(inicio)
-    #print(destino)
+
     for i in range(0,dim):
-        Mfn.append([10000]*dim)
+        Mfn.append([1000]*dim)
         caminos.append([0]*dim)
 
     caminos[actual[0]][actual[1]]=inicio
@@ -46,7 +43,7 @@ def Astar(matriz,inicio,destino):
                             if hn==1:                                                      #_Si estoy a un paso del destino se detiene
                                 flag=False
                                 
-        Mfn[actual[0]][actual[1]]=10000                                                    #_Reemplazo el valor de f(n) anterior para no volver a pasar por ese nodo        
+        Mfn[actual[0]][actual[1]]=1000                                                    #_Reemplazo el valor de f(n) anterior para no volver a pasar por ese nodo        
         for i in range(0,dim):
             for j in range(0,dim):
                 if (Mfn[i][j])==np.amin(Mfn):                                              #_Busco el nodo con el menor f(n)
@@ -55,11 +52,7 @@ def Astar(matriz,inicio,destino):
 
         matriz[actual[0]][actual[1]]='#'                                                  #_Marco el camino en el almacén
         cont=0
-        """print('\n')
-        for i in range(0,dim):                                                                 #_Graficar el almacén y el recorrido
-            for j in range(0,dim):
-                print(matriz[i][j],end=' ')
-            print('\n')"""
+
     camino=[]
     for i in path:
         if cont>=2:
@@ -67,11 +60,7 @@ def Astar(matriz,inicio,destino):
             camino[cont-2]=i
             matriz[i[0]][i[1]]='.'
         cont=cont+1
-    """print('\n')
-    for i in range(0,dim):                                                                 #_Graficar el almacén y el recorrido
-        for j in range(0,dim):
-            print(matriz[i][j],end=' ')
-        print('\n')""" 
+
     return camino
 
 

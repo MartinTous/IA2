@@ -145,4 +145,3 @@ def recocido_simulado(To, alfa, Tf, plano, lista_de_productos,dim):
     # distancia minimiaza correspondiente
     dist_min=e_actual
     return (lista_de_productos, dist_min)
-    #[25, 33, 62, 27, 98, 66, 80, 95, 74, 29, 24, 63, 55, 70, 54, 22, 87, 47, 31, 72, 73, 65, 46, 58, 97]
