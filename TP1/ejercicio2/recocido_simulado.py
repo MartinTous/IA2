@@ -7,9 +7,9 @@ Año 2022
 
 from random import sample, random
 from math import e
-from numpy import matrix
 from a_estrella import a_estrella
 from Aestrella import *
+import copy
 
 def almacen(matriz,dim):
     PF=0             #Pasillo filas
@@ -68,7 +68,7 @@ def estado_vecino_aleatorio(estado_vecino):
     return list(estado_vecino)
 
 
-def distancia_recorrida(plano, lista_de_productos,dim):
+def distancia_recorrida(plano, lista_de_productos):
     """ Función distancia_recorrida
     Calcula la distancia recorrida para un cierto orden de la lista de productos
     Es la función a minimizar. Dice que tan buena es una solución propuesta
@@ -78,23 +78,23 @@ def distancia_recorrida(plano, lista_de_productos,dim):
     Parametro de Salida:
         distancia total recorrida para dicho ordenamiento de la lista de picking
     """
+    
     posiciones = lista_de_productos[:]
     f_total = 0
 
     for i in range (len(posiciones) - 1):
-
+        matriz=copy.deepcopy(plano)
         # Busco las coordenadas del elemento para poder buscarlo con A estrella
-        indices_a = ubicacion(plano, posiciones[i])
-        indices_b = ubicacion(plano, posiciones[i + 1])
-       
+        indices_a = ubicacion(matriz, posiciones[i])
+        indices_b = ubicacion(matriz, posiciones[i + 1])
+
         # Sumo de todos los desplazamientos de ir de cada posicion a la proximo
-        f_total = f_total + len(Astar(plano, list(indices_a),list(indices_b )))
-        plano=[]
-        plano=almacen(plano,dim)
+        f_total = f_total + len(Astar(matriz, list(indices_a),list(indices_b )))
+
     return (f_total)
 
 
-def recocido_simulado(To, alfa, Tf, plano, lista_de_productos,dim):
+def recocido_simulado(To, alfa, Tf, plano, lista_de_productos):
     """ Función recocido_simulado
     Determina un orden optimizado para la lista de picking a traves
     del algoritmo de Temple Simulado o Recocido Simulado
@@ -109,7 +109,7 @@ def recocido_simulado(To, alfa, Tf, plano, lista_de_productos,dim):
         dist_min: Distancia minimizada por la lista ordenada
     """
 
-    e_actual = distancia_recorrida(plano, lista_de_productos,dim)
+    e_actual = distancia_recorrida(plano, lista_de_productos)
 
     # Temperatura inicial
     T = To
@@ -120,11 +120,8 @@ def recocido_simulado(To, alfa, Tf, plano, lista_de_productos,dim):
         # Intercambio de lugar dos ítems diferentes de la lista
         estado_vecino = estado_vecino_aleatorio(lista_de_productos)
 
-        plano=[]
-        plano=almacen(plano,dim)
-        e_estado_vecino = distancia_recorrida(plano, estado_vecino,dim)
-
-                        
+        e_estado_vecino = distancia_recorrida(plano, estado_vecino)
+                   
         # La variación de energía dE es la función objetivo a minimizar
         dE = e_estado_vecino - e_actual
 

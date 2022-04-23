@@ -41,7 +41,7 @@ if __name__ == "__main__":
     To = 1000
     Tf = 0.05
     alfa = 0.9
-    lista_ordenada, distancia_recorrida = recocido_simulado(To, alfa, Tf, matriz, lista_de_productos,dim)
+    lista_ordenada, distancia_recorrida = recocido_simulado(To, alfa, Tf, matriz, lista_de_productos)
     print("Lista ordenada para reducir la distancia recorrida:")
     print(lista_ordenada)
     print("Distancia minimizada con la lista ordenada:", distancia_recorrida)
