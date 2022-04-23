@@ -55,7 +55,11 @@ def Astar(matriz,inicio,destino):
 
         matriz[actual[0]][actual[1]]='#'                                                  #_Marco el camino en el almacén
         cont=0
-       
+        """print('\n')
+        for i in range(0,dim):                                                                 #_Graficar el almacén y el recorrido
+            for j in range(0,dim):
+                print(matriz[i][j],end=' ')
+            print('\n')"""
     camino=[]
     for i in path:
         if cont>=2:

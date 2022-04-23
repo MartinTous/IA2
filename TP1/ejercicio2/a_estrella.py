@@ -21,7 +21,7 @@ class Node():
         return self.position == other.position
     
 
-def a_estrella(start, end, plano):
+def a_estrella(plano,start,end):
     """Returns a list of tuples as a path from the given start to the given end in the given plano"""
 
     # Create start and end node
