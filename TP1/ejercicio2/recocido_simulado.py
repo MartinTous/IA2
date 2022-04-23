@@ -110,7 +110,7 @@ def recocido_simulado(To, alfa, Tf, plano, lista_de_productos,dim):
     """
     plano=[]
     plano=almacen(plano,dim)
-    d_actual = distancia_recorrida(plano, lista_de_productos,dim)
+    e_actual = distancia_recorrida(plano, lista_de_productos,dim)
 
     # Temperatura inicial
     T = To
@@ -121,13 +121,13 @@ def recocido_simulado(To, alfa, Tf, plano, lista_de_productos,dim):
         # Intercambio de lugar dos ítems diferentes de la lista
         estado_vecino = estado_vecino_aleatorio(lista_de_productos)
 
-
         plano=[]
         plano=almacen(plano,dim)
-        d_estado_vecino = distancia_recorrida(plano, estado_vecino,dim)
-        
+        e_estado_vecino = distancia_recorrida(plano, estado_vecino,dim)
+
+                        
         # La variación de energía dE es la función objetivo a minimizar
-        dE = d_estado_vecino - d_actual
+        dE = e_estado_vecino - e_actual
 
         # Decrecimiento exponencial
         probabilidad = pow(e, -dE / T)
@@ -135,16 +135,15 @@ def recocido_simulado(To, alfa, Tf, plano, lista_de_productos,dim):
         # Los movimientos que minimizan la distancia recorrida se aceptan siempre
         # Si el nuevo estado candidato es peor, podría llegar a aceptarse con
         # probabilidad pow(e, -dE/T)
-        if ((dE <= 0) or (probabilidad > random())):
-            lista_de_productos = estado_vecino
-            d_actual=d_estado_vecino
+        if ((dE <= 0) or (probabilidad >= random())):
+            e_actual=e_estado_vecino
+            lista_de_productos=estado_vecino
             print(estado_vecino)
-            print('Costo= ',d_estado_vecino)
+            print('Costo= ',e_estado_vecino)
+
 
     # El algoritmo devuelve la mejor solución que se haya podido explorar y la
     # distancia minimiaza correspondiente
-    plano=[]
-    plano=almacen(plano,dim)
-    dist_min = distancia_recorrida(plano, lista_de_productos,dim)
+    dist_min=e_actual
     return (lista_de_productos, dist_min)
     #[25, 33, 62, 27, 98, 66, 80, 95, 74, 29, 24, 63, 55, 70, 54, 22, 87, 47, 31, 72, 73, 65, 46, 58, 97]
