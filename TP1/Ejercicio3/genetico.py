@@ -10,18 +10,21 @@ class individuo():
         #calculo el fitness con recocido simulado
         fitness = 0
         for i in range (len(ordenes)):
-            nf = recocido_simulado(self.disposicion,ordenes)
+            nf = recocido_simulado(self.disposicion,ordenes[i])
             fitness = fitness + nf
         return fitness
           
 
 
 def genetico (disp,ordenes):
+    it = 0
+    ft = []
     poblacion = []
     for j in range(1000):
         for i in range(len(disp)):
             poblacion[i] = individuo(disp(i),ordenes)
-        
+            ft [it] = poblacion[i].fitness
+            it += it
         poblacion = seleccion(poblacion)
         poblacion = crossover(poblacion)
         poblacion = mutacion(poblacion)
@@ -34,10 +37,6 @@ def genetico (disp,ordenes):
     pobok = poblacion [1]
 
     print(pobok)
-
-
-
-
 
 
 
@@ -72,5 +71,4 @@ def mutacion (poblacion):
         poblacion [i][a] = a2
         poblacion [i][b] = a3
         poblacion [i][c] = a1
-    
     return poblacion
