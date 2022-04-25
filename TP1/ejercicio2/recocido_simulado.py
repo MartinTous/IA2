@@ -37,14 +37,11 @@ def almacen(matriz,dim):
     return matriz
 
 
-#def buscar_ubicacion(plano, producto):
 def ubicacion(matriz,pos):
     dim=len(matriz)
-    #print(matrix(matriz))
     for i in range(0,dim):
         for j in range(0,dim):
             if matriz[i][j]==pos:
-                #print(i,' ',j)
                 pos=[i,j]
     return pos
 
