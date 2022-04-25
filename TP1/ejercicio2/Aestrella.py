@@ -50,8 +50,8 @@ def Astar(matriz,inicio,destino):
         cont=0
 
     path=path[2:len(path)]
-    for i in path:
-        matriz[i[0]][i[1]]='.'
+    #for i in path:
+     #   matriz[i[0]][i[1]]='.'
     return path
 
 
