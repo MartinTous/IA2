@@ -26,17 +26,15 @@ def Astar(matriz,inicio,destino):
                         if matriz[pSig[0]][pSig[1]]==0:                                    #_Para que avance solo por los pasillos                    
                             [f,hn]=fn(pSig,destino,len(caminos[actual[0]][actual[1]])-2)   #_Calculo f(n) de esa posición
                             Mfn[pSig[0]][pSig[1]]=f                                        #_Lo almaceno en la matriz
-                            
-                            path=[]
+
+                            path=np.full(((len(caminos[actual[0]][actual[1]])+1)),None)
                             cont=0
                             for i in caminos[actual[0]][actual[1]]:
-                                path.append(0)
                                 path[cont]=i
                                 cont=cont+1
-                            path.append(0)
-
                             path[cont]=pSig
                             caminos[pSig[0]][pSig[1]]= path                                #Almaceno el camino hasta el nodo en cuestion
+                            
                             if hn==1:                                                      #_Si estoy a un paso del destino se detiene
                                 flag=False
 
@@ -52,9 +50,9 @@ def Astar(matriz,inicio,destino):
         cont=0
 
     path=path[2:len(path)]
-    for i in path:
-        matriz[i[0]][i[1]]='.'
-    return matriz,path
+    #for i in path:
+     #   matriz[i[0]][i[1]]='.'
+    return path
 
 
 #==================================== Calcular F(n)=h(n)+c(n)=============================#

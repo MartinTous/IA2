@@ -1,5 +1,5 @@
 from Aestrella import *
-from numpy import matrix
+from numpy import *
 from subprocess import call
 import os
 
@@ -50,11 +50,6 @@ if __name__=="__main__":
     matriz=almacen(matriz,dim)                                                              #_Armo la matriz que representa al almacen
     print('\n')
     
-    #for i in range(0,dim):                                                                  #_Graficar el almacén
-        #for j in range(0,dim):
-            #print(matriz[i][j],end=' ')
-        #print('\n')
-    # Muestra la matriz en pantalla prolijamente con las columnas alineadas
     print(matrix(matriz))
     
     inicio=ubicacion(matriz,int(input('Posición de inicio: ')),dim)                                                                                                                                                 
@@ -62,9 +57,7 @@ if __name__=="__main__":
     [matriz,camino]=Astar(matriz,inicio,pos1)                                               #_Encontramos el camino óptimo
 
     
-    #os.system('cls')
-    # Limpia la pantalla del programa, funciona en varios sistemas
-    call('clear' if os.name =='posix' else 'cls')
+    os.system('cls')
 
     print('Camino:\n',camino)
     print('Distancia recorrida: ',len(camino),' celdas')
