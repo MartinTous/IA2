@@ -7,9 +7,14 @@ Año 2022
 
 from random import sample, random
 from math import e
-from a_estrella import a_estrella
-from Aestrella import *
-import copy
+#from Aestrella import *
+from Aestrella import Astar
+from copy import deepcopy
+#import copy
+# Se importa copy usando from para la ejecución del código
+# Esto evita usar la dot operation (copy.)
+# https://www.loginradius.com/blog/engineering/speed-up-python-code/
+
 
 def almacen(matriz,dim):
     PF=0             #Pasillo filas
@@ -59,7 +64,8 @@ def estado_vecino_aleatorio(estado_vecino):
     #estado_vecino = lista_de_productos
     # Elijo aleatoriamente dos índices de la lista, e intercambio los elementos
     # para esos índices
-    estado_vecino=copy.deepcopy(estado_vecino)
+    #estado_vecino=copy.deepcopy(estado_vecino)
+    estado_vecino = deepcopy(estado_vecino)
     idx = range(len(estado_vecino))
     i1, i2 = sample(idx, 2)
     estado_vecino[i1], estado_vecino[i2] = estado_vecino[i2], estado_vecino[i1]
@@ -81,7 +87,8 @@ def distancia_recorrida(plano, lista_de_productos):
     f_total = 0
 
     for i in range (len(posiciones) - 1):
-        matriz=copy.deepcopy(plano)
+        #matriz=copy.deepcopy(plano)
+        matriz = deepcopy(plano)
         # Busco las coordenadas del elemento para poder buscarlo con A estrella
         indices_a = ubicacion(matriz, posiciones[i])
         indices_b = ubicacion(matriz, posiciones[i + 1])
@@ -124,12 +131,14 @@ def recocido_simulado(To, alfa, Tf, plano, lista_de_productos):
         dE = e_estado_vecino - e_actual
 
         # Decrecimiento exponencial
-        probabilidad = pow(e, -dE / T)
+        #probabilidad = pow(e, -dE / T)
 
         # Los movimientos que minimizan la distancia recorrida se aceptan siempre
         # Si el nuevo estado candidato es peor, podría llegar a aceptarse con
         # probabilidad pow(e, -dE/T)
-        if ((dE <= 0) or (probabilidad >= random())):
+        #if ((dE <= 0) or (probabilidad >= random())):
+        # De no ser necesario calcular la probabilidad no se hace
+        if ((dE <= 0) or (pow(e, -dE / T) >= random())):
             e_actual=e_estado_vecino
             lista_de_productos=estado_vecino
             print(estado_vecino)
