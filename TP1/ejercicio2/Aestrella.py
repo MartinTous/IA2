@@ -1,4 +1,5 @@
-import numpy as np
+#import numpy as np
+from numpy import full, amin
 
 #================================== Algoritmo A* =========================================#
 def Astar(matriz,inicio,destino):
@@ -7,8 +8,10 @@ def Astar(matriz,inicio,destino):
     flag=True
     actual=inicio                                                         
 
-    Mfn=np.full((dim,dim),1000)                                          #Matriz que guardará las funciones f(n)
-    caminos=np.full((dim,dim),None)                                      #Matriz que guardara los caminos hasta cada nodo
+    #Mfn=np.full((dim,dim),1000)                                          #Matriz que guardará las funciones f(n)
+    Mfn=full((dim,dim),1000)                                          #Matriz que guardará las funciones f(n)
+    #caminos=np.full((dim,dim),None)                                      #Matriz que guardara los caminos hasta cada nodo
+    caminos=full((dim,dim),None)                                      #Matriz que guardara los caminos hasta cada nodo
 
     caminos[actual[0]][actual[1]]=inicio
 
@@ -27,7 +30,8 @@ def Astar(matriz,inicio,destino):
                             [f,hn]=fn(pSig,destino,len(caminos[actual[0]][actual[1]])-2)   #_Calculo f(n) de esa posición
                             Mfn[pSig[0]][pSig[1]]=f                                        #_Lo almaceno en la matriz
 
-                            path=np.full(((len(caminos[actual[0]][actual[1]])+1)),None)
+                            #path=np.full(((len(caminos[actual[0]][actual[1]])+1)),None)
+                            path=full(((len(caminos[actual[0]][actual[1]])+1)),None)
                             cont=0
                             for i in caminos[actual[0]][actual[1]]:
                                 path[cont]=i
@@ -42,7 +46,8 @@ def Astar(matriz,inicio,destino):
         Mfn[actual[0]][actual[1]]=1000                                                    #_Reemplazo el valor de f(n) anterior para no volver a pasar por ese nodo        
         for i in range(0,dim):
             for j in range(0,dim):
-                if (Mfn[i][j])==np.amin(Mfn):                                              #_Busco el nodo con el menor f(n)
+                #if (Mfn[i][j])==np.amin(Mfn):                                              #_Busco el nodo con el menor f(n)
+                if (Mfn[i][j])==amin(Mfn):                                              #_Busco el nodo con el menor f(n)
                     actual=[i,j]
 
 
