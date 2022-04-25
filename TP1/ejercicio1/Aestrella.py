@@ -51,15 +51,10 @@ def Astar(matriz,inicio,destino):
         matriz[actual[0]][actual[1]]='#'                                                  #_Marco el camino en el almacén
         cont=0
 
-    camino=[]
+    path=path[2:len(path)]
     for i in path:
-        if cont>=2:
-            camino.append(0)
-            camino[cont-2]=i
-            matriz[i[0]][i[1]]='.'
-        cont=cont+1
-
-    return [matriz,camino]
+        matriz[i[0]][i[1]]='.'
+    return matriz,path
 
 
 #==================================== Calcular F(n)=h(n)+c(n)=============================#
