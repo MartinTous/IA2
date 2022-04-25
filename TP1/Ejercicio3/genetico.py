@@ -64,11 +64,5 @@ def mutacion (poblacion):
         b = random.randint(0,len(poblacion[i]))
         c = random.randint(0,len(poblacion[i]))
 
-        a1 = poblacion [i][a]
-        a2 = poblacion [i][b]
-        a3 = poblacion [i][c]
-
-        poblacion [i][a] = a2
-        poblacion [i][b] = a3
-        poblacion [i][c] = a1
+        poblacion[i][a],poblacion [i][b], poblacion [i][c] = poblacion [i][b], poblacion [i][c],poblacion [i][a]
     return poblacion
