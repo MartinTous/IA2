@@ -7,7 +7,6 @@ Año 2022
 
 from random import sample, random
 from math import e
-#from Aestrella import *
 from Aestrella import Astar
 from copy import deepcopy
 #import copy
@@ -87,7 +86,7 @@ def distancia_recorrida(plano, lista_de_productos):
     f_total = 0
 
     for i in range (len(posiciones) - 1):
-        #matriz=copy.deepcopy(plano)
+
         matriz = deepcopy(plano)
         # Busco las coordenadas del elemento para poder buscarlo con A estrella
         indices_a = ubicacion(matriz, posiciones[i])
@@ -129,9 +128,6 @@ def recocido_simulado(To, alfa, Tf, plano, lista_de_productos):
                    
         # La variación de energía dE es la función objetivo a minimizar
         dE = e_estado_vecino - e_actual
-
-        # Decrecimiento exponencial
-        #probabilidad = pow(e, -dE / T)
 
         # Los movimientos que minimizan la distancia recorrida se aceptan siempre
         # Si el nuevo estado candidato es peor, podría llegar a aceptarse con
