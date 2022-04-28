@@ -9,6 +9,8 @@ from random import sample, random
 from math import e
 from Aestrella import Astar
 from copy import deepcopy
+import pandas as pd
+from numpy import *
 #import copy
 # Se importa copy usando from para la ejecución del código
 # Esto evita usar la dot operation (copy.)
@@ -71,7 +73,7 @@ def estado_vecino_aleatorio(estado_vecino):
     return list(estado_vecino)
 
 
-def distancia_recorrida(plano, lista_de_productos):
+def distancia_recorrida(plano, lista_de_productos,df):
     """ Función distancia_recorrida
     Calcula la distancia recorrida para un cierto orden de la lista de productos
     Es la función a minimizar. Dice que tan buena es una solución propuesta
@@ -88,12 +90,25 @@ def distancia_recorrida(plano, lista_de_productos):
     for i in range (len(posiciones) - 1):
 
         matriz = deepcopy(plano)
+
+        #IMPLEMENTACION CALCULANDO A* EN CADA ITERACION
         # Busco las coordenadas del elemento para poder buscarlo con A estrella
-        indices_a = ubicacion(matriz, posiciones[i])
-        indices_b = ubicacion(matriz, posiciones[i + 1])
+        #indices_a = ubicacion(matriz, posiciones[i])
+        #indices_b = ubicacion(matriz, posiciones[i + 1])
 
         # Sumo de todos los desplazamientos de ir de cada posicion a la proximo
-        f_total = f_total + len(Astar(matriz, list(indices_a),list(indices_b )))
+        #f_total = f_total + len(Astar(matriz, list(indices_a),list(indices_b )))
+
+
+
+        #IMPLEMENTACION CON LAS DISTANCIAS YA CALCULADAS
+        costo=0
+        for i in range(0,len(df)):
+
+            if(df[i][0])==posiciones[i] and (df[i][1]==posiciones[i+1]):
+                costo=df[i][2]
+        f_total = f_total + costo
+        
 
     return (f_total)
 
@@ -112,11 +127,14 @@ def recocido_simulado(To, alfa, Tf, plano, lista_de_productos):
         lista_de_productos: Lista ordenada para reducir la distancia recorrida
         dist_min: Distancia minimizada por la lista ordenada
     """
-
-    e_actual = distancia_recorrida(plano, lista_de_productos)
+    df=pd.read_csv('distancias.csv')
+    df=df.to_numpy()
+    print(len(df))
+    e_actual = distancia_recorrida(plano, lista_de_productos,df)
 
     # Temperatura inicial
     T = To
+    
     while (T >= Tf):
         # La Temperatura va disminuyendo a medida que avanza el algoritmo
         T = alfa * T
