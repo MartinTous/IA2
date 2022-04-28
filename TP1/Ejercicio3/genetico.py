@@ -1,4 +1,5 @@
 from random import random
+from recocido_simulado import recocido_simulado
 
 class individuo():                                      
     def __init__(self,list,ordenes):
@@ -9,8 +10,20 @@ class individuo():
     def setfitness(self,ordenes):
         #calculo el fitness con recocido simulado
         fitness = 0
+        it=0
+        plano =[[0,  0,  0, 0, 0, 0, 0, 0],
+                [0,  1,  1, 0, 0, 1, 1, 0],
+                [0,  1,  1, 0, 0, 1, 1, 0],
+                [0,  1,  1, 0, 0, 1, 1, 0],
+                [0,  1,  1, 0, 0, 1, 1, 0],
+                [0,  0,  0, 0, 0, 0, 0, 0],]
+        for i in range(len(plano)):
+            for j in range(len(plano[i])):
+                if plano[i][j]==1:
+                    plano[i][j]== self.disposicion[it]
+                    it += it
         for i in range (len(ordenes)):
-            nf = recocido_simulado(self.disposicion,ordenes[i])
+            nf = recocido_simulado(plano,ordenes[i])[1]
             fitness = fitness + nf                                  #Acumulo todos los costos y ese es el fitness del individuo
         return fitness
           
@@ -49,12 +62,25 @@ def seleccion(poblacion):
 
 
 def crossover(lista): 
-  
-    k = random.randint(0, len(lista[1]),2)                           #Punto random para entrecruzar
-
+    nuevalista=[0,0,0,0,0,0,0,0,0,0]
+    listadoble=[]
+    k1 = random.randint(0, len(lista[1]),2)                           #Punto random para entrecruzar
+    k2 = random.randint(0, len(lista[1]),2)
+    while(k1==k2):
+        k1 = random.randint(0, len(lista[1]),2)                           #Punto random para entrecruzar
+        k2 = random.randint(0, len(lista[1]),2)
+    if k1>k2: 
+        k1,k2 = k2,k1   
     for i in range (len(lista)):
-        for j in range(k,len(lista[i])): 
-            lista[i][j], lista[i+1][j] = lista[i+1][j], lista[i][j]    
+        for j in range(k1,k2+1): 
+            nuevalista[i][j], nuevalista[i+1][j] = lista[i+1][j], lista[i][j] 
+        listadoble= lista[i]+lista[i+1]
+        for l in range(len(listadoble)):
+            for j in range(len(nuevalista)):
+                if listadoble[l]!=nuevalista[j]:
+                    nuevalista[j]==listadoble[l]
+                    break
+          
       
     return lista 
 
