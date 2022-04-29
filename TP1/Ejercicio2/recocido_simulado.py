@@ -102,10 +102,11 @@ def distancia_recorrida(plano, lista_de_productos,df):
 
 
         #IMPLEMENTACION CON LAS DISTANCIAS YA CALCULADAS
+        indices_a = ubicacion(matriz, posiciones[i])
+        indices_b = ubicacion(matriz, posiciones[i + 1])
         costo=0
         for i in range(0,len(df)):
-
-            if(df[i][0])==posiciones[i] and (df[i][1]==posiciones[i+1]):
+            if(((df[i][0])==indices_a and (df[i][1]==indices_b))or((df[i][0])==indices_b and (df[i][1]==indices_a))):   #
                 costo=df[i][2]
         f_total = f_total + costo
         
@@ -142,7 +143,7 @@ def recocido_simulado(To, alfa, Tf, plano, lista_de_productos):
         # Intercambio de lugar dos ítems diferentes de la lista
         estado_vecino = estado_vecino_aleatorio(lista_de_productos)
 
-        e_estado_vecino = distancia_recorrida(plano, estado_vecino)
+        e_estado_vecino = distancia_recorrida(plano, estado_vecino,df)
                    
         # La variación de energía dE es la función objetivo a minimizar
         dE = e_estado_vecino - e_actual
