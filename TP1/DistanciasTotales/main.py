@@ -1,7 +1,8 @@
+""" _En este programa se calculan las distancias desde cada nodo de la matriz hasta el resto y se almacena
+    _Unicamente es necesario correrlo en caso de que cambiemos la matriz que representa el almacen, 
+     ya que el archivo csv que generamos queda guardado"""
+
 from Aestrella import *
-from numpy import *
-import os
-import pandas as pd
 from copy import deepcopy
 
 
@@ -55,7 +56,9 @@ if __name__=="__main__":
     
     print(matrix(plano))
 
-    l=open("distancias.csv","w")
+
+    # Este bloque se ejecuta en caso de que querramos volver a calcular 
+    """ l=open("distancias.csv","w")
     l.write("inicio,destino,costo")
     for i in range(1,121):
         inicio=ubicacion(plano,i)
@@ -65,19 +68,11 @@ if __name__=="__main__":
             destino=ubicacion(plano,j)
             [matriz,camino]=Astar(matriz,inicio,destino) 
             l.write(str(inicio)+","+str(destino)+","+str(len(camino))+"\n")
-    l.close()
+    l.close() """
 
 
-    df=pd.read_csv('distancias.csv')
-    df=df.to_numpy()
-
-    for i in range(0,len(df)):
-        if(df[i][0])==inicio and (df[i][1]==pos1):
-            print(i)
-            camino=df[i][2]
+    #df=pd.read_csv('distancias.csv')
+    #df=df.to_numpy()
 
 
 
-    #os.system('cls')
-
-    print('Distancia recorrida: ',camino,' celdas')
