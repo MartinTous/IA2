@@ -2,6 +2,8 @@ from Aestrella import *
 from numpy import *
 import os
 import pandas as pd
+from copy import deepcopy
+
 
 #====================== Armar la matriz que representa todo el almacen==================#
 def almacen(matriz,dim):
@@ -31,7 +33,8 @@ def almacen(matriz,dim):
 
 #============================= Ubicar posiciones de destino =============================#
 # Devuelve las coordenadas de la estantería que solicito
-def ubicacion(matriz,pos,dim):
+def ubicacion(matriz,pos):
+    dim=len(matriz)
     for i in range(0,dim):
         for j in range(0,dim):
             if matriz[i][j]==pos:
@@ -44,17 +47,25 @@ def ubicacion(matriz,pos,dim):
 #======================================== MAIN ===========================================#
 if __name__=="__main__":
     
-    matriz=[]
+    plano=[]
     print('\n')
     dim=16
-    matriz=almacen(matriz,dim)                                                              #_Armo la matriz que representa al almacen
+    plano=almacen(plano,dim)                                                              #_Armo la matriz que representa al almacen
     print('\n')
     
-    print(matrix(matriz))
-    
-    inicio=int(input('Posición de inicio: ') )                                                                                                                                              
-    pos1=int(input('Posición de destino: ')   )                       #_Saber el lugar de la matriz de la posicion de destino
-    #[matriz,camino]=Astar(matriz,inicio,pos1)                                               #_Encontramos el camino óptimo
+    print(matrix(plano))
+
+    l=open("distancias.csv","w")
+    l.write("inicio,destino,costo")
+    for i in range(1,121):
+        inicio=ubicacion(plano,i)
+        print(i)
+        for j in range(i+1,121):
+            matriz= deepcopy(plano)
+            destino=ubicacion(plano,j)
+            [matriz,camino]=Astar(matriz,inicio,destino) 
+            l.write(str(inicio)+","+str(destino)+","+str(len(camino))+"\n")
+    l.close()
 
 
     df=pd.read_csv('distancias.csv')
