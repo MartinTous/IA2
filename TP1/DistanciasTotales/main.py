@@ -59,7 +59,7 @@ if __name__=="__main__":
 
 
     # Este bloque se ejecuta en caso de que querramos volver a calcular 
-    l=open("distancias.csv","w")
+"""     l=open("distancias.csv","w")
     l.write("inicio,destino,costo\n")
     
     for i in range(1,estante+1):
@@ -69,11 +69,9 @@ if __name__=="__main__":
             destino=ubicacion(plano,j)
             [matriz,camino]=Astar(matriz,inicio,destino) 
             l.write(str(inicio)+","+str(destino)+","+str(len(camino))+"\n")
-    l.close() 
+    l.close()  """
 
 
-    #df=pd.read_csv('distancias.csv')
-    #df=df.to_numpy()
 
 
 
