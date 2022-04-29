@@ -4,6 +4,7 @@
 
 from Aestrella import *
 from copy import deepcopy
+from numpy import matrix
 
 
 #====================== Armar la matriz que representa todo el almacen==================#
@@ -30,7 +31,7 @@ def almacen(matriz,dim):
         PC=0
         if PF==5:
             PF=0
-    return matriz
+    return matriz,estante
 
 #============================= Ubicar posiciones de destino =============================#
 # Devuelve las coordenadas de la estantería que solicito
@@ -50,25 +51,25 @@ if __name__=="__main__":
     
     plano=[]
     print('\n')
-    dim=16
-    plano=almacen(plano,dim)                                                              #_Armo la matriz que representa al almacen
+    dim=16                                                                                # Tamaño del almacén (dim x dim)
+    plano,estante=almacen(plano,dim)                                                              #_Armo la matriz que representa al almacen
     print('\n')
     
     print(matrix(plano))
 
 
     # Este bloque se ejecuta en caso de que querramos volver a calcular 
-    """ l=open("distancias.csv","w")
-    l.write("inicio,destino,costo")
-    for i in range(1,121):
+    l=open("distancias.csv","w")
+    l.write("inicio,destino,costo\n")
+    
+    for i in range(1,estante+1):
         inicio=ubicacion(plano,i)
-        print(i)
-        for j in range(i+1,121):
+        for j in range(i+1,estante+1):
             matriz= deepcopy(plano)
             destino=ubicacion(plano,j)
             [matriz,camino]=Astar(matriz,inicio,destino) 
             l.write(str(inicio)+","+str(destino)+","+str(len(camino))+"\n")
-    l.close() """
+    l.close() 
 
 
     #df=pd.read_csv('distancias.csv')
