@@ -9,8 +9,7 @@ class individuo():
         self.fitness = self.setfitness(ordenes)
     def setfitness(self,ordenes):
         #calculo el fitness con recocido simulado
-       # pdb.set_trace()
-        print(self.disposicion)
+        # pdb.set_trace()
         fitness = 0
         it=0
         plano =[[0, 0, 0, 0, 0, 0, 0, 0],
@@ -37,6 +36,7 @@ def genetico (disp,ordenes):
     poblacion = []
     for j in range(1000):                                           #Criterio de parada, cantidad de iteraciones
         for i in range(len(disp)):
+            #pdb.set_trace()
             poblacion[i] = individuo(disp[i],ordenes)               #Creo un objeto de cada individuo con su fitness asociado
             ft [it] = poblacion[i].fitness                          #Guardo los fitness en una lista para graficar al final
             it += it
