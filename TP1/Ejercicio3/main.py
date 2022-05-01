@@ -7,7 +7,7 @@ Dada varias ordenes de pedidos, se empieza a probar distintas disposiciones para
 la ubicacion de cada objeto que tenga el menor costo 
 """
 from genetico import *
-from random import shuffle
+import random 
 import pdb
 def main():
     """ Método main
@@ -15,14 +15,14 @@ def main():
     """
     print("\t Ejercicio 3 del TP 1 de IA 2 \n")
 x= [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
-disposicion =  [shuffle(x),
-                shuffle(x),
-                shuffle(x),
-                shuffle(x),
-                shuffle(x),
-                shuffle(x),
-                shuffle(x),
-                shuffle(x)]
+disposicion =  [[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16],
+                [11,12,13,14,15,16,1,2,3,4,5,6,7,8,9,10],
+                [1,2,3,4,12,13,14,15,16,5,6,7,8,9,10,11],
+                [11,12,1,2,3,4,5,6,14,15,7,8,9,10,13,16],
+                [3,4,5,6,14,15,7,8,11,12,1,2,9,10,13,16],
+                [10,13,16,11,12,1,2,3,4,5,6,14,15,7,8,9],
+                [15,7,8,9,10,11,12,1,2,3,4,5,6,14,13,16],
+                [14,15,7,8,9,10,13,11,12,1,2,3,4,5,6,16]]
 
 orden =[[1,2,3,4,5,6,7,8,9,10],
         [1,2,3,4,5,6,13,14,15,16],

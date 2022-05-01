@@ -9,8 +9,7 @@ class individuo():
         self.fitness = self.setfitness(ordenes)
     def setfitness(self,ordenes):
         #calculo el fitness con recocido simulado
-       # pdb.set_trace()
-        print(self.disposicion)
+        # pdb.set_trace()
         fitness = 0
         it=0
         plano =[[0, 0, 0, 0, 0, 0, 0, 0],
