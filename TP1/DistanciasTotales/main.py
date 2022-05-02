@@ -5,7 +5,7 @@
 from Aestrella import *
 from copy import deepcopy
 from numpy import matrix
-
+import pandas as pd
 
 #====================== Armar la matriz que representa todo el almacen==================#
 def almacen(matriz,dim):
@@ -57,19 +57,26 @@ if __name__=="__main__":
     
     print(matrix(plano))
 
+   
+    df=pd.read_csv('distancias.csv')
+    print(df)
+    df=df.to_numpy()
+    print(df) 
 
-    # Este bloque se ejecuta en caso de que querramos volver a calcular 
+
+    # Este bloque se ejecuta en caso de que querramos volver a calcular      
 """     l=open("distancias.csv","w")
     l.write("inicio,destino,costo\n")
     
     for i in range(1,estante+1):
         inicio=ubicacion(plano,i)
+        print(i)
         for j in range(i+1,estante+1):
             matriz= deepcopy(plano)
             destino=ubicacion(plano,j)
             [matriz,camino]=Astar(matriz,inicio,destino) 
-            l.write(str(inicio)+","+str(destino)+","+str(len(camino))+"\n")
-    l.close()  """
+            l.write(str(inicio[0])+" "+str(inicio[1])+","+str(destino[0])+" "+str(destino[1])+","+str(len(camino))+"\n")
+    l.close()   """ 
 
 
 

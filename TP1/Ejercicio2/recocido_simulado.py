@@ -7,6 +7,7 @@ Año 2022
 
 from random import sample, random
 from math import e
+from turtle import width
 from Aestrella import Astar
 from copy import deepcopy
 import pandas as pd
@@ -104,10 +105,13 @@ def distancia_recorrida(plano, lista_de_productos,df):
         #IMPLEMENTACION CON LAS DISTANCIAS YA CALCULADAS
         indices_a = ubicacion(matriz, posiciones[i])
         indices_b = ubicacion(matriz, posiciones[i + 1])
+        indices_a=str(indices_a[0])+" "+str(indices_a[1])
+        indices_b=str(indices_b[0])+" "+str(indices_b[1])
+
         costo=0
         for i in range(0,len(df)):
-            if(((df[i][0])==indices_a and (df[i][1]==indices_b))or((df[i][0])==indices_b and (df[i][1]==indices_a))):   #
-                costo=df[i][2]
+            if ((df[i][0]==indices_a and df[i][1]==indices_b)or(df[i][0]==indices_b and df[i][1]==indices_a)):
+                costo=int(df[i][2])
         f_total = f_total + costo
         
 
@@ -130,7 +134,6 @@ def recocido_simulado(To, alfa, Tf, plano, lista_de_productos):
     """
     df=pd.read_csv('distancias.csv')
     df=df.to_numpy()
-    print(len(df))
     e_actual = distancia_recorrida(plano, lista_de_productos,df)
 
     # Temperatura inicial
@@ -139,14 +142,14 @@ def recocido_simulado(To, alfa, Tf, plano, lista_de_productos):
     while (T >= Tf):
         # La Temperatura va disminuyendo a medida que avanza el algoritmo
         T = alfa * T
-
+        
         # Intercambio de lugar dos ítems diferentes de la lista
         estado_vecino = estado_vecino_aleatorio(lista_de_productos)
 
         e_estado_vecino = distancia_recorrida(plano, estado_vecino,df)
-                   
+       
         # La variación de energía dE es la función objetivo a minimizar
-        dE = e_estado_vecino - e_actual
+        dE = int(e_estado_vecino - e_actual)
 
         # Los movimientos que minimizan la distancia recorrida se aceptan siempre
         # Si el nuevo estado candidato es peor, podría llegar a aceptarse con
