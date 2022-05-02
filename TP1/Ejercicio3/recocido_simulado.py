@@ -102,19 +102,18 @@ def distancia_recorrida(plano, lista_de_productos, df):
     for i in range(len(posiciones) - 1):
 
         # IMPLEMENTACION CALCULANDO A* EN CADA ITERACION
-        # Busco las coordenadas del elemento para poder buscarlo con A estrella
-        #indices_a = ubicacion(matriz, posiciones[i])
-        #indices_b = ubicacion(matriz, posiciones[i + 1])
-
+        """  # Busco las coordenadas del elemento para poder buscarlo con A estrella
+        matriz = deepcopy(plano)
+        indices_a = ubicacion(matriz, posiciones[i])
+        indices_b = ubicacion(matriz, posiciones[i + 1])
         # Sumo de todos los desplazamientos de ir de cada posicion a la proximo
-        #f_total = f_total + len(Astar(matriz, list(indices_a),list(indices_b )))
+        f_total = f_total + len(Astar(matriz, list(indices_a),list(indices_b ))) """
 
         # IMPLEMENTACION CON LAS DISTANCIAS YA CALCULADAS
         indices_a = ubicacion(matriz, posiciones[i])
         indices_b = ubicacion(matriz, posiciones[i + 1])
         indices_a = str(indices_a[0]) + " " + str(indices_a[1])
         indices_b = str(indices_b[0]) + " " + str(indices_b[1])
-
         costo = 0
         for i in range(0, len(df)):
             if ((df[i][0] == indices_a and df[i][1] == indices_b) or (df[i][0] == indices_b and df[i][1] == indices_a)):
@@ -138,8 +137,11 @@ def recocido_simulado(plano, lista_de_productos, To=1000, alfa=0.9, Tf=0.05):
         lista_de_productos: Lista ordenada para reducir la distancia recorrida
         dist_min: Distancia minimizada por la lista ordenada
     """
+    # IMPLEMENTACION CON LAS DISTANCIAS YA CALCULADAS
     df = pd.read_csv('distancias.csv')
     df = df.to_numpy()
+
+    
     e_actual = distancia_recorrida(plano, lista_de_productos, df)
 
     # Temperatura inicial
@@ -166,8 +168,6 @@ def recocido_simulado(plano, lista_de_productos, To=1000, alfa=0.9, Tf=0.05):
         if ((dE <= 0) or (pow(e, -dE / T) >= random())):
             e_actual = e_estado_vecino
             lista_de_productos = estado_vecino
-            print(estado_vecino)
-            print('Costo= ', e_estado_vecino)
 
     # El algoritmo devuelve la mejor solución que se haya podido explorar y la
     # distancia minimiaza correspondiente
