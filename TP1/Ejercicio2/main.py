@@ -12,7 +12,7 @@ otros algoritmos pueden utilizarse para esta tarea?
 # tal que la salida de un recocido simulado sea la entrada del segundo
 
 from numpy import array, genfromtxt, int32, matrix
-from recocido_simulado import *
+from recocido_simulado import almacen, recocido_simulado
 #from plyer import filechooser
 
 
@@ -48,7 +48,8 @@ if __name__ == "__main__":
     To = 1000
     Tf = 0.05
     alfa = 0.9
-    lista_ordenada, distancia_recorrida = recocido_simulado(To, alfa, Tf, matriz, lista_de_productos)
+    lista_ordenada, distancia_recorrida = recocido_simulado(
+        matriz, lista_de_productos, To, alfa, Tf)
     print("Lista ordenada para reducir la distancia recorrida:")
     print(lista_ordenada)
     print("Distancia minimizada con la lista ordenada:", distancia_recorrida)

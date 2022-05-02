@@ -124,7 +124,7 @@ def distancia_recorrida(plano, lista_de_productos, df):
     return (f_total)
 
 
-def recocido_simulado(To, alfa, Tf, plano, lista_de_productos):
+def recocido_simulado(plano, lista_de_productos, To=1000, alfa=0.9, Tf=0.05):
     """ Función recocido_simulado
     Determina un orden optimizado para la lista de picking a traves
     del algoritmo de Temple Simulado o Recocido Simulado
