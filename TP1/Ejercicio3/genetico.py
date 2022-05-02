@@ -1,7 +1,6 @@
 from random import random
 from recocido_simulado import recocido_simulado
 import pdb
-import matplotlib.pyplot as plt
 import numpy as np
 
 class individuo():                                      
@@ -15,17 +14,29 @@ class individuo():
         # pdb.set_trace()
         fitness = 0
         it=0
-        plano =[[0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 1, 1, 0, 0, 1, 1, 0],
-                [0, 1, 1, 0, 0, 1, 1, 0],
-                [0, 1, 1, 0, 0, 1, 1, 0],
-                [0, 1, 1, 0, 0, 1, 1, 0],
-                [0, 0, 0, 0, 0, 0, 0, 0],]
+        plano =[[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0],
+                [0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0],
+                [0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0],
+                [0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0],
+                [0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0],
+                [0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0],
+                [0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0],
+                [0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0],
+                [0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0],
+                [0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],]
         for i in range(len(plano)):
             for j in range(len(plano[i])):
                 if plano[i][j]==1:
                     plano[i][j] = self.disposicion[it]
                     it += it
+        
+        pdb.set_trace()
         for i in range (len(ordenes)):
             nf = recocido_simulado(plano,ordenes[i])[1]
             fitness = fitness + nf                                  #Acumulo todos los costos y ese es el fitness del individuo
@@ -66,7 +77,7 @@ def seleccion(poblacion):
 
 
 def crossover(lista): 
-    nuevalista=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+    nuevalista=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
     listadoble=[]
     k1 = random.randint(0, len(lista[1]),2)                           #Punto random para entrecruzar
     k2 = random.randint(0, len(lista[1]),2)

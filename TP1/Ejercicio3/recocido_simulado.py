@@ -7,9 +7,11 @@ Año 2022
 
 from random import sample, random
 from math import e
-#from Aestrella import *
+from turtle import width
 from Aestrella import Astar
 from copy import deepcopy
+import pandas as pd
+from numpy import *
 #import copy
 # Se importa copy usando from para la ejecución del código
 # Esto evita usar la dot operation (copy.)
@@ -72,7 +74,7 @@ def estado_vecino_aleatorio(estado_vecino):
     return list(estado_vecino)
 
 
-def distancia_recorrida(plano, lista_de_productos):
+def distancia_recorrida(plano, lista_de_productos,df):
     """ Función distancia_recorrida
     Calcula la distancia recorrida para un cierto orden de la lista de productos
     Es la función a minimizar. Dice que tan buena es una solución propuesta
@@ -87,19 +89,36 @@ def distancia_recorrida(plano, lista_de_productos):
     f_total = 0
 
     for i in range (len(posiciones) - 1):
-        #matriz=copy.deepcopy(plano)
+
         matriz = deepcopy(plano)
+
+        #IMPLEMENTACION CALCULANDO A* EN CADA ITERACION
         # Busco las coordenadas del elemento para poder buscarlo con A estrella
-        indices_a = ubicacion(matriz, posiciones[i])
-        indices_b = ubicacion(matriz, posiciones[i + 1])
+        #indices_a = ubicacion(matriz, posiciones[i])
+        #indices_b = ubicacion(matriz, posiciones[i + 1])
 
         # Sumo de todos los desplazamientos de ir de cada posicion a la proximo
-        f_total = f_total + len(Astar(matriz, list(indices_a),list(indices_b )))
+        #f_total = f_total + len(Astar(matriz, list(indices_a),list(indices_b )))
+
+
+
+        #IMPLEMENTACION CON LAS DISTANCIAS YA CALCULADAS
+        indices_a = ubicacion(matriz, posiciones[i])
+        indices_b = ubicacion(matriz, posiciones[i + 1])
+        indices_a=str(indices_a[0])+" "+str(indices_a[1])
+        indices_b=str(indices_b[0])+" "+str(indices_b[1])
+
+        costo=0
+        for i in range(0,len(df)):
+            if ((df[i][0]==indices_a and df[i][1]==indices_b)or(df[i][0]==indices_b and df[i][1]==indices_a)):
+                costo=int(df[i][2])
+        f_total = f_total + costo
+        
 
     return (f_total)
 
 
-def recocido_simulado(plano, lista_de_productos,To=1000, alfa=0.9, Tf=0.05):
+def recocido_simulado(To, alfa, Tf, plano, lista_de_productos):
     """ Función recocido_simulado
     Determina un orden optimizado para la lista de picking a traves
     del algoritmo de Temple Simulado o Recocido Simulado
@@ -113,25 +132,24 @@ def recocido_simulado(plano, lista_de_productos,To=1000, alfa=0.9, Tf=0.05):
         lista_de_productos: Lista ordenada para reducir la distancia recorrida
         dist_min: Distancia minimizada por la lista ordenada
     """
-
-    e_actual = distancia_recorrida(plano, lista_de_productos)
+    df=pd.read_csv('distancias.csv')
+    df=df.to_numpy()
+    e_actual = distancia_recorrida(plano, lista_de_productos,df)
 
     # Temperatura inicial
     T = To
+    
     while (T >= Tf):
         # La Temperatura va disminuyendo a medida que avanza el algoritmo
         T = alfa * T
-
+        
         # Intercambio de lugar dos ítems diferentes de la lista
         estado_vecino = estado_vecino_aleatorio(lista_de_productos)
 
-        e_estado_vecino = distancia_recorrida(plano, estado_vecino)
-                   
+        e_estado_vecino = distancia_recorrida(plano, estado_vecino,df)
+       
         # La variación de energía dE es la función objetivo a minimizar
-        dE = e_estado_vecino - e_actual
-
-        # Decrecimiento exponencial
-        #probabilidad = pow(e, -dE / T)
+        dE = int(e_estado_vecino - e_actual)
 
         # Los movimientos que minimizan la distancia recorrida se aceptan siempre
         # Si el nuevo estado candidato es peor, podría llegar a aceptarse con
