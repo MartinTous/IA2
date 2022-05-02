@@ -166,8 +166,6 @@ def recocido_simulado(plano, lista_de_productos, To=1000, alfa=0.9, Tf=0.05):
         if ((dE <= 0) or (pow(e, -dE / T) >= random())):
             e_actual = e_estado_vecino
             lista_de_productos = estado_vecino
-            print(estado_vecino)
-            print('Costo= ', e_estado_vecino)
 
     # El algoritmo devuelve la mejor solución que se haya podido explorar y la
     # distancia minimiaza correspondiente
