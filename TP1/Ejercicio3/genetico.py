@@ -1,6 +1,9 @@
 from random import random
 from recocido_simulado import recocido_simulado
 import pdb
+import matplotlib.pyplot as plt
+import numpy as np
+
 class individuo():                                      
     def __init__(self,lista,ordenes):
         # individuo
