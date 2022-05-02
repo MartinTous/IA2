@@ -98,10 +98,8 @@ def distancia_recorrida(plano, lista_de_productos, df):
 
     posiciones = lista_de_productos[:]
     f_total = 0
-
+    matriz = deepcopy(plano)
     for i in range(len(posiciones) - 1):
-
-        matriz = deepcopy(plano)
 
         # IMPLEMENTACION CALCULANDO A* EN CADA ITERACION
         # Busco las coordenadas del elemento para poder buscarlo con A estrella
