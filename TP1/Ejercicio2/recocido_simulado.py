@@ -13,6 +13,14 @@ import pandas as pd
 
 
 def almacen(matriz, dim):
+    """ Función almacen
+    Genera una matriz cuadrada con los elementos del plano del almacén
+    Parametros de Entrada:
+        matriz: Lista [] para colocar matriz cuadrada con el plano del almacén
+        dim: Dimensiones de la matriz cuadrada
+    Parametro de Salida:
+        matriz: Matriz cuadrada con los elementos del almacén
+    """
     # Pasillo filas
     PF = 0
     # Pasillos columnas
@@ -41,6 +49,14 @@ def almacen(matriz, dim):
 
 
 def ubicacion(matriz, pos):
+    """ Función ubicacion
+    Entrega las coordenadas (i,j) donde esta el producto buscado en la matriz
+    Parametros de Entrada:
+        matriz: Matriz cuadrada con el mapa del almacén
+        pos: Nro del producto buscado
+    Parametro de Salida:
+        pos: Array con las coordenadas donde esta el item en el plano
+    """
     dim = len(matriz)
     for i in range(0, dim):
         for j in range(0, dim):
@@ -54,7 +70,7 @@ def estado_vecino_aleatorio(lista_de_productos):
     Crea un "estado vecino" de ordenamiento lista de productos intercambiando 
     aleatoriamente dos elementos de la lista
     Parametro de Entrada:
-        lista_de_productos: lista de picking, con productos del almacen
+        lista_de_productos: lista de picking, con productos del almacén
     Parametro de Salida:
         estado_vecino: lista en que intercambio de lugar dos items aleatoriamente
     """
@@ -90,8 +106,8 @@ def distancia_recorrida(plano, lista_de_productos, df):
     Calcula la distancia recorrida para un cierto orden de la lista de productos
     Es la función a minimizar. Dice que tan buena es una solución propuesta
     Parametros de Entrada:
-        plano: Arreglo 2D con el mapa del almacen
-        lista_de_productos: Lista de picking, con productos del almacen
+        plano: Arreglo 2D con el mapa del almacén
+        lista_de_productos: Lista de picking, con productos del almacén
     Parametro de Salida:
         distancia total recorrida para dicho ordenamiento de la lista de picking
     """
