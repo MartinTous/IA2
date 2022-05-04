@@ -52,8 +52,8 @@ def genetico (disp,ordenes):
     ft = full((10*len(disp),1),None) 
     arreglo = disp
     poblacion=[0,0,0,0]
-    for j in range(4):                                           #Criterio de parada, cantidad de iteraciones
-        poblacion=[0,0,0,0]
+    for j in range(4):     
+        poblacion=[0,0,0,0]                                      #Criterio de parada, cantidad de iteraciones
         for i in range(len(disp)):
             print(i)
             ind = individuo(arreglo[i],ordenes)               #Creo un objeto de cada individuo con su fitness asociado
@@ -70,7 +70,8 @@ def genetico (disp,ordenes):
 
         arreglo = nuevapoblacion
 
-
+    print('afuera')
+    poblacion=[0,0,0,0]
     for i in range(len(disp)):
         print(i)
         ind = individuo(disp[i],ordenes)
@@ -79,7 +80,7 @@ def genetico (disp,ordenes):
     poblacion = seleccion(poblacion)                                #Hago una ultima seleccion para elegir al mejor de la ultima poblacion
 
     pobok = full((120,1),None)
-    pobok = poblacion [1].disposicion
+    pobok = poblacion [1]
 
 
     print(pobok)
