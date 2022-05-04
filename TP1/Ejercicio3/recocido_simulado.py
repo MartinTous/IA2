@@ -109,6 +109,12 @@ def distancia_recorrida(plano, lista_de_productos, df):
         f_total = f_total + len(Astar(matriz, list(indices_a),list(indices_b ))) """
 
         # IMPLEMENTACION CON LAS DISTANCIAS YA CALCULADAS
+        print(lista_de_productos)
+        print('\n')
+        for i in range(0,16):                                                                 #_Graficar el almacén y el recorrido
+            for j in range(0,16):
+                print(matriz[i][j],end=' ')
+            print('\n')
         indices_a = ubicacion(matriz, posiciones[i])
         indices_b = ubicacion(matriz, posiciones[i + 1])
         indices_a = str(indices_a[0]) + " " + str(indices_a[1])

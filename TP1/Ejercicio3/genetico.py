@@ -1,5 +1,5 @@
 from random import random
-from recocido_simulado import recocido_simulado
+from recocido_simulado import *
 import pdb
 import numpy as np
 
