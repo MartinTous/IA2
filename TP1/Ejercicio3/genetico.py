@@ -1,4 +1,4 @@
-from random import random
+import random
 from recocido_simulado import *
 import pdb
 import numpy as np
@@ -90,6 +90,7 @@ def crossover(lista):
         for j in range(k1,k2+1): 
             nuevalista[i][j], nuevalista[i+1][j] = lista[i+1][j], lista[i][j] 
         listadoble= lista[i]+lista[i+1]
+        
         for h in range(k2+1,len(nuevalista)):
             pp=0
             for l in range(len(listadoble)):
@@ -105,7 +106,7 @@ def crossover(lista):
             pp=0
             for l in range(len(listadoble)):
                 for j in range(len(nuevalista[i])):
-                    if listadoble[l]!=nuevalista[i][j]:
+                    if listadoble[l] != nuevalista[i][j]:
                         nuevalista[i][h]=listadoble[l]
                         pp=1
                         break
