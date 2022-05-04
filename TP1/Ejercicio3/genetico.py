@@ -1,9 +1,6 @@
 import random
-<<<<<<< HEAD
 from recocido_simulado import recocido_simulado
-=======
-from recocido_simulado import *
->>>>>>> d12f21f585950966c2d709ec72091322799ee2fe
+
 import pdb
 from numpy import full
 
@@ -42,14 +39,7 @@ class individuo():
                     it += 1
         
         #pdb.set_trace()
-<<<<<<< HEAD
-        """       print('\n')
-        for i in range(0,16):                                                                 #_Graficar el almacén y el recorrido
-            for j in range(0,16):
-                print(plano[i][j],end=' ')
-            print('\n') """
-=======
->>>>>>> d12f21f585950966c2d709ec72091322799ee2fe
+
         for i in range (len(ordenes)):
             nf = recocido_simulado(plano,ordenes[i])[1]
             fitness = fitness + nf                                  #Acumulo todos los costos y ese es el fitness del individuo
