@@ -33,8 +33,7 @@ if __name__ == "__main__":
     # Lee la lista de picking de un archivo de texto indicado por el usuario
     try:
         print("Indique el nro [1 ; 100] de la orden: ")
-        nro_orden = int(input())
-        ruta_txt_orden = "./ordenes/order_" + str(nro_orden) + ".txt"
+        ruta_txt_orden = input()
 
         lista_de_productos = list(genfromtxt(ruta_txt_orden, dtype=int32))
 
