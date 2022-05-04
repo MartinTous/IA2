@@ -8,48 +8,50 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>recocido_simulado</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/marceloemellimaci/Documents/2022/ia2/ej2_tp1/recocido_simulado.py">/home/marceloemellimaci/Documents/2022/ia2/ej2_tp1/recocido_simulado.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/marceloemellimaci/Documents/2022/ia2/github/Practica-IA2/TP1/Ejercicio2/recocido_simulado.py">/home/marceloemellimaci/Documents/2022/ia2/github/Practica-IA2/TP1/Ejercicio2/recocido_simulado.py</a></font></td></tr></table>
     <p><tt>Año&nbsp;2022<br>
 -&nbsp;Cabrero&nbsp;García,&nbsp;Gabriel<br>
 -&nbsp;Mellimaci,&nbsp;Marcelo&nbsp;E<br>
 -&nbsp;Tous&nbsp;Maggini,&nbsp;Martín</tt></p>
 <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="pandas.html">pandas</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#eeaa77">
 <td colspan=3 valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
     
 <tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><dl><dt><a name="-BAHIA_DE_CARGA"><strong>BAHIA_DE_CARGA</strong></a>()</dt><dd><tt>Función&nbsp;BAHIA_DE_CARGA<br>
-Devuelve&nbsp;las&nbsp;coordenadas&nbsp;donde&nbsp;esta&nbsp;la&nbsp;bahia&nbsp;de&nbsp;carga,&nbsp;lo&nbsp;que&nbsp;es&nbsp;una&nbsp;ctte<br>
+<td width="100%"><dl><dt><a name="-almacen"><strong>almacen</strong></a>(matriz, dim)</dt><dd><tt>Función&nbsp;almacen<br>
+Genera&nbsp;una&nbsp;matriz&nbsp;cuadrada&nbsp;con&nbsp;los&nbsp;elementos&nbsp;del&nbsp;plano&nbsp;del&nbsp;almacén<br>
 Parametros&nbsp;de&nbsp;Entrada:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Ninguno&nbsp;-<br>
+&nbsp;&nbsp;&nbsp;&nbsp;matriz:&nbsp;Lista&nbsp;[]&nbsp;para&nbsp;colocar&nbsp;matriz&nbsp;cuadrada&nbsp;con&nbsp;el&nbsp;plano&nbsp;del&nbsp;almacén<br>
+&nbsp;&nbsp;&nbsp;&nbsp;dim:&nbsp;Dimensiones&nbsp;de&nbsp;la&nbsp;matriz&nbsp;cuadrada<br>
 Parametro&nbsp;de&nbsp;Salida:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;coordenadas&nbsp;(xo,yo)&nbsp;donde&nbsp;esta&nbsp;ubicada&nbsp;la&nbsp;bahia&nbsp;de&nbsp;carga&nbsp;en&nbsp;el&nbsp;almacen</tt></dd></dl>
- <dl><dt><a name="-buscar_ubicacion"><strong>buscar_ubicacion</strong></a>(plano, producto)</dt><dd><tt>Función&nbsp;buscar_ubicacion<br>
-Entrega&nbsp;las&nbsp;coordenadas&nbsp;(i,j)&nbsp;donde&nbsp;esta&nbsp;el&nbsp;producto&nbsp;buscado&nbsp;en&nbsp;el&nbsp;plano<br>
-Parametros&nbsp;de&nbsp;Entrada:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;plano:&nbsp;Arreglo&nbsp;2D&nbsp;con&nbsp;el&nbsp;mapa&nbsp;del&nbsp;almacen<br>
-&nbsp;&nbsp;&nbsp;&nbsp;producto:&nbsp;Nro&nbsp;de&nbsp;producto&nbsp;buscado<br>
-Parametro&nbsp;de&nbsp;Salida:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;tupla&nbsp;con&nbsp;las&nbsp;coordenadas&nbsp;donde&nbsp;esta&nbsp;el&nbsp;item&nbsp;en&nbsp;el&nbsp;plano</tt></dd></dl>
- <dl><dt><a name="-distancia_recorrida"><strong>distancia_recorrida</strong></a>(plano, lista_de_productos)</dt><dd><tt>Función&nbsp;distancia_recorrida<br>
+&nbsp;&nbsp;&nbsp;&nbsp;matriz:&nbsp;Matriz&nbsp;cuadrada&nbsp;con&nbsp;los&nbsp;elementos&nbsp;del&nbsp;almacén</tt></dd></dl>
+ <dl><dt><a name="-distancia_recorrida"><strong>distancia_recorrida</strong></a>(plano, lista_de_productos, df)</dt><dd><tt>Función&nbsp;distancia_recorrida<br>
 Calcula&nbsp;la&nbsp;distancia&nbsp;recorrida&nbsp;para&nbsp;un&nbsp;cierto&nbsp;orden&nbsp;de&nbsp;la&nbsp;lista&nbsp;de&nbsp;productos<br>
 Es&nbsp;la&nbsp;función&nbsp;a&nbsp;minimizar.&nbsp;Dice&nbsp;que&nbsp;tan&nbsp;buena&nbsp;es&nbsp;una&nbsp;solución&nbsp;propuesta<br>
 Parametros&nbsp;de&nbsp;Entrada:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;plano:&nbsp;Arreglo&nbsp;2D&nbsp;con&nbsp;el&nbsp;mapa&nbsp;del&nbsp;almacen<br>
-&nbsp;&nbsp;&nbsp;&nbsp;lista_de_productos:&nbsp;Lista&nbsp;de&nbsp;picking,&nbsp;con&nbsp;productos&nbsp;del&nbsp;almacen<br>
+&nbsp;&nbsp;&nbsp;&nbsp;plano:&nbsp;Arreglo&nbsp;2D&nbsp;con&nbsp;el&nbsp;mapa&nbsp;del&nbsp;almacén<br>
+&nbsp;&nbsp;&nbsp;&nbsp;lista_de_productos:&nbsp;Lista&nbsp;de&nbsp;picking,&nbsp;con&nbsp;productos&nbsp;del&nbsp;almacén<br>
 Parametro&nbsp;de&nbsp;Salida:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;distancia&nbsp;total&nbsp;recorrida&nbsp;para&nbsp;dicho&nbsp;ordenamiento&nbsp;de&nbsp;la&nbsp;lista&nbsp;de&nbsp;picking</tt></dd></dl>
  <dl><dt><a name="-estado_vecino_aleatorio"><strong>estado_vecino_aleatorio</strong></a>(lista_de_productos)</dt><dd><tt>Función&nbsp;estado_vecino_aleatorio<br>
 Crea&nbsp;un&nbsp;"estado&nbsp;vecino"&nbsp;de&nbsp;ordenamiento&nbsp;lista&nbsp;de&nbsp;productos&nbsp;intercambiando&nbsp;<br>
 aleatoriamente&nbsp;dos&nbsp;elementos&nbsp;de&nbsp;la&nbsp;lista<br>
 Parametro&nbsp;de&nbsp;Entrada:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;lista_de_productos:&nbsp;lista&nbsp;de&nbsp;picking,&nbsp;con&nbsp;productos&nbsp;del&nbsp;almacen<br>
+&nbsp;&nbsp;&nbsp;&nbsp;lista_de_productos:&nbsp;lista&nbsp;de&nbsp;picking,&nbsp;con&nbsp;productos&nbsp;del&nbsp;almacén<br>
 Parametro&nbsp;de&nbsp;Salida:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;estado_vecino:&nbsp;lista&nbsp;en&nbsp;que&nbsp;intercambio&nbsp;de&nbsp;lugar&nbsp;dos&nbsp;items&nbsp;aleatoriamente</tt></dd></dl>
  <dl><dt><a name="-random"><strong>random</strong></a>()<font color="#909090"><font face="helvetica, arial"> method of <a href="random.html#Random">random.Random</a> instance</font></font></dt><dd><tt><a href="#-random">random</a>()&nbsp;-&gt;&nbsp;x&nbsp;in&nbsp;the&nbsp;interval&nbsp;[0,&nbsp;1).</tt></dd></dl>
- <dl><dt><a name="-recocido_simulado"><strong>recocido_simulado</strong></a>(To, alfa, Tf, plano, lista_de_productos)</dt><dd><tt>Función&nbsp;recocido_simulado<br>
+ <dl><dt><a name="-recocido_simulado"><strong>recocido_simulado</strong></a>(plano, lista_de_productos, To=1000, alfa=0.9, Tf=0.05)</dt><dd><tt>Función&nbsp;recocido_simulado<br>
 Determina&nbsp;un&nbsp;orden&nbsp;optimizado&nbsp;para&nbsp;la&nbsp;lista&nbsp;de&nbsp;picking&nbsp;a&nbsp;traves<br>
 del&nbsp;algoritmo&nbsp;de&nbsp;Temple&nbsp;Simulado&nbsp;o&nbsp;Recocido&nbsp;Simulado<br>
 Parametros&nbsp;de&nbsp;Entrada:<br>
@@ -61,6 +63,13 @@ Parametros&nbsp;de&nbsp;Entrada:<br>
 Parametros&nbsp;de&nbsp;Salida:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;lista_de_productos:&nbsp;Lista&nbsp;ordenada&nbsp;para&nbsp;reducir&nbsp;la&nbsp;distancia&nbsp;recorrida<br>
 &nbsp;&nbsp;&nbsp;&nbsp;dist_min:&nbsp;Distancia&nbsp;minimizada&nbsp;por&nbsp;la&nbsp;lista&nbsp;ordenada</tt></dd></dl>
+ <dl><dt><a name="-ubicacion"><strong>ubicacion</strong></a>(matriz, pos)</dt><dd><tt>Función&nbsp;ubicacion<br>
+Entrega&nbsp;las&nbsp;coordenadas&nbsp;(i,j)&nbsp;donde&nbsp;esta&nbsp;el&nbsp;producto&nbsp;buscado&nbsp;en&nbsp;la&nbsp;matriz<br>
+Parametros&nbsp;de&nbsp;Entrada:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;matriz:&nbsp;Matriz&nbsp;cuadrada&nbsp;con&nbsp;el&nbsp;mapa&nbsp;del&nbsp;almacén<br>
+&nbsp;&nbsp;&nbsp;&nbsp;pos:&nbsp;Nro&nbsp;del&nbsp;producto&nbsp;buscado<br>
+Parametro&nbsp;de&nbsp;Salida:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;pos:&nbsp;Array&nbsp;con&nbsp;las&nbsp;coordenadas&nbsp;donde&nbsp;esta&nbsp;el&nbsp;item&nbsp;en&nbsp;el&nbsp;plano</tt></dd></dl>
 </td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#55aa55">
