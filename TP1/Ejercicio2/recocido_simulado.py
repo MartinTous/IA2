@@ -154,7 +154,7 @@ def recocido_simulado(plano, lista_de_productos, To=1000, alfa=0.9, Tf=0.05):
         dist_min: Distancia minimizada por la lista ordenada
     """
     # IMPLEMENTACION CON LAS DISTANCIAS YA CALCULADAS
-    df = pd.read_csv('distancias.csv')
+    df = pd.read_csv('C:\distancias.csv')
     df = df.to_numpy()
 
     

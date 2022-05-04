@@ -7,11 +7,20 @@ Año 2022
 
 from random import random, choice
 from math import e
+
 from copy import deepcopy
 import pandas as pd
 
 
 def almacen(matriz, dim):
+    """ Función almacen
+    Genera una matriz cuadrada con los elementos del plano del almacén
+    Parametros de Entrada:
+        matriz: Lista [] para colocar matriz cuadrada con el plano del almacén
+        dim: Dimensiones de la matriz cuadrada
+    Parametro de Salida:
+        matriz: Matriz cuadrada con los elementos del almacén
+    """
     # Pasillo filas
     PF = 0
     # Pasillos columnas
@@ -40,8 +49,15 @@ def almacen(matriz, dim):
 
 
 def ubicacion(matriz, pos):
+    """ Función ubicacion
+    Entrega las coordenadas (i,j) donde esta el producto buscado en la matriz
+    Parametros de Entrada:
+        matriz: Matriz cuadrada con el mapa del almacén
+        pos: Nro del producto buscado
+    Parametro de Salida:
+        pos: Array con las coordenadas donde esta el item en el plano
+    """
     dim = len(matriz)
-    
     for i in range(0, dim):
         for j in range(0, dim):
             if matriz[i][j] == pos:
@@ -54,7 +70,7 @@ def estado_vecino_aleatorio(lista_de_productos):
     Crea un "estado vecino" de ordenamiento lista de productos intercambiando 
     aleatoriamente dos elementos de la lista
     Parametro de Entrada:
-        lista_de_productos: lista de picking, con productos del almacen
+        lista_de_productos: lista de picking, con productos del almacén
     Parametro de Salida:
         estado_vecino: lista en que intercambio de lugar dos items aleatoriamente
     """
@@ -90,8 +106,8 @@ def distancia_recorrida(plano, lista_de_productos, df):
     Calcula la distancia recorrida para un cierto orden de la lista de productos
     Es la función a minimizar. Dice que tan buena es una solución propuesta
     Parametros de Entrada:
-        plano: Arreglo 2D con el mapa del almacen
-        lista_de_productos: Lista de picking, con productos del almacen
+        plano: Arreglo 2D con el mapa del almacén
+        lista_de_productos: Lista de picking, con productos del almacén
     Parametro de Salida:
         distancia total recorrida para dicho ordenamiento de la lista de picking
     """
@@ -110,7 +126,6 @@ def distancia_recorrida(plano, lista_de_productos, df):
         f_total = f_total + len(Astar(matriz, list(indices_a),list(indices_b ))) """
 
         # IMPLEMENTACION CON LAS DISTANCIAS YA CALCULADAS
-  
         indices_a = ubicacion(matriz, posiciones[i])
         indices_b = ubicacion(matriz, posiciones[i + 1])
         indices_a = str(indices_a[0]) + " " + str(indices_a[1])
@@ -124,7 +139,7 @@ def distancia_recorrida(plano, lista_de_productos, df):
     return (f_total)
 
 
-def recocido_simulado(plano, lista_de_productos, To=1000, alfa=0.9, Tf=0.05):
+def recocido_simulado(plano, lista_de_productos, To=1000, alfa=0.7, Tf=0.05):
     """ Función recocido_simulado
     Determina un orden optimizado para la lista de picking a traves
     del algoritmo de Temple Simulado o Recocido Simulado
@@ -139,7 +154,7 @@ def recocido_simulado(plano, lista_de_productos, To=1000, alfa=0.9, Tf=0.05):
         dist_min: Distancia minimizada por la lista ordenada
     """
     # IMPLEMENTACION CON LAS DISTANCIAS YA CALCULADAS
-    df = pd.read_csv('distancias.csv')
+    df = pd.read_csv('C:\distancias.csv')
     df = df.to_numpy()
 
     
