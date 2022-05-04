@@ -65,9 +65,9 @@ def genetico (disp,ordenes):
         poblacion = seleccion(poblacion) 
         print(poblacion)     
         nuevapoblacion = crossover(poblacion)
-        print(nuevapoblacion)
+        print(nuevapoblacion[0])
+        print(nuevapoblacion[1])
         nuevapoblacion = mutacion(nuevapoblacion)
-        print(nuevapoblacion)
         nuevapoblacion = poblacion + nuevapoblacion
 
         arreglo = nuevapoblacion
