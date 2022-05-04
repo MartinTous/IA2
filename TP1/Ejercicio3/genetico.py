@@ -36,7 +36,7 @@ class individuo():
                     plano[i][j] = self.disposicion[it]
                     it += 1
         
-        pdb.set_trace()
+        #pdb.set_trace()
         for i in range (len(ordenes)):
             nf = recocido_simulado(plano,ordenes[i])[1]
             fitness = fitness + nf                                  #Acumulo todos los costos y ese es el fitness del individuo
