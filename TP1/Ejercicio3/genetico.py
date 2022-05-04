@@ -1,5 +1,9 @@
 import random
+<<<<<<< HEAD
 from recocido_simulado import recocido_simulado
+=======
+from recocido_simulado import *
+>>>>>>> d12f21f585950966c2d709ec72091322799ee2fe
 import pdb
 from numpy import full
 
@@ -38,11 +42,14 @@ class individuo():
                     it += 1
         
         #pdb.set_trace()
+<<<<<<< HEAD
         """       print('\n')
         for i in range(0,16):                                                                 #_Graficar el almacén y el recorrido
             for j in range(0,16):
                 print(plano[i][j],end=' ')
             print('\n') """
+=======
+>>>>>>> d12f21f585950966c2d709ec72091322799ee2fe
         for i in range (len(ordenes)):
             nf = recocido_simulado(plano,ordenes[i])[1]
             fitness = fitness + nf                                  #Acumulo todos los costos y ese es el fitness del individuo
@@ -113,6 +120,7 @@ def crossover(lista):
         for j in range(k1,k2+1): 
             nuevalista[i][j], nuevalista[i+1][j] = lista[i+1][j], lista[i][j] 
         listadoble= lista[i]+lista[i+1]
+        
         for h in range(k2+1,len(nuevalista)):
             pp=0
             for l in range(len(listadoble)):
@@ -128,7 +136,7 @@ def crossover(lista):
             pp=0
             for l in range(len(listadoble)):
                 for j in range(len(nuevalista[i])):
-                    if listadoble[l]!=nuevalista[i][j]:
+                    if listadoble[l] != nuevalista[i][j]:
                         nuevalista[i][h]=listadoble[l]
                         pp=1
                         break
