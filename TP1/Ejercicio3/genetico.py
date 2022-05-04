@@ -53,6 +53,7 @@ def genetico (disp,ordenes):
     arreglo = disp
     poblacion=[0,0,0,0]
     for j in range(4):                                           #Criterio de parada, cantidad de iteraciones
+        poblacion=[0,0,0,0]
         for i in range(len(disp)):
             print(i)
             ind = individuo(arreglo[i],ordenes)               #Creo un objeto de cada individuo con su fitness asociado
@@ -60,10 +61,10 @@ def genetico (disp,ordenes):
             ft [it] = ind.fitness                          #Guardo los fitness en una lista para graficar al final
             it += 1
         poblacion = seleccion(poblacion) 
-        print(poblacion)     
+        #print(poblacion,"\n")     
         nuevapoblacion = crossover(poblacion)
-        print(nuevapoblacion[0])
-        print(nuevapoblacion[1])
+        #print(nuevapoblacion[0])
+        #print(nuevapoblacion[1])
         nuevapoblacion = mutacion(nuevapoblacion)
         nuevapoblacion = poblacion + nuevapoblacion
 
@@ -106,54 +107,54 @@ def crossover(lista):
     if k1>k2: 
         k1,k2 = k2,k1   
     for i in range (0,len(lista),2):
-        print()
         for j in range(k1,k2+1): 
             nuevalista[i][j], nuevalista[i+1][j] = lista[i+1][j], lista[i][j] 
         listadoble= lista[i]+lista[i+1]
-        
-        for h in range(k2+1,len(nuevalista)):
-            pp=0
-            for l in range(len(listadoble)):
-                for j in range(len(nuevalista[i])):
-                    if listadoble[l]!=nuevalista[i][j]:
-                        nuevalista[i][h]=listadoble[l]
-                        pp=1
-                        break
-                if pp==1:
-                    break
+                    
 
-        for h in range(k1-1):
-            pp=0
+        for h in range(k1):
             for l in range(len(listadoble)):
+                pp=0
                 for j in range(len(nuevalista[i])):
-                    if listadoble[l] != nuevalista[i][j]:
-                        nuevalista[i][h]=listadoble[l]
+                    if listadoble[l]==nuevalista[i][j]:
                         pp=1
                         break
-                if pp==1:
-                    break
-        for h in range(k2+1,len(nuevalista)):
-            pp=0
-            for l in range(len(listadoble)):
-                for j in range(len(nuevalista[i+1])):
-                    if listadoble[l]!=nuevalista[i+1][j]:
-                        nuevalista[i+1][h]=listadoble[l]
-                        pp=1
-                        break
-                if pp==1:
-                    break
+                if pp!=1:
+                    nuevalista[i][h]=listadoble[l]
 
-        for h in range(k1-1):
-            pp=0
+        for h in range((k2+1),len(nuevalista[i])):
             for l in range(len(listadoble)):
-                for j in range(len(nuevalista[i+1])):
-                    if listadoble[l]!=nuevalista[i+1][j]:
-                        nuevalista[i+1][h]=listadoble[l]
+                pp=0
+                for j in range(len(nuevalista[i])):
+                    if listadoble[l]==nuevalista[i][j]:
                         pp=1
                         break
-                if pp==1:
-                    break
-      
+                if pp!=1:
+                    nuevalista[i][h]=listadoble[l]            
+
+
+
+        for h in range(k1):
+            for l in range(len(listadoble)):
+                pp=0
+                for j in range(len(nuevalista[i+1])):
+                    if listadoble[l]==nuevalista[i+1][j]:
+                        pp=1
+                        break
+                if pp!=1:
+                    nuevalista[i+1][h]=listadoble[l]
+
+        for h in range((k2+1),len(nuevalista[i+1])):
+            for l in range(len(listadoble)):
+                pp=0
+                for j in range(len(nuevalista[i+1])):
+                    if listadoble[l]==nuevalista[i+1][j]:
+                        pp=1
+                        break
+                if pp!=1:
+                    nuevalista[i+1][h]=listadoble[l] 
+
+
     return nuevalista 
 
 def mutacion (poblacion):               
