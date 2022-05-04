@@ -7,7 +7,6 @@ Año 2022
 
 from random import random, choice
 from math import e
-from Aestrella import Astar
 from copy import deepcopy
 import pandas as pd
 
