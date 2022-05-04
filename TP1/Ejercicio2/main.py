@@ -17,6 +17,9 @@ from recocido_simulado import almacen, recocido_simulado
 
 
 if __name__ == "__main__":
+    """ main:
+    Punto de entrada donde se inicia el programa
+    """
 
     print("\t Ejercicio 2 del TP 1 de IA 2")
 

@@ -30,11 +30,11 @@ class individuo():
                 [0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0],
                 [0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0],
                 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],]
-        for i in range(len(plano)):
-            for j in range(len(plano[i])):
+        for i in range(1, len(plano)-1):
+            for j in range(1, len(plano[i])-1):
                 if plano[i][j]==1:
                     plano[i][j] = self.disposicion[it]
-                    it += it
+                    it += 1
         
         #pdb.set_trace()
         for i in range (len(ordenes)):
