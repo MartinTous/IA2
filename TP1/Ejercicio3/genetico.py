@@ -1,6 +1,6 @@
 import random
 from recocido_simulado import recocido_simulado
-
+import matplotlib.pyplot as plt
 import pdb
 from numpy import full
 
@@ -49,17 +49,22 @@ class individuo():
 
 def genetico (disp,ordenes):
     it = 0
-    ft = full((10*len(disp),1),None) 
+    ft = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,]
     arreglo = disp
     poblacion=[0,0,0,0]
-    for j in range(4):     
+    promedio=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+    for j in range(40): 
+        print(j) 
+        prom = 0   
         poblacion=[0,0,0,0]                                      #Criterio de parada, cantidad de iteraciones
         print(j)
         for i in range(len(disp)):
             ind = individuo(arreglo[i],ordenes)               #Creo un objeto de cada individuo con su fitness asociado
             poblacion[i]= ind
-            ft [it] = ind.fitness                          #Guardo los fitness en una lista para graficar al final
-            it += 1
+            #ft [it] = ind.fitness                          #Guardo los fitness en una lista para graficar al final
+            #it += 1
+            prom = prom + int(ind.fitness)
+        promedio[j]=prom/4
         poblacion = seleccion(poblacion) 
         #print(poblacion,"\n")     
         nuevapoblacion = crossover(poblacion)
@@ -79,11 +84,16 @@ def genetico (disp,ordenes):
 
     pobok = full((120,1),None)
     pobok = poblacion [1]
-
-
     print(pobok)
-
-
+    x2=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40]
+    #x = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
+    x = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+   # print(ft)
+   # plt.plot(x,ft, "o")
+   # plt.show()
+   # print(promedio)
+    plt.plot(x2,promedio, "x")
+    plt.show()
 
 
 def seleccion(poblacion):
@@ -98,11 +108,11 @@ def crossover(lista):
     nuevalista=[[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
                 [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]]
     listadoble=[]
-    k1 = random.randint(0, 120)                           #Punto random para entrecruzar
-    k2 = random.randint(0, 120)
+    k1 = random.randint(0, 119)                           #Punto random para entrecruzar
+    k2 = random.randint(0, 119)
     while(k1==k2):
-        k1 = random.randint(0, 120)                           #Punto random para entrecruzar
-        k2 = random.randint(0, 120)
+        k1 = random.randint(0, 119)                           #Punto random para entrecruzar
+        k2 = random.randint(0, 119)
     if k1>k2: 
         k1,k2 = k2,k1   
     for i in range (0,len(lista),2):
