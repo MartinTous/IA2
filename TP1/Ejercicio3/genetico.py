@@ -55,7 +55,6 @@ def genetico (disp,ordenes):
     for j in range(4):     
         poblacion=[0,0,0,0]                                      #Criterio de parada, cantidad de iteraciones
         for i in range(len(disp)):
-            print(i)
             ind = individuo(arreglo[i],ordenes)               #Creo un objeto de cada individuo con su fitness asociado
             poblacion[i]= ind
             ft [it] = ind.fitness                          #Guardo los fitness en una lista para graficar al final
@@ -70,11 +69,9 @@ def genetico (disp,ordenes):
 
         arreglo = nuevapoblacion
 
-    print('afuera')
     poblacion=[0,0,0,0]
     for i in range(len(disp)):
-        print(i)
-        ind = individuo(disp[i],ordenes)
+        ind = individuo(arreglo[i],ordenes)
         poblacion[i]= ind 
 
     poblacion = seleccion(poblacion)                                #Hago una ultima seleccion para elegir al mejor de la ultima poblacion
@@ -160,9 +157,9 @@ def crossover(lista):
 
 def mutacion (poblacion):               
     for i in range(len(poblacion)):
-        a = random.randint(0,len(poblacion[i]))                     #elijo 3 puntos y realizo permutacion
-        b = random.randint(0,len(poblacion[i]))
-        c = random.randint(0,len(poblacion[i]))
+        a = random.randint(0,len(poblacion[i])-1)                     #elijo 3 puntos y realizo permutacion
+        b = random.randint(0,len(poblacion[i])-1)
+        c = random.randint(0,len(poblacion[i])-1)
 
         poblacion[i][a],poblacion [i][b], poblacion [i][c] = poblacion [i][b], poblacion [i][c],poblacion [i][a]
     return poblacion
