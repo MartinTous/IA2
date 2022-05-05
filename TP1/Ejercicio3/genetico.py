@@ -54,6 +54,7 @@ def genetico (disp,ordenes):
     poblacion=[0,0,0,0]
     for j in range(4):     
         poblacion=[0,0,0,0]                                      #Criterio de parada, cantidad de iteraciones
+        print(j)
         for i in range(len(disp)):
             ind = individuo(arreglo[i],ordenes)               #Creo un objeto de cada individuo con su fitness asociado
             poblacion[i]= ind

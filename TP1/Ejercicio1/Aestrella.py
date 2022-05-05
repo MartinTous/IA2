@@ -2,7 +2,8 @@ import numpy as np
 
 #================================== Algoritmo A* =========================================#
 def Astar(matriz,inicio,destino):
-
+    """Algorítmo que encuentra el camino óptimo entre el inicio y destino, para pasamos como argumento la 
+       matriz que representa al almacén, y las coordenadas del inicio y destino dentro del almacén"""
     dim=len(matriz)
     flag=True
     actual=inicio                                                         
@@ -59,6 +60,9 @@ def Astar(matriz,inicio,destino):
 
 #==================================== Calcular F(n)=h(n)+c(n)=============================#
 def fn(pSig,destino,costo): 
+    """Funcion que calcula el f(n)=c(n)+h(n), es decir el costo más la heurística
+       Para ello, ingresamos la posición siguiente a visitar, el destino donde se debe 
+       llegar y el costo para llegar desde el inicio hasta la siguiente posicion en cuestion"""
 
     hn=abs(destino[0]-pSig[0])+abs(destino[1]-pSig[1])
     gn=costo

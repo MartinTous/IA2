@@ -5,6 +5,8 @@ import os
 
 #====================== Armar la matriz que representa todo el almacen==================#
 def almacen(matriz,dim):
+    """Con esta funcion generamos la matriz que representa al almacén, 
+    para ello debemos pasarle la dimension de la matriz y genera un almacén cuadrado [dim x dim]"""
     PF=0             #Pasillo filas
     PC=0             #Pasillos columnas
     estante=0
@@ -32,6 +34,9 @@ def almacen(matriz,dim):
 #============================= Ubicar posiciones de destino =============================#
 # Devuelve las coordenadas de la estantería que solicito
 def ubicacion(matriz,pos,dim):
+    """Esta funcion se encarga de recibir el producto en cuestion, 
+    buscarlo en la matriz almacén y devolver las coordenadas del mismo"""
+
     for i in range(0,dim):
         for j in range(0,dim):
             if matriz[i][j]==pos:
@@ -43,7 +48,9 @@ def ubicacion(matriz,pos,dim):
 
 #======================================== MAIN ===========================================#
 if __name__=="__main__":
-    
+    """ Aquí se ejecuta el programa, ingresamos el tamaño de la matriz almacén y los productos de inicio y destino
+        Además muestra por pantalla el almacén y el camino marcado desde la posicion de inicio a la de destino"""
+        
     matriz=[]
     print('\n')
     dim=int(input('Tamaño del almacen (LxL) -> L= '))
