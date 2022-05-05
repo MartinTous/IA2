@@ -23,19 +23,42 @@
 <td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="pandas.html">pandas</a><br>
 </td><td width="25%" valign=top></td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
-<tr bgcolor="#eeaa77">
+<tr bgcolor="#ee77aa">
 <td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
     
-<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><dl><dt><a name="-almacen"><strong>almacen</strong></a>(matriz, dim)</dt><dd><tt>Función&nbsp;almacen<br>
-Genera&nbsp;una&nbsp;matriz&nbsp;cuadrada&nbsp;con&nbsp;los&nbsp;elementos&nbsp;del&nbsp;plano&nbsp;del&nbsp;almacén<br>
-Parametros&nbsp;de&nbsp;Entrada:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;matriz:&nbsp;Lista&nbsp;[]&nbsp;para&nbsp;colocar&nbsp;matriz&nbsp;cuadrada&nbsp;con&nbsp;el&nbsp;plano&nbsp;del&nbsp;almacén<br>
-&nbsp;&nbsp;&nbsp;&nbsp;dim:&nbsp;Dimensiones&nbsp;de&nbsp;la&nbsp;matriz&nbsp;cuadrada<br>
-Parametro&nbsp;de&nbsp;Salida:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;matriz:&nbsp;Matriz&nbsp;cuadrada&nbsp;con&nbsp;los&nbsp;elementos&nbsp;del&nbsp;almacén</tt></dd></dl>
- <dl><dt><a name="-distancia_recorrida"><strong>distancia_recorrida</strong></a>(plano, lista_de_productos, df)</dt><dd><tt>Función&nbsp;distancia_recorrida<br>
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="builtins.html#object">builtins.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="recocido_simulado.html#RecocidoSimulado">RecocidoSimulado</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="RecocidoSimulado">class <strong>RecocidoSimulado</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Clase&nbsp;<a href="#RecocidoSimulado">RecocidoSimulado</a><br>
+Clase&nbsp;para&nbsp;implementar&nbsp;el&nbsp;algoritmo&nbsp;de&nbsp;Temple&nbsp;Simulado&nbsp;/&nbsp;Recocido&nbsp;Simulado<br>
+Atributos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;distancias<br>
+Metodos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;__init__<br>
+&nbsp;&nbsp;&nbsp;&nbsp;distancia_recorrida<br>
+&nbsp;&nbsp;&nbsp;&nbsp;estado_vecino_aleatorio<br>
+&nbsp;&nbsp;&nbsp;&nbsp;optimizar<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ubicacion<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="RecocidoSimulado-__init__"><strong>__init__</strong></a>(self)</dt><dd><tt>Metodo&nbsp;__init__<br>
+Metodo&nbsp;init&nbsp;o&nbsp;Constructor</tt></dd></dl>
+
+<dl><dt><a name="RecocidoSimulado-distancia_recorrida"><strong>distancia_recorrida</strong></a>(self, plano, lista_de_productos, distancias)</dt><dd><tt>Método&nbsp;distancia_recorrida<br>
 Calcula&nbsp;la&nbsp;distancia&nbsp;recorrida&nbsp;para&nbsp;un&nbsp;cierto&nbsp;orden&nbsp;de&nbsp;la&nbsp;lista&nbsp;de&nbsp;productos<br>
 Es&nbsp;la&nbsp;función&nbsp;a&nbsp;minimizar.&nbsp;Dice&nbsp;que&nbsp;tan&nbsp;buena&nbsp;es&nbsp;una&nbsp;solución&nbsp;propuesta<br>
 Parametros&nbsp;de&nbsp;Entrada:<br>
@@ -43,15 +66,16 @@ Parametros&nbsp;de&nbsp;Entrada:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;lista_de_productos:&nbsp;Lista&nbsp;de&nbsp;picking,&nbsp;con&nbsp;productos&nbsp;del&nbsp;almacén<br>
 Parametro&nbsp;de&nbsp;Salida:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;distancia&nbsp;total&nbsp;recorrida&nbsp;para&nbsp;dicho&nbsp;ordenamiento&nbsp;de&nbsp;la&nbsp;lista&nbsp;de&nbsp;picking</tt></dd></dl>
- <dl><dt><a name="-estado_vecino_aleatorio"><strong>estado_vecino_aleatorio</strong></a>(lista_de_productos)</dt><dd><tt>Función&nbsp;estado_vecino_aleatorio<br>
+
+<dl><dt><a name="RecocidoSimulado-estado_vecino_aleatorio"><strong>estado_vecino_aleatorio</strong></a>(self, lista_de_productos)</dt><dd><tt>Método&nbsp;estado_vecino_aleatorio<br>
 Crea&nbsp;un&nbsp;"estado&nbsp;vecino"&nbsp;de&nbsp;ordenamiento&nbsp;lista&nbsp;de&nbsp;productos&nbsp;intercambiando&nbsp;<br>
 aleatoriamente&nbsp;dos&nbsp;elementos&nbsp;de&nbsp;la&nbsp;lista<br>
 Parametro&nbsp;de&nbsp;Entrada:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;lista_de_productos:&nbsp;lista&nbsp;de&nbsp;picking,&nbsp;con&nbsp;productos&nbsp;del&nbsp;almacén<br>
 Parametro&nbsp;de&nbsp;Salida:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;estado_vecino:&nbsp;lista&nbsp;en&nbsp;que&nbsp;intercambio&nbsp;de&nbsp;lugar&nbsp;dos&nbsp;items&nbsp;aleatoriamente</tt></dd></dl>
- <dl><dt><a name="-random"><strong>random</strong></a>()<font color="#909090"><font face="helvetica, arial"> method of <a href="random.html#Random">random.Random</a> instance</font></font></dt><dd><tt><a href="#-random">random</a>()&nbsp;-&gt;&nbsp;x&nbsp;in&nbsp;the&nbsp;interval&nbsp;[0,&nbsp;1).</tt></dd></dl>
- <dl><dt><a name="-recocido_simulado"><strong>recocido_simulado</strong></a>(plano, lista_de_productos, To=1000, alfa=0.9, Tf=0.05)</dt><dd><tt>Función&nbsp;recocido_simulado<br>
+
+<dl><dt><a name="RecocidoSimulado-optimizar"><strong>optimizar</strong></a>(self, plano, lista_de_productos, To=1000, alfa=0.9, Tf=0.05)</dt><dd><tt>Método&nbsp;optimizar<br>
 Determina&nbsp;un&nbsp;orden&nbsp;optimizado&nbsp;para&nbsp;la&nbsp;lista&nbsp;de&nbsp;picking&nbsp;a&nbsp;traves<br>
 del&nbsp;algoritmo&nbsp;de&nbsp;Temple&nbsp;Simulado&nbsp;o&nbsp;Recocido&nbsp;Simulado<br>
 Parametros&nbsp;de&nbsp;Entrada:<br>
@@ -63,13 +87,31 @@ Parametros&nbsp;de&nbsp;Entrada:<br>
 Parametros&nbsp;de&nbsp;Salida:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;lista_de_productos:&nbsp;Lista&nbsp;ordenada&nbsp;para&nbsp;reducir&nbsp;la&nbsp;distancia&nbsp;recorrida<br>
 &nbsp;&nbsp;&nbsp;&nbsp;dist_min:&nbsp;Distancia&nbsp;minimizada&nbsp;por&nbsp;la&nbsp;lista&nbsp;ordenada</tt></dd></dl>
- <dl><dt><a name="-ubicacion"><strong>ubicacion</strong></a>(matriz, pos)</dt><dd><tt>Función&nbsp;ubicacion<br>
+
+<dl><dt><a name="RecocidoSimulado-ubicacion"><strong>ubicacion</strong></a>(self, matriz, pos)</dt><dd><tt>Método&nbsp;ubicacion<br>
 Entrega&nbsp;las&nbsp;coordenadas&nbsp;(i,j)&nbsp;donde&nbsp;esta&nbsp;el&nbsp;producto&nbsp;buscado&nbsp;en&nbsp;la&nbsp;matriz<br>
 Parametros&nbsp;de&nbsp;Entrada:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;matriz:&nbsp;Matriz&nbsp;cuadrada&nbsp;con&nbsp;el&nbsp;mapa&nbsp;del&nbsp;almacén<br>
 &nbsp;&nbsp;&nbsp;&nbsp;pos:&nbsp;Nro&nbsp;del&nbsp;producto&nbsp;buscado<br>
 Parametro&nbsp;de&nbsp;Salida:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;pos:&nbsp;Array&nbsp;con&nbsp;las&nbsp;coordenadas&nbsp;donde&nbsp;esta&nbsp;el&nbsp;item&nbsp;en&nbsp;el&nbsp;plano</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-random"><strong>random</strong></a>()<font color="#909090"><font face="helvetica, arial"> method of <a href="random.html#Random">random.Random</a> instance</font></font></dt><dd><tt><a href="#-random">random</a>()&nbsp;-&gt;&nbsp;x&nbsp;in&nbsp;the&nbsp;interval&nbsp;[0,&nbsp;1).</tt></dd></dl>
 </td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#55aa55">
