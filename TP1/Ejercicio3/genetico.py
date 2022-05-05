@@ -1,8 +1,10 @@
 import random
-from recocido_simulado import recocido_simulado
 import matplotlib.pyplot as plt
-import pdb
+#import pdb
 from numpy import full
+from recocido_simulado import RecocidoSimulado
+
+recocido_simulado = RecocidoSimulado()
 
 class individuo():                                      
     def __init__(self,lista,ordenes):
@@ -41,7 +43,7 @@ class individuo():
         #pdb.set_trace()
 
         for i in range (len(ordenes)):
-            nf = recocido_simulado(plano,ordenes[i])[1]
+            nf = recocido_simulado.optimizar(plano,ordenes[i])[1]
             fitness = fitness + nf                                  #Acumulo todos los costos y ese es el fitness del individuo
         return fitness
           

@@ -30,7 +30,8 @@ class RecocidoSimulado:
         Metodo init o Constructor
         """
         # Variable de instancia; atributo global del objeto
-        self.distancias = None
+        self.distancias = pd.read_csv('distancias.csv')
+        self.distancias = self.distancias.to_numpy()
 
     def distancia_recorrida(self, plano, lista_de_productos, distancias):
         """ Método distancia_recorrida
@@ -117,10 +118,7 @@ class RecocidoSimulado:
             lista_de_productos: Lista ordenada para reducir la distancia recorrida
             dist_min: Distancia minimizada por la lista ordenada
         """
-        # IMPLEMENTACION CON LAS DISTANCIAS YA CALCULADAS
-        if (self.distancias == None):
-            self.distancias = pd.read_csv('distancias.csv')
-            self.distancias = self.distancias.to_numpy()
+        # Implementacion Con Las Distancias Ya Calculadas
 
         e_actual = self.distancia_recorrida(plano, lista_de_productos, self.distancias)
 

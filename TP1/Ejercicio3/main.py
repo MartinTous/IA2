@@ -7,8 +7,7 @@ Dada varias ordenes de pedidos, se empieza a probar distintas disposiciones para
 la ubicacion de cada objeto que tenga el menor costo 
 """
 from genetico import *
-import random 
-import pdb
+
 def main():
     """ Método main
     Punto de entrada donde se inicia el programa
