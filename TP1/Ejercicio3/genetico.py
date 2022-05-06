@@ -4,9 +4,9 @@ import matplotlib.pyplot as plt
 from numpy import full
 from recocido_simulado import RecocidoSimulado
 
-recocido_simulado = RecocidoSimulado()
+_recocido_simulado = RecocidoSimulado()
 
-class individuo():                                      
+class individuo():
     def __init__(self,lista,ordenes):
         # individuo
         self.disposicion = lista
@@ -43,7 +43,7 @@ class individuo():
         #pdb.set_trace()
 
         for i in range (len(ordenes)):
-            nf = recocido_simulado.optimizar(plano,ordenes[i])[1]
+            nf = _recocido_simulado.optimizar(plano,ordenes[i])[1]
             fitness = fitness + nf                                  #Acumulo todos los costos y ese es el fitness del individuo
         return fitness
           
