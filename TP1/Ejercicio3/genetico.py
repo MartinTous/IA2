@@ -51,27 +51,21 @@ class individuo():
 
 def genetico (disp,ordenes):
     it = 0
-    ft = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,]
     arreglo = disp
-    poblacion=[0,0,0,0]
     ff = 1000
     promedio=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-    for j in range(40): 
+    for j in range(30):                                       #Criterio de parada, cantidad de iteraciones
         print(j) 
-        prom = 0   
-        poblacion=[0,0,0,0]                                      #Criterio de parada, cantidad de iteraciones
-        #print(j)
-        for i in range(len(disp)):
+        poblacion=[0,0,0,0,0,0,0,0]
+        prom = 0                                
+        for i in range(len(arreglo)):
             ind = individuo(arreglo[i],ordenes)               #Creo un objeto de cada individuo con su fitness asociado
             poblacion[i]= ind
-            #ft [it] = ind.fitness                          #Guardo los fitness en una lista para graficar al final
-            #it += 1
             prom =  int(ind.fitness)
             if prom<ff:
                 ff= prom
         promedio[j] = ff 
-        poblacion = seleccion(poblacion) 
-        #print(poblacion,"\n")     
+        poblacion = seleccion(poblacion)     
         nuevapoblacion = crossover(poblacion)
         #print(nuevapoblacion[0])
         #print(nuevapoblacion[1])
@@ -80,7 +74,7 @@ def genetico (disp,ordenes):
 
         arreglo = nuevapoblacion
 
-    poblacion=[0,0,0,0]
+    poblacion=[0,0,0,0,0,0,0,0]
     for i in range(len(disp)):
         ind = individuo(arreglo[i],ordenes)
         poblacion[i]= ind 
@@ -103,7 +97,7 @@ def genetico (disp,ordenes):
 
 def seleccion(poblacion):
     poblacion.sort(key=lambda x: x.fitness)                          #Ordeno a la poblacion de forma ascendente segun su fitness
-    seleccion=[0,0]
+    seleccion=[0,0,0,0]
     for i in range(0,int(len(poblacion)/2)):                                #Seleciono la mitad con mejor fitness
         seleccion [i] = poblacion [i].disposicion
     return seleccion
@@ -111,6 +105,8 @@ def seleccion(poblacion):
 
 def crossover(lista): 
     nuevalista=[[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+                [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+                [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
                 [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]]
     listadoble=[]
     k1 = random.randint(0, 119)                           #Punto random para entrecruzar
