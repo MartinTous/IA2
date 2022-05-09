@@ -7,7 +7,7 @@ Año 2022
 
 from random import random, choice
 from math import e
-from Aestrella import Astar
+#from Aestrella import Astar
 from copy import deepcopy
 import pandas as pd
 
@@ -30,7 +30,7 @@ class RecocidoSimulado:
         Metodo init o Constructor
         """
         # Variable de instancia; atributo global del objeto
-        self.distancias = pd.read_csv('distancias.csv')
+        self.distancias = pd.read_csv('C:\distancias.csv')
         self.distancias = self.distancias.to_numpy()
 
     def distancia_recorrida(self, plano, lista_de_productos, distancias):
