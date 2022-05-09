@@ -54,6 +54,7 @@ def genetico (disp,ordenes):
     ft = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,]
     arreglo = disp
     poblacion=[0,0,0,0]
+    ff = 1000
     promedio=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
     for j in range(40): 
         print(j) 
@@ -65,8 +66,10 @@ def genetico (disp,ordenes):
             poblacion[i]= ind
             #ft [it] = ind.fitness                          #Guardo los fitness en una lista para graficar al final
             #it += 1
-            prom = prom + int(ind.fitness)
-        promedio[j]=prom/4
+            prom =  int(ind.fitness)
+            if prom<ff:
+                ff= prom
+        promedio[j] = ff 
         poblacion = seleccion(poblacion) 
         #print(poblacion,"\n")     
         nuevapoblacion = crossover(poblacion)
