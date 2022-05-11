@@ -135,7 +135,7 @@ class RecocidoSimulado:
             e_estado_vecino = self.distancia_recorrida(plano, estado_vecino, self.distancias)
 
             # La variación de energía dE es la función objetivo a minimizar
-            dE = int(e_estado_vecino - e_actual)
+            dE = e_estado_vecino - e_actual
 
             # Los movimientos que minimizan la distancia recorrida se aceptan siempre
             # Si el nuevo estado candidato es peor, podría llegar a aceptarse con
