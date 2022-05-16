@@ -124,8 +124,9 @@ class RecocidoSimulado:
 
         # Temperatura inicial
         T = To
-
+        j=0
         while (T >= Tf):
+            j += 1
             # La Temperatura va disminuyendo a medida que avanza el algoritmo
             T = alfa * T
 
@@ -146,7 +147,7 @@ class RecocidoSimulado:
             if ((dE <= 0) or (pow(e, -dE / T) >= random())):
                 e_actual = e_estado_vecino
                 lista_de_productos = estado_vecino
-
+        print(j)
         # El algoritmo devuelve la mejor solución que se haya podido explorar y la
         # distancia minimiaza correspondiente
         dist_min = e_actual
