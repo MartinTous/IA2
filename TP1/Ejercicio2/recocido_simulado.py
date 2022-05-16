@@ -7,10 +7,9 @@ Año 2022
 
 from random import random, choice
 from math import e
-from Aestrella import Astar
 from copy import deepcopy
-import pandas as pd
-
+from pandas import read_csv
+from Aestrella import Astar
 
 class RecocidoSimulado:
     """ Clase RecocidoSimulado
@@ -30,8 +29,7 @@ class RecocidoSimulado:
         Metodo init o Constructor
         """
         # Variable de instancia; atributo global del objeto
-        self.distancias = pd.read_csv('distancias.csv')
-        self.distancias = self.distancias.to_numpy()
+        self.distancias = read_csv('distancias.csv').to_numpy()
 
     def distancia_recorrida(self, plano, lista_de_productos, distancias):
         """ Método distancia_recorrida
@@ -43,27 +41,26 @@ class RecocidoSimulado:
         Parametro de Salida:
             distancia total recorrida para dicho ordenamiento de la lista de picking
         """
-        posiciones = lista_de_productos[:]
+#         posiciones = lista_de_productos[:]
         f_total = 0
-        matriz = deepcopy(plano)
-        for i in range(len(posiciones) - 1):
+        for i in range(len(lista_de_productos) - 1):
 
             # IMPLEMENTACION CALCULANDO A* EN CADA ITERACION
             """  # Busco las coordenadas del elemento para poder buscarlo con A estrella
-            matriz = deepcopy(plano)
-            indices_a = ubicacion(matriz, posiciones[i])
-            indices_b = ubicacion(matriz, posiciones[i + 1])
+            indices_a = ubicacion(plano, lista_de_productos[i])
+            indices_b = ubicacion(plano, lista_de_productos[i + 1])
             # Sumo de todos los desplazamientos de ir de cada posicion a la proximo
-            f_total = f_total + len(Astar(matriz, list(indices_a),list(indices_b ))) """
+            f_total = f_total + len(Astar(plano, list(indices_a),list(indices_b ))) """
 
             # IMPLEMENTACION CON LAS DISTANCIAS YA CALCULADAS
-            indices_a = self.ubicacion(matriz, posiciones[i])
-            indices_b = self.ubicacion(matriz, posiciones[i + 1])
+            indices_a = self.ubicacion(plano, lista_de_productos[i])
+            indices_b = self.ubicacion(plano, lista_de_productos[i + 1])
             indices_a = str(indices_a[0]) + " " + str(indices_a[1])
             indices_b = str(indices_b[0]) + " " + str(indices_b[1])
-            costo = 0
-            for i in range(0, len(self.distancias)):
-                if ((distancias[i][0] == indices_a and distancias[i][1] == indices_b) or (distancias[i][0] == indices_b and distancias[i][1] == indices_a)):
+#             costo = 0
+            for i in range(len(self.distancias)):
+                if ((distancias[i][0] == indices_a and distancias[i][1] == indices_b) or
+                        (distancias[i][0] == indices_b and distancias[i][1] == indices_a)):
                     costo = int(distancias[i][2])
             f_total = f_total + costo
 
@@ -116,7 +113,7 @@ class RecocidoSimulado:
             lista_de_productos: Lista de picking, con productos del almacen
         Parametros de Salida:
             lista_de_productos: Lista ordenada para reducir la distancia recorrida
-            dist_min: Distancia minimizada por la lista ordenada
+            e_actual: Distancia minimizada por la lista ordenada
         """
         # Implementacion Con Las Distancias Ya Calculadas
 
@@ -135,7 +132,7 @@ class RecocidoSimulado:
             e_estado_vecino = self.distancia_recorrida(plano, estado_vecino, self.distancias)
 
             # La variación de energía dE es la función objetivo a minimizar
-            dE = int(e_estado_vecino - e_actual)
+            dE = e_estado_vecino - e_actual
 
             # Los movimientos que minimizan la distancia recorrida se aceptan siempre
             # Si el nuevo estado candidato es peor, podría llegar a aceptarse con
@@ -149,8 +146,8 @@ class RecocidoSimulado:
 
         # El algoritmo devuelve la mejor solución que se haya podido explorar y la
         # distancia minimiaza correspondiente
-        dist_min = e_actual
-        return (lista_de_productos, dist_min)
+#         dist_min = e_actual
+        return (lista_de_productos, e_actual)
 
     def ubicacion(self, matriz, pos):
         """ Método ubicacion
@@ -162,8 +159,8 @@ class RecocidoSimulado:
             pos: Array con las coordenadas donde esta el item en el plano
         """
         dim = len(matriz)
-        for i in range(0, dim):
-            for j in range(0, dim):
+        for i in range(dim):
+            for j in range(dim):
                 if matriz[i][j] == pos:
                     pos = [i, j]
         return pos
