@@ -67,15 +67,17 @@ if __name__ == "__main__":
     dim = 16
     matriz = almacen(matriz, dim)
     print(matrix(matriz))
-
+    ruta_txt_orden=('C:\ordenes\order_3.txt')
+    lista_de_productos = list(genfromtxt(ruta_txt_orden, dtype=int32))
     # Lee la lista de picking de un archivo de texto indicado por el usuario
     try:
-        print("Indique el nro [1 ; 100] de la orden: ")
+        """         print("Indique el nro [1 ; 100] de la orden: ")
         nro_order = int(input())
         order = "order_" + str(nro_order) + ".txt"
         # https://medium.com/@ageitgey/python-3-quick-tip-the-easy-way-to-deal-with-file-paths-on-windows-mac-and-linux-11a072b58d5f
         ruta_txt_orden = os.path.join("ordenes", order)
-        # /home/marceemellimaci/Documents/2022/ia2/Practica-IA2/TP1/Ejercicio2/ordenes/order_1.txt
+        # /home/marceemellimaci/Documents/2022/ia2/Practica-IA2/TP1/Ejercicio2/ordenes/order_1.txt """
+        ruta_txt_orden=('C:\1- FACULTAD\9° Semestre\Git\Practica-IA2\TP1\Ejercicio2\ordenes\order_1.txt')
         lista_de_productos = list(genfromtxt(ruta_txt_orden, dtype=int32))
 
     except:

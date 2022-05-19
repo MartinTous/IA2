@@ -10,6 +10,7 @@ from math import e
 from copy import deepcopy
 from pandas import read_csv
 from Aestrella import Astar
+import matplotlib.pyplot as plt
 
 class RecocidoSimulado:
     """ Clase RecocidoSimulado
@@ -29,7 +30,7 @@ class RecocidoSimulado:
         Metodo init o Constructor
         """
         # Variable de instancia; atributo global del objeto
-        self.distancias = read_csv('distancias.csv').to_numpy()
+        self.distancias = read_csv('C:\distancias.csv').to_numpy()
 
     def distancia_recorrida(self, plano, lista_de_productos, distancias):
         """ Método distancia_recorrida
@@ -101,7 +102,7 @@ class RecocidoSimulado:
             estado_vecino = self.estado_vecino_aleatorio(lista_de_productos)
         return (estado_vecino)
 
-    def optimizar(self, plano, lista_de_productos, To=1000, alfa=0.9, Tf=0.05):
+    def optimizar(self, plano, lista_de_productos, To=1000, alfa=0.95, Tf=0.05):
         """ Método optimizar
         Determina un orden optimizado para la lista de picking a traves
         del algoritmo de Temple Simulado o Recocido Simulado
@@ -116,13 +117,14 @@ class RecocidoSimulado:
             e_actual: Distancia minimizada por la lista ordenada
         """
         # Implementacion Con Las Distancias Ya Calculadas
-
+        costos=[]
         e_actual = self.distancia_recorrida(plano, lista_de_productos, self.distancias)
-
+        costos.append(e_actual)
         # Temperatura inicial
         T = To
 
         while (T >= Tf):
+            
             # La Temperatura va disminuyendo a medida que avanza el algoritmo
             T = alfa * T
 
@@ -130,7 +132,7 @@ class RecocidoSimulado:
             estado_vecino = self.estado_vecino_aleatorio(lista_de_productos)
 
             e_estado_vecino = self.distancia_recorrida(plano, estado_vecino, self.distancias)
-
+            
             # La variación de energía dE es la función objetivo a minimizar
             dE = e_estado_vecino - e_actual
 
@@ -142,11 +144,15 @@ class RecocidoSimulado:
             # nro_aleatorio = random.random()
             if ((dE <= 0) or (pow(e, -dE / T) >= random())):
                 e_actual = e_estado_vecino
+                costos.append(e_actual)
                 lista_de_productos = estado_vecino
+                costos
 
         # El algoritmo devuelve la mejor solución que se haya podido explorar y la
         # distancia minimiaza correspondiente
 #         dist_min = e_actual
+        plt.plot(costos, "x")
+        plt.show()
         return (lista_de_productos, e_actual)
 
     def ubicacion(self, matriz, pos):
