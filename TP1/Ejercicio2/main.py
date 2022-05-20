@@ -67,7 +67,7 @@ if __name__ == "__main__":
     dim = 16
     matriz = almacen(matriz, dim)
     print(matrix(matriz))
-    ruta_txt_orden=('C:\ordenes\order_3.txt')
+    ruta_txt_orden=('C:\ordenes\order_30.txt')
     lista_de_productos = list(genfromtxt(ruta_txt_orden, dtype=int32))
     # Lee la lista de picking de un archivo de texto indicado por el usuario
     try:
