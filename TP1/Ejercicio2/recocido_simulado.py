@@ -152,8 +152,9 @@ class RecocidoSimulado:
         # distancia minimiaza correspondiente
 #         dist_min = e_actual
         plt.plot(costos, "x")
-        plt.xlabel('Iteraciones')
-        plt.ylabel('Costo')
+        plt.xlabel('Iteración Nro')
+        plt.ylabel('Distancia Recorrida')
+        plt.title('Óptimo mediante Temple Simulado')
         plt.show()
         return (lista_de_productos, e_actual)
 
