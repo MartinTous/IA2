@@ -30,7 +30,7 @@ class RecocidoSimulado:
         Metodo init o Constructor
         """
         # Variable de instancia; atributo global del objeto
-        self.distancias = read_csv('C:\distancias.csv').to_numpy()
+        self.distancias = read_csv("distancias.csv").to_numpy()
 
     def distancia_recorrida(self, plano, lista_de_productos, distancias):
         """ Método distancia_recorrida
