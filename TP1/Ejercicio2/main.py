@@ -13,22 +13,23 @@ from recocido_simulado import RecocidoSimulado
 import sys
 import os.path
 
+
 def main():
     """ main:
     Punto de entrada donde se inicia el programa
     """
     recocido_simulado = RecocidoSimulado()
-    
+
     print("\t Ejercicio 2 del TP 1 de IA 2")
 
     matriz = []
-    print('\n')
     #dim=int(input('Tamaño del almacen (LxL) -> L= '))
     # Tamaño de la matriz cuadrada para el mapa del almacén
     dim = 16
     matriz = almacen(matriz, dim)
+    print('\n')
     print(matrix(matriz))
-    
+
     # Lee la lista de picking de un archivo de texto indicado por el usuario
     if (sys.platform.startswith("win")):
     # C:\ordenes\order_30.txt
@@ -38,7 +39,7 @@ def main():
             lista_de_productos = list(genfromtxt(ruta_txt_orden, dtype=int32))
         except:
             print("Error cargando el archivo .txt con lista de productos de la orden !")
-            # exit()        
+            # exit()
     else:
     # /home/marceemellimaci/Documents/2022/ia2/Practica-IA2/TP1/Ejercicio2/ordenes/order_1.txt
         try:
@@ -55,6 +56,9 @@ def main():
 
     print("Lista de picking sin ordenar:")
     print(lista_de_productos)
+    print("Distancia recorrida con la lista sin ordenar:")
+    print(recocido_simulado.distancia_recorrida(
+        matriz, lista_de_productos, recocido_simulado.distancias))
 
     To = 1100
     Tf = 0.05
@@ -63,30 +67,31 @@ def main():
         matriz, lista_de_productos, To, alfa, Tf)
     print("Lista ordenada para reducir la distancia recorrida:")
     print(lista_ordenada)
-    print("Distancia minimizada con la lista ordenada:", distancia_recorrida)
-    
-    # Se puede mejorar el resultado usando otra vez el recocido simulado, de 
+    print("Distancia minimizada con la lista ordenada:")
+    print(distancia_recorrida)
+
+    # Se puede mejorar el resultado usando otra vez el recocido simulado, de
     # forma tal que la salida de un recocido simulado sea la entrada del segundo
     for _ in range(3):
         print("Quiere optimizar otra vez para mejorar la calidad del resultado ???")
         input_de_nuevo = input("[S/n] ")
-        
+
         if any(input_de_nuevo.lower() == f for f in ['si', 's', 'yes', 'ye', 'y', '1']):
             lista_ordenada_2, distancia_recorrida_2 = recocido_simulado.optimizar(
                 matriz, lista_ordenada, To, alfa, Tf)
             print("Lista ordenada nuevamente para reducir la distancia recorrida:")
             print(lista_ordenada)
-            print("Distancia minimizada con la lista ordenada:", distancia_recorrida)
+            print("Distancia minimizada con la lista ordenada:")
+            print(distancia_recorrida)
             print("Programa terminado")
             break
-        
+
         elif any(input_de_nuevo.lower() == f for f in ['no', 'n', '0']):
             print("Programa terminado")
             break
-        
+
         else:
             print("Opción inválida")
-
 
 
 def almacen(matriz, dim):

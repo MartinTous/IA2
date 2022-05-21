@@ -4,13 +4,13 @@ Año 2022
 - Mellimaci, Marcelo E
 - Tous Maggini, Martín
 """
-
 from random import random, choice
 from math import e
 from copy import deepcopy
 from pandas import read_csv
-from Aestrella import Astar
 import matplotlib.pyplot as plt
+#from Aestrella import Astar
+
 
 class RecocidoSimulado:
     """ Clase RecocidoSimulado
@@ -60,8 +60,8 @@ class RecocidoSimulado:
             indices_b = str(indices_b[0]) + " " + str(indices_b[1])
 #             costo = 0
             for i in range(len(self.distancias)):
-                if ((distancias[i][0] == indices_a and distancias[i][1] == indices_b) or
-                        (distancias[i][0] == indices_b and distancias[i][1] == indices_a)):
+                if ((distancias[i][0] == indices_a and distancias[i][1] == indices_b)
+                        or (distancias[i][0] == indices_b and distancias[i][1] == indices_a)):
                     costo = int(distancias[i][2])
             f_total = f_total + costo
 
@@ -117,14 +117,14 @@ class RecocidoSimulado:
             e_actual: Distancia minimizada por la lista ordenada
         """
         # Implementacion Con Las Distancias Ya Calculadas
-        costos=[]
+        costos = []
         e_actual = self.distancia_recorrida(plano, lista_de_productos, self.distancias)
         costos.append(e_actual)
         # Temperatura inicial
         T = To
 
         while (T >= Tf):
-            
+
             # La Temperatura va disminuyendo a medida que avanza el algoritmo
             T = alfa * T
 
@@ -132,7 +132,7 @@ class RecocidoSimulado:
             estado_vecino = self.estado_vecino_aleatorio(lista_de_productos)
 
             e_estado_vecino = self.distancia_recorrida(plano, estado_vecino, self.distancias)
-            
+
             # La variación de energía dE es la función objetivo a minimizar
             dE = e_estado_vecino - e_actual
 
