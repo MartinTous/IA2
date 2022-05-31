@@ -81,9 +81,27 @@ check(parts_effects_of_dazzling_and_rusting) :-
                 (condition(parts_effects_of_dazzling_and_rusting, unknown), 
                 writeln('Check if the safety valve body, pipes and joints have effects of dazzling and rusting'));
                 (condition(parts_effects_of_dazzling_and_rusting, yes), 
-                writeln('Coordination is required in order to render and color the equipment'));
+                writeln('Coordination is required in order to render and color the equipment')).
 
 /* RAMA DERECHA DEL ARBOL*/
+check(leakage_fixed_with_wrench) :-
+    condition(thickness_less_than_the_threshold_limit, yes), writeln('Report to the technical inspection unit').
+
+check(leakage_fixed_with_wrench) :- 
+    condition(thickness_less_than_the_threshold_limit, unknown), 
+    ((condition(gas_leakage_at_joint, yes), writeln('Send a report to the repair department to fix the fault'));
+    check(gas_leakage_at_joint)).
+
+check(gas_leakage_at_joint) :-  
+    (condition(parts_effects_of_dazzling_and_rusting, unknown), 
+    writeln('Check if there if a gas leakage at joint'));
+    (condition(parts_effects_of_dazzling_and_rusting, no), 
+    writeln('The safety valve joint are free of gas leakage')).
+
+
+
+
+
 
 /* Ground Facts de instancia variables (podrian resolverse mediante sensado o agregando la informacion interactivamente a la base de conocimientos) */
 
