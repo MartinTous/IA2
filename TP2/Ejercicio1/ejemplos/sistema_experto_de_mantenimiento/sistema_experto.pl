@@ -2,7 +2,7 @@
 
 /* Axiomas (invariantes del dominio) */
 verificar(piloto) :- 
-    estado(piloto, ok), writeln('Todo OK').
+                estado(piloto, ok), writeln('Todo OK').
 
 verificar(piloto) :- 
                 estado(piloto, desconocido), 
@@ -33,16 +33,49 @@ verificar(relief_valve_ok_with_10_percent_more_pressure) :-
                 estado(relief_valve_ok_with_10_percent_more_pressure, desconocido),
                 ((estado(safety_valve_has_continuous_evacuation, no), writeln('Verificar relief valve works correctly with +10% over regular pressure')); 
                 verificar(safety_valve_has_continuous_evacuation)).
-            
+
+
+
+
+verificar(fuga_preventiva) :- 
+                estado(fuga_preventiva, ok), writeln('Todo OK').
+
+verificar(fuga_preventiva) :- 
+                estado(fuga_preventiva, desconocido), 
+                ((estado(safety_spring, ok), writeln('Verificar fuga preventiva'));
+                verificar(safety_spring)).
+
+verificar(safety_spring) :-
+                estado(safety_spring, desconocido), 
+                ((estado(control_and_pressure_sensce_pipes_blocked, ok), writeln('Verificar safety valve spring')); 
+                verificar(control_and_pressure_sensce_pipes_blocked)).
+
+verificar(control_and_pressure_sensce_pipes_blocked) :-
+                estado(control_and_pressure_sensce_pipes_blocked, desconocido), 
+                ((estado(line_gas_pressure, no), writeln('Verificar control and pressure sence pipes blocked')); 
+                verificar(line_gas_pressure)).
+
+verificar(line_gas_pressure) :-
+                estado(line_gas_pressure, desconocido), 
+                ((estado(safety_valve_has_continuous_evacuation, ok), writeln('Verificar control and pressure sence pipes blocked')); 
+                verificar(safety_valve_has_continuous_evacuation)).
+
+
 verificar(safety_valve_has_continuous_evacuation) :- 
                 estado(safety_valve_has_continuous_evacuation, desconocido), 
                 writeln('Verificar safety valve has continuous evacuation').
 
+            
 /* Ground Facts de instancia variables (podrian resolverse mediante sensado o agregando la informacion interactivamente a la base de conocimientos) */
 estado(piloto, desconocido).
 estado(leakage_prevention_between_sit_and_orifice, desconocido).
 estado(safety_valve_spring, desconocido).
-estado(control_valve_sensors_blocked, desconocido).
+estado(control_valve_sensors_blocked, no).
 estado(valve_status_closed, desconocido).
 estado(relief_valve_ok_with_10_percent_more_pressure, desconocido).
 estado(safety_valve_has_continuous_evacuation, desconocido).
+
+estado(fuga_preventiva, desconocido).
+estado(safety_spring, desconocido).
+estado(control_and_pressure_sensce_pipes_blocked,desconocido).
+estado(line_gas_pressure,desconocido).
