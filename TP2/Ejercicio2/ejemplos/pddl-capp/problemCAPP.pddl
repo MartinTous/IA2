@@ -1,9 +1,9 @@
 (define (problem capp-pieza)
     (:domain CAPP)
     (:objects 
-        orientacion+x
-        orientacion+y
-        orientacion+z
+        orientacionPx
+        orientacionPy
+        orientacionPz
         orientacion-x
         orientacion-y
         orientacion-z
@@ -12,6 +12,13 @@
         s6
         s9
         s10
+        h1
+        h3
+        h5
+        h7
+        h9
+        h11
+        h12
         slot
         through-hole
         blind-hole
@@ -19,9 +26,9 @@
         taladrado
     )
     (:init 
-        (orientacion orientacion+x)
-        (orientacion orientacion+y)
-        (orientacion orientacion+z)
+        (orientacion orientacionPx)
+        (orientacion orientacionPy)
+        (orientacion orientacionPz)
         (orientacion orientacion-x)
         (orientacion orientacion-y)
         (orientacion orientacion-z)
@@ -45,7 +52,6 @@
 
         (operacion fresado)
         (operacion taladrado)
-        (operacion torneado)
 
         (feature-tipo s2 slot)
         (feature-tipo s4 slot)
@@ -62,18 +68,18 @@
 
         (orientacion-pieza orientacion-x)
 
-        (orientacion-feature s2 orientacion+x)
+        (orientacion-feature s2 orientacionPx)
         (orientacion-feature s4 orientacion-x)
-        (orientacion-feature s6 orientacion+x)
-        (orientacion-feature s9 orientacion+z)
-        (orientacion-feature s10 orientacion+z)
-        (orientacion-feature h1 orientacion+z)
-        (orientacion-feature h3 orientacion+z)
-        (orientacion-feature h5 orientacion+z)
-        (orientacion-feature h7 orientacion+x)
-        (orientacion-feature h9 orientacion+x)
-        (orientacion-feature h11 orientacion+x)
-        (orientacion-feature h12 orientacion+x)
+        (orientacion-feature s6 orientacionPx)
+        (orientacion-feature s9 orientacionPz)
+        (orientacion-feature s10 orientacionPz)
+        (orientacion-feature h1 orientacionPz)
+        (orientacion-feature h3 orientacionPz)
+        (orientacion-feature h5 orientacionPz)
+        (orientacion-feature h7 orientacionPx)
+        (orientacion-feature h9 orientacionPx)
+        (orientacion-feature h11 orientacionPx)
+        (orientacion-feature h12 orientacionPx)
         
         (fabricable slot fresado)
         (fabricable blind-hole taladrado)
