@@ -144,15 +144,18 @@ def main():
 def graficar_cjtos_difusos(mu, titulo, eje_x):
     plt.style.use('ggplot')
     
+    nro_cjtos_difusos = 0
     for k in mu[1].values():
+        nro_cjtos_difusos += 1
         plt.plot(mu[0], k)
         
     plt.xlabel(eje_x)
     plt.ylabel("Grado de Pertenencia (mu)")
     plt.title(titulo)
-    plt.text(0.5, 0.95, '(NG, NP, Z, PP, PG)',
-             horizontalalignment='center',
-             verticalalignment='center')
+    if (nro_cjtos_difusos == 5):
+        plt.text(0.5, 0.95, '(NG, NP, Z, PP, PG)',
+                 horizontalalignment='center',
+                 verticalalignment='center')
     
     plt.grid(True)
     plt.show() 
