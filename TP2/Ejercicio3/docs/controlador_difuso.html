@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module controlador_difuso</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>controlador_difuso</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/tmp/TP2/Ejercicio3/controlador_difuso.py">/tmp/TP2/Ejercicio3/controlador_difuso.py</a></font></td></tr></table>
+    <p><tt>#-&nbsp;Cabrero&nbsp;García,&nbsp;Gabriel<br>
+#-&nbsp;Mellimaci,&nbsp;Marcelo&nbsp;E<br>
+#-&nbsp;Tous&nbsp;Maggini,&nbsp;Martín</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="builtins.html#object">builtins.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="controlador_difuso.html#ControladorDifuso">ControladorDifuso</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ControladorDifuso">class <strong>ControladorDifuso</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#ControladorDifuso">ControladorDifuso</a>(reglas)<br>
+&nbsp;<br>
+Clase&nbsp;PenduloInvertido<br>
+&nbsp;<br>
+Atributo:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;self.<strong>reglas</strong><br>
+Metodos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;__init__<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;borrosificacion<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;cjto_difuso<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;control_difuso<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;desborrosificacion<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="ControladorDifuso-__init__"><strong>__init__</strong></a>(self, reglas)</dt><dd><tt>Metodo&nbsp;__init__<br>
+Metodo&nbsp;init&nbsp;o&nbsp;Constructor<br>
+&nbsp;<br>
+Parametro&nbsp;de&nbsp;Entrada:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;reglas:&nbsp;diccionario&nbsp;con&nbsp;la&nbsp;tabla&nbsp;con&nbsp;las&nbsp;reglas&nbsp;de&nbsp;inferencia&nbsp;(FAM)<br>
+Parametro&nbsp;de&nbsp;Salida:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Ninguno</tt></dd></dl>
+
+<dl><dt><a name="ControladorDifuso-borrosificacion"><strong>borrosificacion</strong></a>(self, cjto_difuso, valor)</dt><dd><tt>Metodo&nbsp;borrosificacion<br>
+Pasa&nbsp;a&nbsp;difuso&nbsp;el&nbsp;valor&nbsp;nítido&nbsp;de&nbsp;una&nbsp;entrada&nbsp;(borrosificador&nbsp;singleton)<br>
+&nbsp;<br>
+Parametros&nbsp;de&nbsp;Entrada:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;cjto_difuso:&nbsp;lista&nbsp;con&nbsp;conjuntos&nbsp;borrosos&nbsp;de&nbsp;una&nbsp;variable&nbsp;de&nbsp;entrada<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;valor:&nbsp;valores&nbsp;de&nbsp;entrada&nbsp;nítidos&nbsp;(theta&nbsp;y&nbsp;omega)<br>
+Parametro&nbsp;de&nbsp;Salida:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;valores_difusos:&nbsp;valor&nbsp;de&nbsp;pertenencia&nbsp;dicha&nbsp;variable&nbsp;de&nbsp;entrada</tt></dd></dl>
+
+<dl><dt><a name="ControladorDifuso-cjto_difuso"><strong>cjto_difuso</strong></a>(self, minimo, centro, maximo, variable_linguistica)</dt></dl>
+
+<dl><dt><a name="ControladorDifuso-control_difuso"><strong>control_difuso</strong></a>(self, mu_fza, pendulo_angulo, pendulo_velocidad, mu_theta, mu_w)</dt><dd><tt>Metodo&nbsp;control_difuso<br>
+Calcular&nbsp;la&nbsp;salida&nbsp;(F)&nbsp;en&nbsp;funcn&nbsp;de&nbsp;las&nbsp;entradas&nbsp;(theta&nbsp;y&nbsp;omega)&nbsp;mediante<br>
+inferencia&nbsp;difusa<br>
+&nbsp;<br>
+Parametros&nbsp;de&nbsp;Entrada:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;mu_fza:&nbsp;lista&nbsp;con&nbsp;los&nbsp;conjuntos&nbsp;borrosos&nbsp;de&nbsp;una&nbsp;variable&nbsp;de&nbsp;entrada<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;pendulo_angulo:&nbsp;valor&nbsp;numerico&nbsp;nitido&nbsp;de&nbsp;la&nbsp;posicion&nbsp;theta<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;pendulo_velocidad:&nbsp;valor&nbsp;numerico&nbsp;nitido&nbsp;de&nbsp;omega&nbsp;(theta_punto)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;mu_theta:&nbsp;lista&nbsp;con&nbsp;los&nbsp;conjuntos&nbsp;borrosos&nbsp;de&nbsp;posicion&nbsp;angular<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;mu_w:&nbsp;lista&nbsp;con&nbsp;los&nbsp;conjuntos&nbsp;borrosos&nbsp;de&nbsp;velocidad&nbsp;angular<br>
+Parametro&nbsp;de&nbsp;Salida:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;F:&nbsp;Nro&nbsp;nítido&nbsp;de&nbsp;la&nbsp;variable&nbsp;Fza&nbsp;de&nbsp;salida&nbsp;(para&nbsp;el&nbsp;actuador)</tt></dd></dl>
+
+<dl><dt><a name="ControladorDifuso-desborrosificacion"><strong>desborrosificacion</strong></a>(self, mu_fza, salida_borrosa)</dt><dd><tt>Metodo&nbsp;desborrosificacion<br>
+Desborrosifica&nbsp;la&nbsp;variable&nbsp;de&nbsp;salida&nbsp;por&nbsp;Centroide&nbsp;o&nbsp;Ctro&nbsp;de&nbsp;Gravedad&nbsp;(COG)<br>
+&nbsp;<br>
+Parametros&nbsp;de&nbsp;Entrada:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;mu_fza:&nbsp;arreglo&nbsp;con&nbsp;los&nbsp;conjuntos&nbsp;borrosos&nbsp;de&nbsp;la&nbsp;variable&nbsp;de&nbsp;salida<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;salida_borrosa:&nbsp;lista&nbsp;con&nbsp;el&nbsp;valor&nbsp;difuso&nbsp;para&nbsp;la&nbsp;variable&nbsp;de&nbsp;salida<br>
+Parametro&nbsp;de&nbsp;Salida:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;valor_nitido:&nbsp;Nro&nbsp;nítido&nbsp;de&nbsp;la&nbsp;variable&nbsp;de&nbsp;salida&nbsp;(para&nbsp;el&nbsp;actuador)</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table>
+</body></html>
