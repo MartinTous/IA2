@@ -20,6 +20,9 @@ from pendulo_invertido import PenduloInvertido
 
 
 def main():
+    """ main:
+    Punto de entrada donde se inicia el programa
+    """
     # Tabla con las reglas de inferencia, eg:
     # reglas['NG']['PP'] da la Fza (valor borroso) para theta NG y veloc PP
     reglas = {
@@ -103,6 +106,12 @@ def main():
     graficar_cjtos_difusos(mu_w, 'Conjuntos borrosos de velocidad angular', 'omega')
     graficar_cjtos_difusos(mu_fza, 'Conjuntos borrosos de fuerza', 'Fza')
     
+    # l: largo de la barra del péndulo [m]
+    l = 0.5
+    # m: masa del péndulo (pertiga) [Kg]
+    m = 0.1
+    # M: Masa del carro [Kg]    
+    M = 1.0
     # PenduloInvertido(l, m, M)
     pendulo = PenduloInvertido(0.5, 0.1, 1.0)
     
@@ -113,9 +122,9 @@ def main():
     listado_fza = []
     listado_t = []
     # Parametros iniciales:
-    angulo = pi/6  # Theta inicial [rad]
-    velocidad = 0  # Omega inicial [rad / s]
-    aceleracion = 0     # [rad / s**2]
+    angulo = pi/6       # Theta inicial [rad]
+    velocidad = 0       # Omega inicial [rad / s]
+    aceleracion = 0     # Alfa inicial [rad / s**2]
     F = 0    
     t = 0
     # Para obtener buenos resultados tiene que ser <=0.02
@@ -142,23 +151,51 @@ def main():
 
 
 def graficar_cjtos_difusos(mu, titulo, eje_x):
+    """ Función graficar_cjtos_difusos
+    Grafica los conjuntos borrosos para una determinada variable
+    
+    Parametros de Entrada:
+        - mu: lista con los conjuntos borrosos de la variable lingüística
+        - titulo: string con el título del diagrama
+        - eje_x: nombre de la variable lingüística (eje x horizontal)
+    Parametro de Salida:
+        - Gráfica con cjtos borrosos (grado de pertenencia / variable lingüística)
+    """            
     plt.style.use('ggplot')
     
+    nro_cjtos_difusos = 0
     for k in mu[1].values():
+        nro_cjtos_difusos += 1
         plt.plot(mu[0], k)
         
     plt.xlabel(eje_x)
     plt.ylabel("Grado de Pertenencia (mu)")
     plt.title(titulo)
-    plt.text(0.5, 0.95, '(NG, NP, Z, PP, PG)',
-             horizontalalignment='center',
-             verticalalignment='center')
+    
+    # Muestra los nombres de los términos lingüísticos en las gráficas en caso
+    # de tratarse de 5 cinco conjuntos difusos    
+    if (nro_cjtos_difusos == 5):
+        plt.text(0.5, 0.95, '(NG, NP, Z, PP, PG)',
+                 horizontalalignment='center',
+                 verticalalignment='center')
     
     plt.grid(True)
     plt.show() 
     
     
 def graficar_curva(x, y, eje_x, eje_y, titulo):
+    """ Función graficar_curva
+    Grafica la curvas de la respuesta de "x" como función de "y"
+    
+    Parametros de Entrada:
+        - x: lista con los sucesivos valores que toma la variable independiente
+        - y: lista con los sucesivos valores de la variable "y" para cada "t"
+        - eje_x: descripción del eje horizantal de abscisas (eg: tiempo)
+        - eje_y: descripción del eje vertical de ordenadas (eg: posición theta)
+        - titulo: string con el título del diagrama
+    Parametro de Salida:
+        - Grafica con la curva de "x" como función de "y" (eg: Posición vs Tiempo)
+    """ 
     plt.style.use('ggplot')
     fig, ax = plt.subplots()
     ax.plot(x, y)
