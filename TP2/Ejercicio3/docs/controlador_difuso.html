@@ -8,7 +8,7 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>controlador_difuso</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/tmp/TP2/Ejercicio3/controlador_difuso.py">/tmp/TP2/Ejercicio3/controlador_difuso.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/tmp/Ejercicio3/controlador_difuso.py">/tmp/Ejercicio3/controlador_difuso.py</a></font></td></tr></table>
     <p><tt>#-&nbsp;Cabrero&nbsp;García,&nbsp;Gabriel<br>
 #-&nbsp;Mellimaci,&nbsp;Marcelo&nbsp;E<br>
 #-&nbsp;Tous&nbsp;Maggini,&nbsp;Martín</tt></p>
@@ -65,14 +65,23 @@ Parametros&nbsp;de&nbsp;Entrada:<br>
 Parametro&nbsp;de&nbsp;Salida:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;valores_difusos:&nbsp;valor&nbsp;de&nbsp;pertenencia&nbsp;dicha&nbsp;variable&nbsp;de&nbsp;entrada</tt></dd></dl>
 
-<dl><dt><a name="ControladorDifuso-cjto_difuso"><strong>cjto_difuso</strong></a>(self, minimo, centro, maximo, variable_linguistica)</dt></dl>
+<dl><dt><a name="ControladorDifuso-cjto_difuso"><strong>cjto_difuso</strong></a>(self, minimo, centro, maximo, variable_linguistica)</dt><dd><tt>Metodo&nbsp;cjto_difuso<br>
+Genera&nbsp;una&nbsp;lista&nbsp;con&nbsp;los&nbsp;valores&nbsp;de&nbsp;pertenencia&nbsp;de&nbsp;dicho&nbsp;cjunto&nbsp;borroso<br>
+&nbsp;<br>
+Parametros&nbsp;de&nbsp;Entrada:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;minimo:&nbsp;intersección&nbsp;izquierda&nbsp;del&nbsp;cjto&nbsp;difuso&nbsp;en&nbsp;el&nbsp;eje&nbsp;horizontal<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;centro:&nbsp;abscisa&nbsp;del&nbsp;punto&nbsp;de&nbsp;quiebre&nbsp;de&nbsp;la&nbsp;gráfica&nbsp;del&nbsp;cjto&nbsp;difuso<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;maximo:&nbsp;intersección&nbsp;derecha&nbsp;del&nbsp;cjto&nbsp;difuso&nbsp;en&nbsp;el&nbsp;eje&nbsp;de&nbsp;abscisas<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;variable_linguistica:&nbsp;array&nbsp;para&nbsp;el&nbsp;cjto&nbsp;borroso&nbsp;de&nbsp;la&nbsp;variable&nbsp;linguística<br>
+Parametro&nbsp;de&nbsp;Salida:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;cjto_borroso:&nbsp;lista&nbsp;con&nbsp;las&nbsp;sucesivas&nbsp;ordenadas&nbsp;del&nbsp;cjunto&nbsp;borroso</tt></dd></dl>
 
 <dl><dt><a name="ControladorDifuso-control_difuso"><strong>control_difuso</strong></a>(self, mu_fza, pendulo_angulo, pendulo_velocidad, mu_theta, mu_w)</dt><dd><tt>Metodo&nbsp;control_difuso<br>
 Calcular&nbsp;la&nbsp;salida&nbsp;(F)&nbsp;en&nbsp;funcn&nbsp;de&nbsp;las&nbsp;entradas&nbsp;(theta&nbsp;y&nbsp;omega)&nbsp;mediante<br>
 inferencia&nbsp;difusa<br>
 &nbsp;<br>
 Parametros&nbsp;de&nbsp;Entrada:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;mu_fza:&nbsp;lista&nbsp;con&nbsp;los&nbsp;conjuntos&nbsp;borrosos&nbsp;de&nbsp;una&nbsp;variable&nbsp;de&nbsp;entrada<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;mu_fza:&nbsp;array&nbsp;con&nbsp;los&nbsp;conjuntos&nbsp;borrosos&nbsp;de&nbsp;la&nbsp;variable&nbsp;de&nbsp;salida<br>
 &nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;pendulo_angulo:&nbsp;valor&nbsp;numerico&nbsp;nitido&nbsp;de&nbsp;la&nbsp;posicion&nbsp;theta<br>
 &nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;pendulo_velocidad:&nbsp;valor&nbsp;numerico&nbsp;nitido&nbsp;de&nbsp;omega&nbsp;(theta_punto)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;mu_theta:&nbsp;lista&nbsp;con&nbsp;los&nbsp;conjuntos&nbsp;borrosos&nbsp;de&nbsp;posicion&nbsp;angular<br>
