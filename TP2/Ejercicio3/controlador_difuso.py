@@ -46,6 +46,17 @@ class ControladorDifuso:
     
     
     def cjto_difuso(self, minimo, centro, maximo, variable_linguistica):
+        """ Metodo cjto_difuso
+        Genera una lista con los valores de pertenencia de dicho cjunto borroso
+        
+        Parametros de Entrada:
+            - minimo: intersección izquierda del cjto difuso en el eje horizontal
+            - centro: abscisa del punto de quiebre de la gráfica del cjto difuso
+            - maximo: intersección derecha del cjto difuso en el eje de abscisas
+            - variable_linguistica: array para el cjto borroso de la variable linguística
+        Parametro de Salida:
+            - cjto_borroso: lista con las sucesivas ordenadas del cjunto borroso
+        """        
         i_centro = variable_linguistica.searchsorted(centro)
         
         if (minimo != None):
@@ -75,7 +86,7 @@ class ControladorDifuso:
         inferencia difusa
         
         Parametros de Entrada:
-            - mu_fza: lista con los conjuntos borrosos de una variable de entrada
+            - mu_fza: array con los conjuntos borrosos de la variable de salida
             - pendulo_angulo: valor numerico nitido de la posicion theta
             - pendulo_velocidad: valor numerico nitido de omega (theta_punto)
             - mu_theta: lista con los conjuntos borrosos de posicion angular
