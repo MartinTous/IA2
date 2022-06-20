@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module main</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>main</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/tmp/Ejercicio3/main.py">/tmp/Ejercicio3/main.py</a></font></td></tr></table>
+    <p><tt>Ejercicio&nbsp;3&nbsp;del&nbsp;TP&nbsp;2&nbsp;de&nbsp;IA&nbsp;2&nbsp;/&nbsp;Año&nbsp;2022&nbsp;<br>
+Implementar&nbsp;un&nbsp;sistema&nbsp;de&nbsp;inferencia&nbsp;difusa&nbsp;para&nbsp;controlar&nbsp;un&nbsp;péndulo&nbsp;invertido<br>
+-&nbsp;Asuma&nbsp;que&nbsp;el&nbsp;carro&nbsp;no&nbsp;tiene&nbsp;espacio&nbsp;restringido&nbsp;para&nbsp;moverse<br>
+-&nbsp;Definir&nbsp;variables&nbsp;lingüísticas&nbsp;de&nbsp;entrada&nbsp;y&nbsp;salida,&nbsp;particiones&nbsp;borrosas,&nbsp;<br>
+operaciones&nbsp;borrosas&nbsp;para&nbsp;la&nbsp;conjunción,&nbsp;disyunción&nbsp;e&nbsp;implicación,&nbsp;reglas&nbsp;de&nbsp;<br>
+inferencia&nbsp;(cubrir&nbsp;todas&nbsp;las&nbsp;posibles&nbsp;combinaciones&nbsp;de&nbsp;valores&nbsp;borrosos&nbsp;de&nbsp;entrada<br>
+en&nbsp;la&nbsp;base&nbsp;de&nbsp;reglas)<br>
+-&nbsp;Utilice&nbsp;el&nbsp;modelo&nbsp;del&nbsp;sistema&nbsp;carro-péndulo&nbsp;en&nbsp;el&nbsp;Práctico&nbsp;Nº&nbsp;2</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="matplotlib.pyplot.html">matplotlib.pyplot</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-arange"><strong>arange</strong></a>(...)</dt><dd><tt><a href="#-arange">arange</a>([start,]&nbsp;stop[,&nbsp;step,],&nbsp;dtype=None,&nbsp;*,&nbsp;like=None)<br>
+&nbsp;<br>
+Return&nbsp;evenly&nbsp;spaced&nbsp;values&nbsp;within&nbsp;a&nbsp;given&nbsp;interval.<br>
+&nbsp;<br>
+Values&nbsp;are&nbsp;generated&nbsp;within&nbsp;the&nbsp;half-open&nbsp;interval&nbsp;``[start,&nbsp;stop)``<br>
+(in&nbsp;other&nbsp;words,&nbsp;the&nbsp;interval&nbsp;including&nbsp;`start`&nbsp;but&nbsp;excluding&nbsp;`stop`).<br>
+For&nbsp;integer&nbsp;arguments&nbsp;the&nbsp;function&nbsp;is&nbsp;equivalent&nbsp;to&nbsp;the&nbsp;Python&nbsp;built-in<br>
+`range`&nbsp;function,&nbsp;but&nbsp;returns&nbsp;an&nbsp;ndarray&nbsp;rather&nbsp;than&nbsp;a&nbsp;list.<br>
+&nbsp;<br>
+When&nbsp;using&nbsp;a&nbsp;non-integer&nbsp;step,&nbsp;such&nbsp;as&nbsp;0.1,&nbsp;it&nbsp;is&nbsp;often&nbsp;better&nbsp;to&nbsp;use<br>
+`numpy.linspace`.&nbsp;See&nbsp;the&nbsp;warnings&nbsp;section&nbsp;below&nbsp;for&nbsp;more&nbsp;information.<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+start&nbsp;:&nbsp;integer&nbsp;or&nbsp;real,&nbsp;optional<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Start&nbsp;of&nbsp;interval.&nbsp;&nbsp;The&nbsp;interval&nbsp;includes&nbsp;this&nbsp;value.&nbsp;&nbsp;The&nbsp;default<br>
+&nbsp;&nbsp;&nbsp;&nbsp;start&nbsp;value&nbsp;is&nbsp;0.<br>
+stop&nbsp;:&nbsp;integer&nbsp;or&nbsp;real<br>
+&nbsp;&nbsp;&nbsp;&nbsp;End&nbsp;of&nbsp;interval.&nbsp;&nbsp;The&nbsp;interval&nbsp;does&nbsp;not&nbsp;include&nbsp;this&nbsp;value,&nbsp;except<br>
+&nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;some&nbsp;cases&nbsp;where&nbsp;`step`&nbsp;is&nbsp;not&nbsp;an&nbsp;integer&nbsp;and&nbsp;floating&nbsp;point<br>
+&nbsp;&nbsp;&nbsp;&nbsp;round-off&nbsp;affects&nbsp;the&nbsp;length&nbsp;of&nbsp;`out`.<br>
+step&nbsp;:&nbsp;integer&nbsp;or&nbsp;real,&nbsp;optional<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Spacing&nbsp;between&nbsp;values.&nbsp;&nbsp;For&nbsp;any&nbsp;output&nbsp;`out`,&nbsp;this&nbsp;is&nbsp;the&nbsp;distance<br>
+&nbsp;&nbsp;&nbsp;&nbsp;between&nbsp;two&nbsp;adjacent&nbsp;values,&nbsp;``out[i+1]&nbsp;-&nbsp;out[i]``.&nbsp;&nbsp;The&nbsp;default<br>
+&nbsp;&nbsp;&nbsp;&nbsp;step&nbsp;size&nbsp;is&nbsp;1.&nbsp;&nbsp;If&nbsp;`step`&nbsp;is&nbsp;specified&nbsp;as&nbsp;a&nbsp;position&nbsp;argument,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;`start`&nbsp;must&nbsp;also&nbsp;be&nbsp;given.<br>
+dtype&nbsp;:&nbsp;dtype<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;type&nbsp;of&nbsp;the&nbsp;output&nbsp;array.&nbsp;&nbsp;If&nbsp;`dtype`&nbsp;is&nbsp;not&nbsp;given,&nbsp;infer&nbsp;the&nbsp;data<br>
+&nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;from&nbsp;the&nbsp;other&nbsp;input&nbsp;arguments.<br>
+like&nbsp;:&nbsp;array_like<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Reference&nbsp;object&nbsp;to&nbsp;allow&nbsp;the&nbsp;creation&nbsp;of&nbsp;arrays&nbsp;which&nbsp;are&nbsp;not<br>
+&nbsp;&nbsp;&nbsp;&nbsp;NumPy&nbsp;arrays.&nbsp;If&nbsp;an&nbsp;array-like&nbsp;passed&nbsp;in&nbsp;as&nbsp;``like``&nbsp;supports<br>
+&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;``__array_function__``&nbsp;protocol,&nbsp;the&nbsp;result&nbsp;will&nbsp;be&nbsp;defined<br>
+&nbsp;&nbsp;&nbsp;&nbsp;by&nbsp;it.&nbsp;In&nbsp;this&nbsp;case,&nbsp;it&nbsp;ensures&nbsp;the&nbsp;creation&nbsp;of&nbsp;an&nbsp;array&nbsp;object<br>
+&nbsp;&nbsp;&nbsp;&nbsp;compatible&nbsp;with&nbsp;that&nbsp;passed&nbsp;in&nbsp;via&nbsp;this&nbsp;argument.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;..&nbsp;versionadded::&nbsp;1.20.0<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+arange&nbsp;:&nbsp;ndarray<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Array&nbsp;of&nbsp;evenly&nbsp;spaced&nbsp;values.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;For&nbsp;floating&nbsp;point&nbsp;arguments,&nbsp;the&nbsp;length&nbsp;of&nbsp;the&nbsp;result&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;``ceil((stop&nbsp;-&nbsp;start)/step)``.&nbsp;&nbsp;Because&nbsp;of&nbsp;floating&nbsp;point&nbsp;overflow,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;this&nbsp;rule&nbsp;may&nbsp;result&nbsp;in&nbsp;the&nbsp;last&nbsp;element&nbsp;of&nbsp;`out`&nbsp;being&nbsp;greater<br>
+&nbsp;&nbsp;&nbsp;&nbsp;than&nbsp;`stop`.<br>
+&nbsp;<br>
+Warnings<br>
+--------<br>
+The&nbsp;length&nbsp;of&nbsp;the&nbsp;output&nbsp;might&nbsp;not&nbsp;be&nbsp;numerically&nbsp;stable.<br>
+&nbsp;<br>
+Another&nbsp;stability&nbsp;issue&nbsp;is&nbsp;due&nbsp;to&nbsp;the&nbsp;internal&nbsp;implementation&nbsp;of<br>
+`numpy.arange`.<br>
+The&nbsp;actual&nbsp;step&nbsp;value&nbsp;used&nbsp;to&nbsp;populate&nbsp;the&nbsp;array&nbsp;is<br>
+``dtype(start&nbsp;+&nbsp;step)&nbsp;-&nbsp;dtype(start)``&nbsp;and&nbsp;not&nbsp;`step`.&nbsp;Precision&nbsp;loss<br>
+can&nbsp;occur&nbsp;here,&nbsp;due&nbsp;to&nbsp;casting&nbsp;or&nbsp;due&nbsp;to&nbsp;using&nbsp;floating&nbsp;points&nbsp;when<br>
+`start`&nbsp;is&nbsp;much&nbsp;larger&nbsp;than&nbsp;`step`.&nbsp;This&nbsp;can&nbsp;lead&nbsp;to&nbsp;unexpected<br>
+behaviour.&nbsp;For&nbsp;example::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;np.<a href="#-arange">arange</a>(0,&nbsp;5,&nbsp;0.5,&nbsp;dtype=int)<br>
+&nbsp;&nbsp;array([0,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;0])<br>
+&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;np.<a href="#-arange">arange</a>(-3,&nbsp;3,&nbsp;0.5,&nbsp;dtype=int)<br>
+&nbsp;&nbsp;array([-3,&nbsp;-2,&nbsp;-1,&nbsp;&nbsp;0,&nbsp;&nbsp;1,&nbsp;&nbsp;2,&nbsp;&nbsp;3,&nbsp;&nbsp;4,&nbsp;&nbsp;5,&nbsp;&nbsp;6,&nbsp;&nbsp;7,&nbsp;&nbsp;8])<br>
+&nbsp;<br>
+In&nbsp;such&nbsp;cases,&nbsp;the&nbsp;use&nbsp;of&nbsp;`numpy.linspace`&nbsp;should&nbsp;be&nbsp;preferred.<br>
+&nbsp;<br>
+See&nbsp;Also<br>
+--------<br>
+numpy.linspace&nbsp;:&nbsp;Evenly&nbsp;spaced&nbsp;numbers&nbsp;with&nbsp;careful&nbsp;handling&nbsp;of&nbsp;endpoints.<br>
+numpy.ogrid:&nbsp;Arrays&nbsp;of&nbsp;evenly&nbsp;spaced&nbsp;numbers&nbsp;in&nbsp;N-dimensions.<br>
+numpy.mgrid:&nbsp;Grid-shaped&nbsp;arrays&nbsp;of&nbsp;evenly&nbsp;spaced&nbsp;numbers&nbsp;in&nbsp;N-dimensions.<br>
+&nbsp;<br>
+Examples<br>
+--------<br>
+&gt;&gt;&gt;&nbsp;np.<a href="#-arange">arange</a>(3)<br>
+array([0,&nbsp;1,&nbsp;2])<br>
+&gt;&gt;&gt;&nbsp;np.<a href="#-arange">arange</a>(3.0)<br>
+array([&nbsp;0.,&nbsp;&nbsp;1.,&nbsp;&nbsp;2.])<br>
+&gt;&gt;&gt;&nbsp;np.<a href="#-arange">arange</a>(3,7)<br>
+array([3,&nbsp;4,&nbsp;5,&nbsp;6])<br>
+&gt;&gt;&gt;&nbsp;np.<a href="#-arange">arange</a>(3,7,2)<br>
+array([3,&nbsp;5])</tt></dd></dl>
+ <dl><dt><a name="-graficar_cjtos_difusos"><strong>graficar_cjtos_difusos</strong></a>(mu, titulo, eje_x)</dt><dd><tt>Función&nbsp;graficar_cjtos_difusos<br>
+Grafica&nbsp;los&nbsp;conjuntos&nbsp;borrosos&nbsp;para&nbsp;una&nbsp;determinada&nbsp;variable<br>
+&nbsp;<br>
+Parametros&nbsp;de&nbsp;Entrada:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;mu:&nbsp;lista&nbsp;con&nbsp;los&nbsp;conjuntos&nbsp;borrosos&nbsp;de&nbsp;la&nbsp;variable&nbsp;lingüística<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;titulo:&nbsp;string&nbsp;con&nbsp;el&nbsp;título&nbsp;del&nbsp;diagrama<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;eje_x:&nbsp;nombre&nbsp;de&nbsp;la&nbsp;variable&nbsp;lingüística&nbsp;(eje&nbsp;x&nbsp;horizontal)<br>
+Parametro&nbsp;de&nbsp;Salida:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Gráfica&nbsp;con&nbsp;cjtos&nbsp;borrosos&nbsp;(grado&nbsp;de&nbsp;pertenencia&nbsp;/&nbsp;variable&nbsp;lingüística)</tt></dd></dl>
+ <dl><dt><a name="-graficar_curva"><strong>graficar_curva</strong></a>(x, y, eje_x, eje_y, titulo)</dt><dd><tt>Función&nbsp;graficar_curva<br>
+Grafica&nbsp;la&nbsp;curvas&nbsp;de&nbsp;la&nbsp;respuesta&nbsp;de&nbsp;"x"&nbsp;como&nbsp;función&nbsp;de&nbsp;"y"<br>
+&nbsp;<br>
+Parametros&nbsp;de&nbsp;Entrada:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;x:&nbsp;lista&nbsp;con&nbsp;los&nbsp;sucesivos&nbsp;valores&nbsp;que&nbsp;toma&nbsp;la&nbsp;variable&nbsp;independiente<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;y:&nbsp;lista&nbsp;con&nbsp;los&nbsp;sucesivos&nbsp;valores&nbsp;de&nbsp;la&nbsp;variable&nbsp;"y"&nbsp;para&nbsp;cada&nbsp;"t"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;eje_x:&nbsp;descripción&nbsp;del&nbsp;eje&nbsp;horizantal&nbsp;de&nbsp;abscisas&nbsp;(eg:&nbsp;tiempo)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;eje_y:&nbsp;descripción&nbsp;del&nbsp;eje&nbsp;vertical&nbsp;de&nbsp;ordenadas&nbsp;(eg:&nbsp;posición&nbsp;theta)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;titulo:&nbsp;string&nbsp;con&nbsp;el&nbsp;título&nbsp;del&nbsp;diagrama<br>
+Parametro&nbsp;de&nbsp;Salida:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Grafica&nbsp;con&nbsp;la&nbsp;curva&nbsp;de&nbsp;"x"&nbsp;como&nbsp;función&nbsp;de&nbsp;"y"&nbsp;(eg:&nbsp;Posición&nbsp;vs&nbsp;Tiempo)</tt></dd></dl>
+ <dl><dt><a name="-main"><strong>main</strong></a>()</dt><dd><tt>main:<br>
+Punto&nbsp;de&nbsp;entrada&nbsp;donde&nbsp;se&nbsp;inicia&nbsp;el&nbsp;programa</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>pi</strong> = 3.141592653589793</td></tr></table>
+</body></html>
