@@ -23,6 +23,9 @@ def main():
     """ main:
     Punto de entrada donde se inicia el programa
     """
+    # PARA GENERAR UN ARCHIVO DE LOG: descomentar los "print" y luego
+    # python3 main.py > log_ej3.txt
+    
     # Tabla con las reglas de inferencia, eg:
     # reglas['NG']['PP'] da la Fza (valor borroso) para theta NG y veloc PP
     reglas = {
@@ -160,7 +163,14 @@ def graficar_cjtos_difusos(mu, titulo, eje_x):
         - eje_x: nombre de la variable lingüística (eje x horizontal)
     Parametro de Salida:
         - Gráfica con cjtos borrosos (grado de pertenencia / variable lingüística)
-    """            
+    """  
+    
+    #print("En la función graficar_cjtos_difusos")
+    #print("mu = ", mu)
+    #print("titulo = ", titulo)
+    #print("eje_x = ", eje_x)
+    
+    
     plt.style.use('ggplot')
     
     nro_cjtos_difusos = 0
@@ -196,6 +206,14 @@ def graficar_curva(x, y, eje_x, eje_y, titulo):
     Parametro de Salida:
         - Grafica con la curva de "x" como función de "y" (eg: Posición vs Tiempo)
     """ 
+    
+    #print("En la función graficar_curva")
+    #print("x = ", x)
+    #print("y = ", y)
+    #print("eje_x = ", eje_x)
+    #print("eje_y = ", eje_y)    
+    #print("titulo = ", titulo)    
+    
     plt.style.use('ggplot')
     fig, ax = plt.subplots()
     ax.plot(x, y)
