@@ -60,22 +60,27 @@ class ControladorDifuso:
         i_centro = variable_linguistica.searchsorted(centro)
         
         if (minimo != None):
+            # Porcion lineal creciente
             cjto_a = i_centro * [0]
             i_minimo = variable_linguistica.searchsorted(minimo)
             for i in range(i_minimo, i_centro):
                 cjto_a[i] = (i - i_minimo) / (i_centro - i_minimo)
         else:
+            # Parte horizontal constante en 1 del cjto difuso mas a la izquierda
             cjto_a = i_centro * [1]
     
         if (maximo != None):
+            # Funcn lineal decreciente
             cjto_b = (len(variable_linguistica) - i_centro) * [0]
             i_maximo = variable_linguistica.searchsorted(maximo)
             # Sumar 1 uno para que si tome el último valor del intervalo
             for i in range(i_centro, 1+i_maximo):
                 cjto_b[i - i_centro] = - (i - i_centro) / (i_maximo - i_centro) + 1
         else:
+             # Parte horizontal constante (en 1) del cjto difuso mas a la derecha
             cjto_b = (len(variable_linguistica) - i_centro) * [1]
             
+        # Se unen las dos listas para asi formar el conjunto difuso
         cjto_borroso = cjto_a + cjto_b
         return (cjto_borroso)
     
