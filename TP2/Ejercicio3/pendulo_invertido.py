@@ -28,6 +28,12 @@ class PenduloInvertido:
         Parametro de Salida:
             - Ninguno
         """        
+        
+        #print("En el metodo __init__ de la clase PenduloInvertido")
+        #print("l = ", l)        
+        #print("m = ", m)        
+        #print("M = ", M)        
+        
         self.long_pendulo = l         # [m]
         self.masa_pendulo = m         # [Kg]
         self.masa_carro = M           # [Kg]
@@ -46,7 +52,15 @@ class PenduloInvertido:
             - angulo: Posición angular (theta) final [rad]
             - velocidad: Velocidad angular (omega) final [rad / s]
             - aceleracion: Aceleración angular (alfa) final [rad / s**2]
-        """        
+        """
+        
+        #print("En el metodo simular de la clase PenduloInvertido")
+        #print("angulo = ", angulo)        
+        #print("velocidad = ", velocidad)        
+        #print("aceleracion = ", aceleracion)                
+        #print("fuerza = ", fuerza)                
+        #print("delta_t = ", delta_t)                
+        
         l = self.long_pendulo
         m = self.masa_pendulo
         M = self.masa_carro
@@ -64,5 +78,9 @@ class PenduloInvertido:
         angulo = (angulo 
                   + velocidad*delta_t 
                   + aceleracion*pow(delta_t, 2)/2)
+        
+        #print("angulo = ", angulo)        
+        #print("velocidad = ", velocidad)        
+        #print("aceleracion = ", aceleracion)   
         
         return (angulo, velocidad, aceleracion)
