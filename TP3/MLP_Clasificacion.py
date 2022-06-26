@@ -1,3 +1,4 @@
+from ctypes import sizeof
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -44,7 +45,7 @@ def generar_datos_clasificacion(cantidad_ejemplos, cantidad_clases):
         # Guardamos el valor de la clase que le vamos a asociar a las entradas x1 y x2 que acabamos
         # de generar
         t[indices] = clase
-
+    
     return x, t
 
 
@@ -63,14 +64,13 @@ def inicializar_pesos(n_entrada, n_capa_2, n_capa_3):
 def ejecutar_adelante(x, pesos):
     # Funcion de entrada (a.k.a. "regla de propagacion") para la primera capa oculta
     z = x.dot(pesos["w1"]) + pesos["b1"]
-
     # Funcion de activacion ReLU para la capa oculta (h -> "hidden")
     h = np.maximum(0, z)
-
+    
     # Salida de la red (funcion de activacion lineal). Esto incluye la salida de todas
     # las neuronas y para todos los ejemplos proporcionados
     y = h.dot(pesos["w2"]) + pesos["b2"]
-
+    
     return {"z": z, "h": h, "y": y}
 
 
@@ -96,6 +96,7 @@ def train(x, t, pesos, learning_rate, epochs):
     # Cantidad de filas (i.e. cantidad de ejemplos)
     m = np.size(x, 0) 
     
+    #epoch: Se cumple un epoch cuando se entrena la red neuronal con todos los ejemplos de entrenamiento una vez
     for i in range(epochs):
         # Ejecucion de la red hacia adelante
         resultados_feed_forward = ejecutar_adelante(x, pesos)
@@ -106,7 +107,7 @@ def train(x, t, pesos, learning_rate, epochs):
         # LOSS
         # a. Exponencial de todos los scores
         exp_scores = np.exp(y)
-
+        
         # b. Suma de todos los exponenciales de los scores, fila por fila (ejemplo por ejemplo).
         #    Mantenemos las dimensiones (indicamos a NumPy que mantenga la segunda dimension del
         #    arreglo, aunque sea una sola columna, para permitir el broadcast correcto en operaciones
@@ -116,7 +117,7 @@ def train(x, t, pesos, learning_rate, epochs):
         # c. "Probabilidades": normalizacion de las exponenciales del score de cada clase (dividiendo por 
         #    la suma de exponenciales de todos los scores), fila por fila
         p = exp_scores / sum_exp_scores
-
+        
         # d. Calculo de la funcion de perdida global. Solo se usa la probabilidad de la clase correcta, 
         #    que tomamos del array t ("target")
         loss = (1 / m) * np.sum( -np.log( p[range(m), t] ))
@@ -164,7 +165,6 @@ def train(x, t, pesos, learning_rate, epochs):
 def iniciar(numero_clases, numero_ejemplos, graficar_datos):
     # Generamos datos
     x, t = generar_datos_clasificacion(numero_ejemplos, numero_clases)
-
     # Graficamos los datos si es necesario
     if graficar_datos:
         # Parametro: "c": color (un color distinto para cada clase en t)
@@ -175,7 +175,6 @@ def iniciar(numero_clases, numero_ejemplos, graficar_datos):
     NEURONAS_CAPA_OCULTA = 100
     NEURONAS_ENTRADA = 2
     pesos = inicializar_pesos(n_entrada=NEURONAS_ENTRADA, n_capa_2=NEURONAS_CAPA_OCULTA, n_capa_3=numero_clases)
-
     # Entrena
     LEARNING_RATE=1
     EPOCHS=10000
