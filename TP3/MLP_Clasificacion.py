@@ -87,7 +87,7 @@ def clasificar(x, pesos):
     # Tomamos el primero de los maximos (podria usarse otro criterio, como ser eleccion aleatoria)
     # Nuevamente, dado que max_scores puede contener varios renglones (uno por cada ejemplo),
     # retornamos la primera columna
-    return max_scores[:, 0]
+    return max_scores[:]
 
 # x: n entradas para cada uno de los m ejemplos(nxm)
 # t: salida correcta (target) para cada uno de los m ejemplos (m x 1)
@@ -160,9 +160,9 @@ def train(x, t, pesos, learning_rate, epochs):
         pesos["b1"] = b1
         pesos["w2"] = w2
         pesos["b2"] = b2
+    return pesos
 
-
-def iniciar(numero_clases, numero_ejemplos, graficar_datos):
+def iniciar_training(numero_clases, numero_ejemplos,EPOCHS,LEARNING_RATE, graficar_datos):
     # Generamos datos
     x, t = generar_datos_clasificacion(numero_ejemplos, numero_clases)
     # Graficamos los datos si es necesario
@@ -177,8 +177,37 @@ def iniciar(numero_clases, numero_ejemplos, graficar_datos):
     pesos = inicializar_pesos(n_entrada=NEURONAS_ENTRADA, n_capa_2=NEURONAS_CAPA_OCULTA, n_capa_3=numero_clases)
     # Entrena
     LEARNING_RATE=1
-    EPOCHS=10000
-    train(x, t, pesos, LEARNING_RATE, EPOCHS)
+    pesos=train(x, t, pesos, LEARNING_RATE, EPOCHS)
+    return pesos
 
 
-iniciar(numero_clases=3, numero_ejemplos=300, graficar_datos=False)
+
+#COMENZAMOS ENTRENANDO LA RED NEURONAL
+print("\nEntrenando la red neuronal...\n")
+pesos=iniciar_training(numero_clases=3, numero_ejemplos=300, EPOCHS=10000,LEARNING_RATE=1,graficar_datos=False)
+
+# Luego de haber sida entrenada y obtener los pesos sinápticos, generamos un
+# nuevo set de datos para poder evaluar que tan bien responde la red neuronal
+print("\nClasificando un nuevo set de datos...")
+x,t=generar_datos_clasificacion(cantidad_ejemplos=300, cantidad_clases=3)
+max_scores=clasificar(x,pesos)
+#print("Valores reales",t)
+#print("Valores clasificados",max_scores)
+
+
+p=t-max_scores
+for i in range(0,len(p)):
+    if p[i]<0:
+        p[i]=p[i]*-1
+    if p[i]==2:
+        p[i]=1
+precision=(len(p)-np.sum(p))*100/len(p)
+print("\nPrecision del ",precision, "%\n")
+
+plt.subplot(121)
+plt.scatter(x[:, 0], x[:, 1], c=t)
+plt.title('Valor real')
+plt.subplot(122)
+plt.scatter(x[:, 0], x[:, 1], c=max_scores)
+plt.title('Valores clasificados')
+plt.show()
