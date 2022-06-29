@@ -189,9 +189,10 @@ LEARNING_RATE=1
 pesos,x,t=iniciar_training(numero_clases=3, numero_ejemplos=300, EPOCHS=1000,LEARNING_RATE=1,graficar_datos=False)
 x_test,t_test=generar_datos_clasificacion(cantidad_ejemplos=300, cantidad_clases=3)
 pepe=0
+precision_mayor=50
+j=0
 while(pepe==0):
-
-    
+    j+=1
     pesos=train(x, t, pesos, LEARNING_RATE, EPOCHS)
 
     # Luego de haber sida entrenada y obtener los pesos sinápticos, generamos un
@@ -209,12 +210,29 @@ while(pepe==0):
     precision=(len(p)-np.sum(p))*100/len(p)
     print("Precision del ",precision, "%\n")
 
-    #Si la precision es mayor al 97% se detiene
-    if precision>=97:
+    if j>1:
+        if precision>precision_mayor:
+            precision_mayor=precision
+            mejores_pesos=pesos
+
+    #Si la precisión obtenida es un 2% menor a la mejor precision obtenida 
+    #hasta el momento, se detiene, y guarda los parámetros de la mejor precision    
+        if ((precision_mayor-precision)>2):
+            print("\n PRECISION SUFICIENTE\n ENTRENAMIENTO FINALIZADO\n")
+            print("|======================================|")
+            print("|Precision del ",precision_mayor, "%")
+            print("|======================================|")
+            pepe=1      
+    else:
+        precision_mayor=precision
+
+    #Si la precision es mayor al 98% se detiene
+    if precision>=98:
         print("\n PRECISION SUFICIENTE\n ENTRENAMIENTO FINALIZADO\n")
+        print("|======================================|")
+        print("|Precision del ",precision_mayor, "%")
+        print("|======================================|")
         pepe=1
-
-
 
 plt.subplot(121)
 plt.scatter(x_test[:, 0], x_test[:, 1], c=t_test)

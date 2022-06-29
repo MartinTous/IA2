@@ -1,13 +1,56 @@
-from ctypes import sizeof
+#- Cabrero García, Gabriel
+#- Mellimaci, Marcelo E
+#- Tous Maggini, Martín
 import numpy as np
 import matplotlib.pyplot as plt
+# Para el ejemplo nro 1:
+# from sklearn.datasets import make_gaussian_quantiles
 
-# Generador basado en ejemplo del curso CS231 de Stanford: 
+# Generador basado en ejemplo del curso CS231 de Stanford:
 # CS231n Convolutional Neural Networks for Visual Recognition
-# (https://cs231n.github.io/neural-networks-case-study/)
+# (https://cs231n.github.io/neural-networks-case-stu/)
 def generar_datos_clasificacion(cantidad_ejemplos, cantidad_clases):
-    FACTOR_ANGULO = 0.79
-    AMPLITUD_ALEATORIEDAD = 0.1
+    # FACTOR_ANGULO = 0.79  # Ejemplo nro 2
+    # AMPLITUD_ALEATORIEDAD = 0.1
+
+    # FACTOR_ANGULO = 0  # Ejemplo nro 3
+    # AMPLITUD_ALEATORIEDAD = 0.1
+    # FACTOR_ANGULO = 0.5  # Ejemplo nro 4
+    # AMPLITUD_ALEATORIEDAD = 0.1
+    # FACTOR_ANGULO = 0.1  # Ejemplo nro 5
+    # AMPLITUD_ALEATORIEDAD = 0.1
+    # FACTOR_ANGULO = 100000  # Ejemplo nro 6
+    # AMPLITUD_ALEATORIEDAD = 0.1
+
+    # FACTOR_ANGULO = 0.79  # Ejemplo nro 7
+    # AMPLITUD_ALEATORIEDAD = 0
+    # FACTOR_ANGULO = 0.79  # Ejemplo nro 8
+    # AMPLITUD_ALEATORIEDAD = 0.8
+    # FACTOR_ANGULO = 0.79  # Ejemplo nro 9
+    # AMPLITUD_ALEATORIEDAD = 1
+    # FACTOR_ANGULO = 0.1  # Ejemplo nro 10
+    # AMPLITUD_ALEATORIEDAD = -0.5
+
+    # FACTOR_ANGULO = -0.79  # Ejemplo nro 11
+    # AMPLITUD_ALEATORIEDAD = 0
+    # FACTOR_ANGULO = 1  # Ejemplo nro 12
+    # AMPLITUD_ALEATORIEDAD = 1
+    # FACTOR_ANGULO = 0.001  # Ejemplo nro 13
+    # AMPLITUD_ALEATORIEDAD = 0.001
+    FACTOR_ANGULO = 0.5  # Ejemplo nro 14
+    AMPLITUD_ALEATORIEDAD = 0.5
+
+    # FACTOR_ANGULO = 100
+    # AMPLITUD_ALEATORIEDAD = 0.1
+    # FACTOR_ANGULO = 0.1
+    # AMPLITUD_ALEATORIEDAD = 100
+    # FACTOR_ANGULO = 1000
+    # AMPLITUD_ALEATORIEDAD = 0
+    # FACTOR_ANGULO = -100
+    # AMPLITUD_ALEATORIEDAD = 0.1
+    # FACTOR_ANGULO = -100
+    # AMPLITUD_ALEATORIEDAD = 0.02
+
 
     # Calculamos la cantidad de puntos por cada clase, asumiendo la misma cantidad para cada 
     # una (clases balanceadas)
@@ -163,8 +206,13 @@ def train(x, t, pesos, learning_rate, epochs):
     return pesos
 
 def iniciar_training(numero_clases, numero_ejemplos,EPOCHS,LEARNING_RATE, graficar_datos):
+
+    # Ejemplo nro 1
+#     # x, t = make_gaussian_quantiles(cov=3., n_samples=numero_ejemplos, n_features=2, n_classes=numero_clases, random_state=1)
+
     # Generamos datos
     x, t = generar_datos_clasificacion(numero_ejemplos, numero_clases)
+
     # Graficamos los datos si es necesario
     if graficar_datos:
         # Parametro: "c": color (un color distinto para cada clase en t)
@@ -184,12 +232,15 @@ def iniciar_training(numero_clases, numero_ejemplos,EPOCHS,LEARNING_RATE, grafic
 
 #COMENZAMOS ENTRENANDO LA RED NEURONAL
 print("\nEntrenando la red neuronal...\n")
-pesos=iniciar_training(numero_clases=7, numero_ejemplos=300, EPOCHS=10000,LEARNING_RATE=1,graficar_datos=False)
+pesos=iniciar_training(numero_clases=3, numero_ejemplos=300, EPOCHS=10000,LEARNING_RATE=1,graficar_datos=False)
 
 # Luego de haber sida entrenada y obtener los pesos sinápticos, generamos un
 # nuevo set de datos para poder evaluar que tan bien responde la red neuronal
 print("\nClasificando un nuevo set de datos...")
-x,t=generar_datos_clasificacion(cantidad_ejemplos=300, cantidad_clases=7)
+x,t=generar_datos_clasificacion(cantidad_ejemplos=300, cantidad_clases=3)
+
+# Del ejemplo 1:
+# x, t = make_gaussian_quantiles(cov=3., n_samples=300, n_features=2, n_classes=3, random_state=1)
 max_scores=clasificar(x,pesos)
 #print("Valores reales",t)
 #print("Valores clasificados",max_scores)
@@ -206,8 +257,8 @@ print("\nPrecision del ",precision, "%\n")
 
 plt.subplot(121)
 plt.scatter(x[:, 0], x[:, 1], c=t)
-plt.title('Datos reales')
+plt.title('Valor real')
 plt.subplot(122)
 plt.scatter(x[:, 0], x[:, 1], c=max_scores)
-plt.title('Datos clasificados')
+plt.title('Valores clasificados')
 plt.show()
