@@ -209,8 +209,8 @@ while(pepe==0):
     precision=(len(p)-np.sum(p))*100/len(p)
     print("Precision del ",precision, "%\n")
 
-    #Si la precision es mayor al 97% se detiene
-    if precision>=97:
+    #Si la precision es mayor al 98% se detiene
+    if precision>=98:
         print("\n PRECISION SUFICIENTE\n ENTRENAMIENTO FINALIZADO\n")
         pepe=1
 

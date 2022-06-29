@@ -184,12 +184,12 @@ def iniciar_training(numero_clases, numero_ejemplos,EPOCHS,LEARNING_RATE, grafic
 
 #COMENZAMOS ENTRENANDO LA RED NEURONAL
 print("\nEntrenando la red neuronal...\n")
-pesos=iniciar_training(numero_clases=3, numero_ejemplos=300, EPOCHS=10000,LEARNING_RATE=1,graficar_datos=False)
+pesos=iniciar_training(numero_clases=7, numero_ejemplos=300, EPOCHS=10000,LEARNING_RATE=1,graficar_datos=False)
 
 # Luego de haber sida entrenada y obtener los pesos sinápticos, generamos un
 # nuevo set de datos para poder evaluar que tan bien responde la red neuronal
 print("\nClasificando un nuevo set de datos...")
-x,t=generar_datos_clasificacion(cantidad_ejemplos=300, cantidad_clases=3)
+x,t=generar_datos_clasificacion(cantidad_ejemplos=300, cantidad_clases=7)
 max_scores=clasificar(x,pesos)
 #print("Valores reales",t)
 #print("Valores clasificados",max_scores)
@@ -206,8 +206,8 @@ print("\nPrecision del ",precision, "%\n")
 
 plt.subplot(121)
 plt.scatter(x[:, 0], x[:, 1], c=t)
-plt.title('Valor real')
+plt.title('Datos reales')
 plt.subplot(122)
 plt.scatter(x[:, 0], x[:, 1], c=max_scores)
-plt.title('Valores clasificados')
+plt.title('Datos clasificados')
 plt.show()
