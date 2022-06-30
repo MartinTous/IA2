@@ -5,44 +5,70 @@ import matplotlib.pyplot as plt
 # Generador basado en ejemplo del curso CS231 de Stanford: 
 # CS231n Convolutional Neural Networks for Visual Recognition
 # (https://cs231n.github.io/neural-networks-case-study/)
-def generar_datos_clasificacion(cantidad_ejemplos):
-    FACTOR_ANGULO = 0.79
-    AMPLITUD_ALEATORIEDAD = 0.1
+def generar_datos_clasificacion(cantidad_ejemplos,x1_neg_lim = -1,x1_pos_lim = 1,x2_neg_lim = -1,x2_pos_lim = 1,plot_data=1):
+    """Receives x1 and x2 limits and generates a number of examples based in a sine cardinal function with noise 
+    It plots the data if plot_data is True.
 
-    # Calculamos la cantidad de puntos por cada clase, asumiendo la misma cantidad para cada 
-    # una (clases balanceadas)
-    n = int(np.random.rand()*10000)
+    Args:
+        axis_lims (_float_): Limits of the working function
+        number_of_examples (_int_): Number of examples to generate
+        plot_data (_bool_): If True, plots the data
+    
+    Returns:
+        x (_np array->3n x 2_): 2 Features
+        y (_np array->3n x 1_): Function values
 
-    # Entradas: 2 columnas (x1 y x2)
-    x = np.zeros((cantidad_ejemplos, 2))
-    # Salida deseada ("target"): 1 columna que contendra la clase correspondiente (codificada como un entero)
-    t = np.zeros(cantidad_ejemplos, dtype="uint8")  # 1 columna: la clase correspondiente (t -> "target")
+    """
+    #Generate arrays of x1 and x2 that go from -14 to +14 with a step of 0.1
+    x1_axis_values = np.arange(x1_neg_lim,x1_pos_lim,0.1)
+    x2_axis_values = np.arange(x2_neg_lim,x2_pos_lim,0.1)
 
-    randomgen = np.random.default_rng()
-    # Por cada clase (que va de 0 a cantidad_clases)...
-    for h in range(cantidad_ejemplos):
-        # Tomando la ecuacion parametrica del circulo (x = r * cos(t), y = r * sin(t)), generamos 
-        # radios distribuidos uniformemente entre 0 y 1 para la clase actual, y agregamos un poco de
-        # aleatoriedad
-        #radios = np.linspace(0, 1, n) + AMPLITUD_ALEATORIEDAD * randomgen.standard_normal(size=n)
-        radios = int(np.random.rand()*10000)
-        # ... y angulos distribuidos tambien uniformemente, con un desfasaje por cada clase
-        angulos = int(np.random.rand()*10000)
-        #angulos = np.linspace(h * np.pi * FACTOR_ANGULO, (h + 1) * np.pi * FACTOR_ANGULO, n)
-        
+    x1_matrix = np.tile(x1_axis_values,(len(x2_axis_values),1))
+    x1_matrix=x1_matrix.T
+    #Create a matrix x2 with x2 as rows repeated according to size of x1
+    x2_matrix = np.tile(x2_axis_values,(len(x1_axis_values),1))
 
-        # Generamos las "entradas", los valores de las variables independientes. Las variables:
-        # radios, angulos e indices tienen n elementos cada una, por lo que le estamos agregando
-        # tambien n elementos a la variable x (que incorpora ambas entradas, x1 y x2)
-        x1 = radios * np.sin(angulos)
-        x2 = radios * np.cos(angulos)
-        x[h][0] = x1
-        x[h][1] = x2
+    #Cardinal sine based function, with particular modifications
+    y_matrix=-10*np.sin(np.sqrt(x1_matrix**2+x2_matrix**2))/np.sqrt(x1_matrix**2+x2_matrix**2)+50
+    
+    #Create a matrix of random gaussian numbers with the size of y and values between -1 and 1
+    noise = np.random.normal(0,0.5,y_matrix.shape)
+    y_matrix+=noise
+    if plot_data:
+        #Make a 3D plot of y_matrix 
+        fig = plt.figure()
+        ax = fig.add_subplot(111, projection='3d')
+        ax.plot_surface(x1_matrix,x2_matrix,y_matrix,cmap='viridis',edgecolor='none')
+        ax.set_xlabel('x1')
+        ax.set_ylabel('x2')
+        ax.set_zlabel('y')
+        ax.set_title('Original training function')
+        plt.show()
 
-        # Guardamos el valor de la clase que le vamos a asociar a las entradas x1 y x2 que acabamos
-        # de generar
-        t[h] = 2 * h - 5
-    return x, t
+
+    #Generate random examples based on the previous function
+    #Generate number_of_examples random floats between x1_neg_lim and x1_pos_lim
+    x1= np.random.uniform(x1_neg_lim,x1_pos_lim,cantidad_ejemplos)
+    x2= np.random.uniform(x2_neg_lim,x2_pos_lim,cantidad_ejemplos)
+    
+    x= np.column_stack((x1,x2))
+    y= -10*np.sin(np.sqrt(x1**2+x2**2))/np.sqrt(x1**2+x2**2)+50+np.random.normal(0,0.5,cantidad_ejemplos)
+    
+    if plot_data:
+        #Plot the random generation of examples
+        fig = plt.figure()
+        ax = fig.add_subplot(111, projection='3d')
+
+        #Plot the 3D plot of the points with x as axis and y as its value
+        ax.scatter(x[:,0],x[:,1],y,c='r',marker='o')
+        ax.set_xlabel('x1')
+        ax.set_ylabel('x2')
+        ax.set_zlabel('y')
+        ax.set_title('Random generation of examples')
+        plt.show()
+
+    y=y.reshape(cantidad_ejemplos,1)
+    return x,y
 
 
 def inicializar_pesos(n_entrada, n_capa_2, n_capa_3):
@@ -91,7 +117,6 @@ def clasificar(x, pesos):
 def train(x, t, pesos, learning_rate, epochs):
     # Cantidad de filas (i.e. cantidad de ejemplos)
     m = np.size(x, 0) 
-    
     #epoch: Se cumple un epoch cuando se entrena la red neuronal con todos los ejemplos de entrenamiento una vez
     for i in range(epochs):
         # Ejecucion de la red hacia adelante
@@ -132,9 +157,7 @@ def train(x, t, pesos, learning_rate, epochs):
         b2 = pesos["b2"]
 
         # Ajustamos los pesos: Backpropagation
-        dL_dy = - 2*mse/m                # Para todas las salidas, L' = p (la probabilidad)...
-        dL_dy[range(m), t] -= 1  # ... excepto para la clase correcta
-        dL_dy /= m
+        dL_dy = - 2 * mse / m                # Para todas las salidas, L' = p (la probabilidad)...
 
         dL_dw2 = h.T.dot(dL_dy)                         # Ajuste para w2
         dL_db2 = np.sum(dL_dy, axis=0, keepdims=True)   # Ajuste para b2
@@ -165,6 +188,9 @@ def train(x, t, pesos, learning_rate, epochs):
 def iniciar_training(numero_clases, numero_ejemplos,EPOCHS,LEARNING_RATE, graficar_datos):
     # Generamos datos
     x, t = generar_datos_clasificacion(numero_ejemplos)
+    print(t)
+    plt.scatter(x[:, 0], x[:, 1], c=t)
+    plt.show()
     # Graficamos los datos si es necesario
     if graficar_datos:
         # Parametro: "c": color (un color distinto para cada clase en t)
@@ -174,7 +200,7 @@ def iniciar_training(numero_clases, numero_ejemplos,EPOCHS,LEARNING_RATE, grafic
     # Inicializa pesos de la red
     NEURONAS_CAPA_OCULTA = 100
     NEURONAS_ENTRADA = 2
-    pesos = inicializar_pesos(n_entrada=NEURONAS_ENTRADA, n_capa_2=NEURONAS_CAPA_OCULTA, n_capa_3=numero_clases)
+    pesos = inicializar_pesos(n_entrada=NEURONAS_ENTRADA, n_capa_2=NEURONAS_CAPA_OCULTA, n_capa_3=1)
     # Entrena
     LEARNING_RATE=1
     pesos=train(x, t, pesos, LEARNING_RATE, EPOCHS)
