@@ -68,7 +68,10 @@ def generar_datos_clasificacion(cantidad_ejemplos,x1_neg_lim = -1,x1_pos_lim = 1
         plt.show()
 
     y=y.reshape(cantidad_ejemplos,1)
-    return x,y
+    YY=np.zeros(len(y), dtype = "uint8")
+    for i in range (len(y)):
+        YY[i] = y[i][0]
+    return x,YY
 
 
 def inicializar_pesos(n_entrada, n_capa_2, n_capa_3):
@@ -114,11 +117,14 @@ def clasificar(x, pesos):
 # x: n entradas para cada uno de los m ejemplos(nxm)
 # t: salida correcta (target) para cada uno de los m ejemplos (m x 1)
 # pesos: pesos (W y b)
-def train(x, t, pesos, learning_rate, epochs):
+def train(x, t, pesos, learning_rate):
     # Cantidad de filas (i.e. cantidad de ejemplos)
     m = np.size(x, 0) 
     #epoch: Se cumple un epoch cuando se entrena la red neuronal con todos los ejemplos de entrenamiento una vez
-    for i in range(epochs):
+    epoch=0
+    pp=0
+    while(pp==0):
+        epoch += 1
         # Ejecucion de la red hacia adelante
         resultados_feed_forward = ejecutar_adelante(x, pesos)
         y = resultados_feed_forward["y"]
@@ -147,8 +153,10 @@ def train(x, t, pesos, learning_rate, epochs):
             mse[k] =(t[k]-y[k])
         loss = ( 1 / m ) *np.sum( pow( mse,2 ) ) 
         # Mostramos solo cada 1000 epochs
-        if i %1000 == 0:
-            print("Loss epoch", i, ":", loss)
+        if epoch %1000 == 0:
+            print("Loss epoch", epoch, ":", loss)
+        if epoch==10000:
+            break
 
         # Extraemos los pesos a variables locales
         w1 = pesos["w1"]
@@ -200,50 +208,27 @@ def iniciar_training(numero_clases, numero_ejemplos,EPOCHS,LEARNING_RATE, grafic
     pesos = inicializar_pesos(n_entrada=NEURONAS_ENTRADA, n_capa_2=NEURONAS_CAPA_OCULTA, n_capa_3=1)
     # Entrena
     LEARNING_RATE=0.01
-    pesos=train(x, t, pesos, LEARNING_RATE, EPOCHS)
+    pesos=train(x, t, pesos, LEARNING_RATE)
     return pesos,x,t
 
 
 
 #COMENZAMOS ENTRENANDO LA RED NEURONAL
 print("\nEntrenando la red neuronal...\n")
-EPOCHS=1000
+EPOCHS=100000
 LEARNING_RATE=0.01
 pesos,x,t=iniciar_training(numero_clases=3, numero_ejemplos=300, EPOCHS=1000,LEARNING_RATE=1,graficar_datos=False)
-x_test,t_test=generar_datos_clasificacion(cantidad_ejemplos=300)
-pepe=0
-while(pepe==0):
-
-    
-    pesos=train(x, t, pesos, LEARNING_RATE, EPOCHS)
-
-    # Luego de haber sida entrenada y obtener los pesos sinápticos, generamos un
-    # nuevo set de datos para poder evaluar que tan bien responde la red neuronal
-    
-    max_scores=clasificar(x_test,pesos)
-
-    # Medimos la precision de la red neuronal
-    p = t_test - max_scores
-    print (max_scores)
-    for i in range(0,len(p)):
-        if  p[i]<0:
-            p[i]=p[i]*-1
-        if p[i]==2:
-            p[i]=1
-    precision=(len(p)-np.sum(p))*100/len(p)
-    print("Precision del ",precision, "%\n")
-
-    #Si la precision es mayor al 97% se detiene
-    if precision>=97:
-        print("\n PRECISION SUFICIENTE\n ENTRENAMIENTO FINALIZADO\n")
-        pepe=1
 
 
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
 
-plt.subplot(121)
-plt.scatter(x_test[:, 0], x_test[:, 1], c=t_test)
-plt.title('Valor real')
-plt.subplot(122)
-plt.scatter(x_test[:, 0], x_test[:, 1], c=max_scores)
-plt.title('Valores clasificados')
+#Plot the 3D plot of the points with x as axis and y as its value
+ax.scatter(x[:,0],x[:,1],t,cmap='viridis',edgecolor='none')
+ax.set_xlabel('x1')
+ax.set_ylabel('x2')
+ax.set_zlabel('y')
+ax.set_title('Random generation of examples')
 plt.show()
+
+

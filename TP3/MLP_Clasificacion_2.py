@@ -45,7 +45,6 @@ def generar_datos_clasificacion(cantidad_ejemplos, cantidad_clases):
         # Guardamos el valor de la clase que le vamos a asociar a las entradas x1 y x2 que acabamos
         # de generar
         t[indices] = clase
-    print ("x: ", x)
     print ("t: ", t)
     return x, t
 
@@ -197,6 +196,7 @@ max_scores=clasificar(x,pesos)
 
 
 p=t-max_scores
+
 for i in range(0,len(p)):
     if p[i]<0:
         p[i]=p[i]*-1
