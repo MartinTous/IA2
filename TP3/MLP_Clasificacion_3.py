@@ -39,6 +39,7 @@ def generar_datos_clasificacion(cantidad_ejemplos, cantidad_clases):
         # radios, angulos e indices tienen n elementos cada una, por lo que le estamos agregando
         # tambien n elementos a la variable x (que incorpora ambas entradas, x1 y x2)
         x1 = radios * np.sin(angulos)
+        print("x1: ", x1)
         x2 = radios * np.cos(angulos)
         x[indices] = np.c_[x1, x2]
 

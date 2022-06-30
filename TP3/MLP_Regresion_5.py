@@ -11,7 +11,7 @@ def generar_datos_clasificacion(cantidad_ejemplos):
 
     # Calculamos la cantidad de puntos por cada clase, asumiendo la misma cantidad para cada 
     # una (clases balanceadas)
-    n = int(np.random.rand())
+    n = int(np.random.rand()*10000)
 
     # Entradas: 2 columnas (x1 y x2)
     x = np.zeros((cantidad_ejemplos, 2))
@@ -19,24 +19,25 @@ def generar_datos_clasificacion(cantidad_ejemplos):
     t = np.zeros(cantidad_ejemplos, dtype="uint8")  # 1 columna: la clase correspondiente (t -> "target")
 
     randomgen = np.random.default_rng()
-    xx = np.arange(1,cantidad_ejemplos+1)
     # Por cada clase (que va de 0 a cantidad_clases)...
     for h in range(cantidad_ejemplos):
         # Tomando la ecuacion parametrica del circulo (x = r * cos(t), y = r * sin(t)), generamos 
         # radios distribuidos uniformemente entre 0 y 1 para la clase actual, y agregamos un poco de
         # aleatoriedad
-        radios = np.linspace(0, 1, n) + AMPLITUD_ALEATORIEDAD * randomgen.standard_normal(size=n)
-
+        #radios = np.linspace(0, 1, n) + AMPLITUD_ALEATORIEDAD * randomgen.standard_normal(size=n)
+        radios = int(np.random.rand()*10000)
         # ... y angulos distribuidos tambien uniformemente, con un desfasaje por cada clase
-        angulos = np.linspace(h * np.pi * FACTOR_ANGULO, (h + 1) * np.pi * FACTOR_ANGULO, n)
-
+        angulos = int(np.random.rand()*10000)
+        #angulos = np.linspace(h * np.pi * FACTOR_ANGULO, (h + 1) * np.pi * FACTOR_ANGULO, n)
+        
 
         # Generamos las "entradas", los valores de las variables independientes. Las variables:
         # radios, angulos e indices tienen n elementos cada una, por lo que le estamos agregando
         # tambien n elementos a la variable x (que incorpora ambas entradas, x1 y x2)
-        x[h][0] = radios * np.sin(angulos)
-        x[h][1] = radios * np.cos(angulos)
-        
+        x1 = radios * np.sin(angulos)
+        x2 = radios * np.cos(angulos)
+        x[h][0] = x1
+        x[h][1] = x2
 
         # Guardamos el valor de la clase que le vamos a asociar a las entradas x1 y x2 que acabamos
         # de generar
@@ -98,7 +99,7 @@ def train(x, t, pesos, learning_rate, epochs):
         y = resultados_feed_forward["y"]
         h = resultados_feed_forward["h"]
         z = resultados_feed_forward["z"]
-
+        
         # LOSS
         # a. Exponencial de todos los scores
         exp_scores = np.exp(y)
@@ -116,7 +117,7 @@ def train(x, t, pesos, learning_rate, epochs):
         # d. Calculo de la funcion de perdida global. Solo se usa la probabilidad de la clase correcta, 
         #    que tomamos del array t ("target")
         #loss = (1 / m) * np.sum( -np.log( p[range(m), t] ))
-        mse = np.zeros(m,1)
+        mse = np.zeros((m,1))
         for k in range (m):
             mse[k] =(t[k]-y[k])
         loss = ( 1 / m ) *np.sum( pow( mse,2 ) ) 
