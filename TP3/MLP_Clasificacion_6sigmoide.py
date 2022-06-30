@@ -193,8 +193,8 @@ def iniciar_training(numero_clases, numero_ejemplos,EPOCHS,LEARNING_RATE, grafic
     # NEURONAS_CAPA_OCULTA = 14
     #
     # # Ejemplo nro 3
-    LEARNING_RATE = 0.713712361381509
-    NEURONAS_CAPA_OCULTA = 281
+    # LEARNING_RATE = 0.713712361381509
+    # NEURONAS_CAPA_OCULTA = 281
     #
     # # Ejemplo nro 4
     # LEARNING_RATE = 0.681370686036219
@@ -245,8 +245,8 @@ def iniciar_training(numero_clases, numero_ejemplos,EPOCHS,LEARNING_RATE, grafic
     # NEURONAS_CAPA_OCULTA = 550
     #
     # # Ejemplo nro 16
-    # LEARNING_RATE = 0.8349257541834374
-    # NEURONAS_CAPA_OCULTA = 872
+    LEARNING_RATE = 0.8349257541834374
+    NEURONAS_CAPA_OCULTA = 872
 
     NEURONAS_ENTRADA = 2
     pesos = inicializar_pesos(n_entrada=NEURONAS_ENTRADA, n_capa_2=NEURONAS_CAPA_OCULTA, n_capa_3=numero_clases)
