@@ -188,9 +188,6 @@ def train(x, t, pesos, learning_rate, epochs):
 def iniciar_training(numero_clases, numero_ejemplos,EPOCHS,LEARNING_RATE, graficar_datos):
     # Generamos datos
     x, t = generar_datos_clasificacion(numero_ejemplos)
-    print(t)
-    plt.scatter(x[:, 0], x[:, 1], c=t)
-    plt.show()
     # Graficamos los datos si es necesario
     if graficar_datos:
         # Parametro: "c": color (un color distinto para cada clase en t)
@@ -202,7 +199,7 @@ def iniciar_training(numero_clases, numero_ejemplos,EPOCHS,LEARNING_RATE, grafic
     NEURONAS_ENTRADA = 2
     pesos = inicializar_pesos(n_entrada=NEURONAS_ENTRADA, n_capa_2=NEURONAS_CAPA_OCULTA, n_capa_3=1)
     # Entrena
-    LEARNING_RATE=1
+    LEARNING_RATE=0.01
     pesos=train(x, t, pesos, LEARNING_RATE, EPOCHS)
     return pesos,x,t
 
@@ -226,9 +223,10 @@ while(pepe==0):
     max_scores=clasificar(x_test,pesos)
 
     # Medimos la precision de la red neuronal
-    p=t_test-max_scores
+    p = t_test - max_scores
+    print (max_scores)
     for i in range(0,len(p)):
-        if p[i]<0:
+        if  p[i]<0:
             p[i]=p[i]*-1
         if p[i]==2:
             p[i]=1
