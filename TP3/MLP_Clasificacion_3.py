@@ -34,7 +34,7 @@ def generar_datos_clasificacion(cantidad_ejemplos, cantidad_clases):
         # desplazando para cada clase: para la primera clase los indices estan en [0, n-1], para
         # la segunda clase estan en [n, (2 * n) - 1], etc.
         indices = range(clase * n, (clase + 1) * n)
-
+        print ("indice:  ", indices)
         # Generamos las "entradas", los valores de las variables independientes. Las variables:
         # radios, angulos e indices tienen n elementos cada una, por lo que le estamos agregando
         # tambien n elementos a la variable x (que incorpora ambas entradas, x1 y x2)
