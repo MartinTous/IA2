@@ -1,2 +1,2 @@
- fila
-        p = exp_scores / sum_exp_scores
+    LEARNING_RATE = 0.41944190225629496
+    NEURONAS_CAPA_OCULTA = 810

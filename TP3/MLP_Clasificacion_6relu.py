@@ -1,11 +1,14 @@
+#- Cabrero García, Gabriel
+#- Mellimaci, Marcelo E
+#- Tous Maggini, Martín
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Generador basado en ejemplo del curso CS231 de Stanford: 
+# Generador basado en ejemplo del curso CS231 de Stanford:
 # CS231n Convolutional Neural Networks for Visual Recognition
-# (https://cs231n.github.io/neural-networks-case-study/)
+# (https://cs231n.github.io/neural-networks-case-stu/)
 def generar_datos_clasificacion(cantidad_ejemplos, cantidad_clases):
-    FACTOR_ANGULO = 0.79
+    FACTOR_ANGULO = 0.79  # Ejemplo nro 2
     AMPLITUD_ALEATORIEDAD = 0.1
 
     # Calculamos la cantidad de puntos por cada clase, asumiendo la misma cantidad para cada 
@@ -44,7 +47,7 @@ def generar_datos_clasificacion(cantidad_ejemplos, cantidad_clases):
         # Guardamos el valor de la clase que le vamos a asociar a las entradas x1 y x2 que acabamos
         # de generar
         t[indices] = clase
-
+    
     return x, t
 
 
@@ -63,14 +66,13 @@ def inicializar_pesos(n_entrada, n_capa_2, n_capa_3):
 def ejecutar_adelante(x, pesos):
     # Funcion de entrada (a.k.a. "regla de propagacion") para la primera capa oculta
     z = x.dot(pesos["w1"]) + pesos["b1"]
-
     # Funcion de activacion ReLU para la capa oculta (h -> "hidden")
     h = np.maximum(0, z)
-
+    
     # Salida de la red (funcion de activacion lineal). Esto incluye la salida de todas
     # las neuronas y para todos los ejemplos proporcionados
     y = h.dot(pesos["w2"]) + pesos["b2"]
-
+    
     return {"z": z, "h": h, "y": y}
 
 
@@ -87,7 +89,7 @@ def clasificar(x, pesos):
     # Tomamos el primero de los maximos (podria usarse otro criterio, como ser eleccion aleatoria)
     # Nuevamente, dado que max_scores puede contener varios renglones (uno por cada ejemplo),
     # retornamos la primera columna
-    return max_scores[:, 0]
+    return max_scores[:]
 
 # x: n entradas para cada uno de los m ejemplos(nxm)
 # t: salida correcta (target) para cada uno de los m ejemplos (m x 1)
@@ -96,6 +98,7 @@ def train(x, t, pesos, learning_rate, epochs):
     # Cantidad de filas (i.e. cantidad de ejemplos)
     m = np.size(x, 0) 
     
+    #epoch: Se cumple un epoch cuando se entrena la red neuronal con todos los ejemplos de entrenamiento una vez
     for i in range(epochs):
         # Ejecucion de la red hacia adelante
         resultados_feed_forward = ejecutar_adelante(x, pesos)
@@ -106,7 +109,7 @@ def train(x, t, pesos, learning_rate, epochs):
         # LOSS
         # a. Exponencial de todos los scores
         exp_scores = np.exp(y)
-
+        
         # b. Suma de todos los exponenciales de los scores, fila por fila (ejemplo por ejemplo).
         #    Mantenemos las dimensiones (indicamos a NumPy que mantenga la segunda dimension del
         #    arreglo, aunque sea una sola columna, para permitir el broadcast correcto en operaciones
@@ -116,7 +119,7 @@ def train(x, t, pesos, learning_rate, epochs):
         # c. "Probabilidades": normalizacion de las exponenciales del score de cada clase (dividiendo por 
         #    la suma de exponenciales de todos los scores), fila por fila
         p = exp_scores / sum_exp_scores
-
+        
         # d. Calculo de la funcion de perdida global. Solo se usa la probabilidad de la clase correcta, 
         #    que tomamos del array t ("target")
         loss = (1 / m) * np.sum( -np.log( p[range(m), t] ))
@@ -159,9 +162,11 @@ def train(x, t, pesos, learning_rate, epochs):
         pesos["b1"] = b1
         pesos["w2"] = w2
         pesos["b2"] = b2
+    return pesos
+
+def iniciar_training(numero_clases, numero_ejemplos,EPOCHS,LEARNING_RATE, graficar_datos):
 
 
-def iniciar(numero_clases, numero_ejemplos, graficar_datos):
     # Generamos datos
     x, t = generar_datos_clasificacion(numero_ejemplos, numero_clases)
 
@@ -173,6 +178,9 @@ def iniciar(numero_clases, numero_ejemplos, graficar_datos):
 
     # Inicializa pesos de la red
 
+    LEARNING_RATE=1
+    NEURONAS_CAPA_OCULTA = 100
+
     # # Ejemplo nro 1
     # LEARNING_RATE = 1
     # NEURONAS_CAPA_OCULTA = 100
@@ -182,8 +190,8 @@ def iniciar(numero_clases, numero_ejemplos, graficar_datos):
     # NEURONAS_CAPA_OCULTA = 14
     #
     # # Ejemplo nro 3
-    LEARNING_RATE = 0.713712361381509
-    NEURONAS_CAPA_OCULTA = 281
+    # LEARNING_RATE = 0.713712361381509
+    # NEURONAS_CAPA_OCULTA = 281
     #
     # # Ejemplo nro 4
     # LEARNING_RATE = 0.681370686036219
@@ -234,15 +242,44 @@ def iniciar(numero_clases, numero_ejemplos, graficar_datos):
     # NEURONAS_CAPA_OCULTA = 550
     #
     # # Ejemplo nro 16
-    # LEARNING_RATE = 0.8349257541834374
-    # NEURONAS_CAPA_OCULTA = 872
+    LEARNING_RATE = 0.8349257541834374
+    NEURONAS_CAPA_OCULTA = 872
 
     NEURONAS_ENTRADA = 2
     pesos = inicializar_pesos(n_entrada=NEURONAS_ENTRADA, n_capa_2=NEURONAS_CAPA_OCULTA, n_capa_3=numero_clases)
-
     # Entrena
-    EPOCHS=10000
-    train(x, t, pesos, LEARNING_RATE, EPOCHS)
+    pesos=train(x, t, pesos, LEARNING_RATE, EPOCHS)
+    return pesos
 
 
-iniciar(numero_clases=3, numero_ejemplos=300, graficar_datos=False)
+
+#COMENZAMOS ENTRENANDO LA RED NEURONAL
+print("\nEntrenando la red neuronal...\n")
+pesos=iniciar_training(numero_clases=3, numero_ejemplos=300, EPOCHS=10000,LEARNING_RATE=1,graficar_datos=False)
+
+# Luego de haber sida entrenada y obtener los pesos sinápticos, generamos un
+# nuevo set de datos para poder evaluar que tan bien responde la red neuronal
+print("\nClasificando un nuevo set de datos...")
+x,t=generar_datos_clasificacion(cantidad_ejemplos=300, cantidad_clases=3)
+
+max_scores=clasificar(x,pesos)
+#print("Valores reales",t)
+#print("Valores clasificados",max_scores)
+
+
+p=t-max_scores
+for i in range(0,len(p)):
+    if p[i]<0:
+        p[i]=p[i]*-1
+    if p[i]==2:
+        p[i]=1
+precision=(len(p)-np.sum(p))*100/len(p)
+print("\nPrecisión del ",precision, "%\n")
+
+# plt.subplot(121)
+# plt.scatter(x[:, 0], x[:, 1], c=t)
+# plt.title('Valor real')
+# plt.subplot(122)
+# plt.scatter(x[:, 0], x[:, 1], c=max_scores)
+# plt.title('Valores clasificados')
+# plt.show()
