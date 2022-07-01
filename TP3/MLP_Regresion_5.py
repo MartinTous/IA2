@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 # Generador basado en ejemplo del curso CS231 de Stanford: 
 # CS231n Convolutional Neural Networks for Visual Recognition
 # (https://cs231n.github.io/neural-networks-case-study/)
-def generar_datos_clasificacion(cantidad_ejemplos,x1_neg_lim = -1,x1_pos_lim = 1,x2_neg_lim = -1,x2_pos_lim = 1,plot_data=1):
+def generar_datos_clasificacion(cantidad_ejemplos,x1_neg_lim = -1,x1_pos_lim = 1,x2_neg_lim = -1,x2_pos_lim = 1,plot_data=0):
     """Receives x1 and x2 limits and generates a number of examples based in a sine cardinal function with noise 
     It plots the data if plot_data is True.
 
@@ -66,12 +66,13 @@ def generar_datos_clasificacion(cantidad_ejemplos,x1_neg_lim = -1,x1_pos_lim = 1
         ax.set_zlabel('y')
         ax.set_title('Random generation of examples')
         plt.show()
-
+        
+    y_d=y
     y=y.reshape(cantidad_ejemplos,1)
     YY=np.zeros(len(y), dtype = "uint8")
     for i in range (len(y)):
         YY[i] = y[i][0]
-    return x,YY
+    return x,YY,y_d,x1_matrix,x2_matrix,y_matrix
 
 
 def inicializar_pesos(n_entrada, n_capa_2, n_capa_3):
@@ -84,7 +85,6 @@ def inicializar_pesos(n_entrada, n_capa_2, n_capa_3):
     b2 = 0.1 * randomgen.standard_normal((1,n_capa_3))
 
     return {"w1": w1, "b1": b1, "w2": w2, "b2": b2}
-
 
 def ejecutar_adelante(x, pesos):
     # Funcion de entrada (a.k.a. "regla de propagacion") para la primera capa oculta
@@ -191,11 +191,11 @@ def train(x, t, pesos, learning_rate):
         pesos["w2"] = w2
         pesos["b2"] = b2
         
-    return pesos
+    return pesos,y
 
 def iniciar_training(numero_clases, numero_ejemplos,EPOCHS,LEARNING_RATE, graficar_datos):
     # Generamos datos
-    x, t = generar_datos_clasificacion(numero_ejemplos)
+    x, t,y_d,x1_matrix,x2_matrix,y_matrix = generar_datos_clasificacion(numero_ejemplos)
     # Graficamos los datos si es necesario
     if graficar_datos:
         # Parametro: "c": color (un color distinto para cada clase en t)
@@ -208,8 +208,8 @@ def iniciar_training(numero_clases, numero_ejemplos,EPOCHS,LEARNING_RATE, grafic
     pesos = inicializar_pesos(n_entrada=NEURONAS_ENTRADA, n_capa_2=NEURONAS_CAPA_OCULTA, n_capa_3=1)
     # Entrena
     LEARNING_RATE=0.01
-    pesos=train(x, t, pesos, LEARNING_RATE)
-    return pesos,x,t
+    pesos,y=train(x, t, pesos, LEARNING_RATE)
+    return pesos,x,y,y_d,x1_matrix,x2_matrix,y_matrix
 
 
 
@@ -217,18 +217,38 @@ def iniciar_training(numero_clases, numero_ejemplos,EPOCHS,LEARNING_RATE, grafic
 print("\nEntrenando la red neuronal...\n")
 EPOCHS=100000
 LEARNING_RATE=0.01
-pesos,x,t=iniciar_training(numero_clases=3, numero_ejemplos=300, EPOCHS=1000,LEARNING_RATE=1,graficar_datos=False)
+pesos,x,y,y_d,x1_matrix,x2_matrix,y_matrix=iniciar_training(numero_clases=3, numero_ejemplos=300, EPOCHS=1000,LEARNING_RATE=1,graficar_datos=False)
 
 
-fig = plt.figure()
-ax = fig.add_subplot(111, projection='3d')
+fig1 = plt.figure()
+ax = fig1.add_subplot(111, projection='3d')
+fig2 = plt.figure()
+bx = fig2.add_subplot(111, projection='3d')
+fig3 = plt.figure()
+cx = fig3.add_subplot(111, projection='3d')
 
 #Plot the 3D plot of the points with x as axis and y as its value
-ax.scatter(x[:,0],x[:,1],t,cmap='viridis',edgecolor='none')
+#plt.subplot(131)
+
+ax.plot_surface(x1_matrix,x2_matrix,y_matrix,cmap='viridis',edgecolor='none')
 ax.set_xlabel('x1')
 ax.set_ylabel('x2')
 ax.set_zlabel('y')
-ax.set_title('Random generation of examples')
-plt.show()
+ax.set_title('Funcion original')
 
+
+#Plot the 3D plot of the points with x as axis and y as its value
+bx.scatter(x[:,0],x[:,1],y_d,c='r',marker='o')
+bx.set_xlabel('x1')
+bx.set_ylabel('x2')
+bx.set_zlabel('y')
+bx.set_title('Set de datos random')
+
+
+cx.scatter(x[:,0],x[:,1],y,c='r',marker='o')
+cx.set_xlabel('x1')
+cx.set_ylabel('x2')
+cx.set_zlabel('y')
+cx.set_title('Salida de la red neuronal')
+plt.show()
 
